@@ -63,6 +63,11 @@ public class ObservableTestDrive {
         // Outputs:
         //  "Hello, world!"
         //  "Completed"
+
+        Observable.just("Hello, world!").subscribe(System.out::println);
+
+        // ^_^
+
     }
 
 }
