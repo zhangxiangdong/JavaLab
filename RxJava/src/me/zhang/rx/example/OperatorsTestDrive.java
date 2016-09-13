@@ -16,6 +16,9 @@ public class OperatorsTestDrive {
                 .map(String::hashCode)
                 .map(i -> "HashCode: " + String.valueOf(i))
                 .subscribe(System.out::println);
+
+        Provider.query("Hi").subscribe(urls -> urls.forEach(System.out::println));
+        Provider.query("He").subscribe(urls -> Observable.from(urls).subscribe(System.out::println)); // Ugh.
     }
 
 }
