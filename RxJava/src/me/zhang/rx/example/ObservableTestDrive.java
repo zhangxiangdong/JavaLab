@@ -48,6 +48,21 @@ public class ObservableTestDrive {
         Action0 onCompleteAction = () -> System.out.println("Completed");
 
         just.subscribe(onNextAction, onErrorAction, onCompleteAction);
+
+        // Outputs:
+        //  "Hello, world!"
+        //  "Completed"
+
+        // Even concise
+        Observable.just("Hello, world!").subscribe(
+                System.out::println,
+                throwable -> System.out.println("Error"),
+                () -> System.out.println("Completed")
+        );
+
+        // Outputs:
+        //  "Hello, world!"
+        //  "Completed"
     }
 
 }
