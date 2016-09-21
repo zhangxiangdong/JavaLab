@@ -19,6 +19,10 @@ public class OperatorsTestDrive {
 
         Provider.query("Hi").subscribe(urls -> urls.forEach(System.out::println));
         Provider.query("He").subscribe(urls -> Observable.from(urls).subscribe(System.out::println)); // Ugh.
+
+        Provider.query("+do")
+                .flatMap(Observable::from)
+                .subscribe(System.out::println);
     }
 
 }
