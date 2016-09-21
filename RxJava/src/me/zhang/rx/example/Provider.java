@@ -24,7 +24,7 @@ class Provider {
     static Observable<List<String>> query(String text) {
         List<String> urlList = new ArrayList<>();
         urlList.add("url1" + text);
-        urlList.add("url2");
+        urlList.add("http://www.title.com/");
         urlList.add("http://www.title.com/");
         urlList.add("url4" + text);
         urlList.add("url5");

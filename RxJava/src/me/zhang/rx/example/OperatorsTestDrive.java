@@ -23,6 +23,9 @@ public class OperatorsTestDrive {
         Provider.query("+do")
                 .flatMap(Observable::from)
                 .flatMap(Provider::getTitle)
+                .filter(title -> title != null)
+                .take(1)
+                .doOnNext(title -> System.out.println("Got this: " + title))
                 .subscribe(System.out::println);
     }
 
