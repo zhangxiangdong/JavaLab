@@ -22,6 +22,7 @@ public class OperatorsTestDrive {
 
         Provider.query("+do")
                 .flatMap(Observable::from)
+                .flatMap(Provider::getTitle)
                 .subscribe(System.out::println);
     }
 

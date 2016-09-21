@@ -10,12 +10,22 @@ import java.util.List;
  */
 class Provider {
 
+    // Returns the title of a website, or null if 404
+    static Observable<String> getTitle(String URL) {
+        String title = "MyTitle";
+        if ("http://www.title.com/".equals(URL)) {
+            return Observable.from(new String[]{title});
+
+        }
+        return Observable.from(new String[]{null});
+    }
+
     // Returns a List of website URLs based on a text search
     static Observable<List<String>> query(String text) {
         List<String> urlList = new ArrayList<>();
         urlList.add("url1" + text);
         urlList.add("url2");
-        urlList.add("url3");
+        urlList.add("http://www.title.com/");
         urlList.add("url4" + text);
         urlList.add("url5");
 
