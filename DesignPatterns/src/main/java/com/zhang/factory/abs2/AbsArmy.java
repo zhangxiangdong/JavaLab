@@ -5,4 +5,9 @@ package com.zhang.factory.abs2;
  */
 public abstract class AbsArmy implements Army {
     protected int number;
+
+    @Override
+    public int getNumber() {
+        return number;
+    }
 }

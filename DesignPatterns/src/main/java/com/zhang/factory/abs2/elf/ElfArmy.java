@@ -7,8 +7,10 @@ import com.zhang.factory.abs2.AbsArmy;
  */
 public class ElfArmy extends AbsArmy {
 
+    public static final int NUMBER = 12000;
+
     public ElfArmy() {
-        number = 12000;
+        number = NUMBER;
     }
 
     @Override
