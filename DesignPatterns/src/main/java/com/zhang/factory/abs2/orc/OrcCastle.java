@@ -6,8 +6,10 @@ import com.zhang.factory.abs2.AbsCastle;
  * Created by zhangxiangdong on 2016/11/22.
  */
 public class OrcCastle extends AbsCastle {
+    public static final String NAME = "Neuschwanstein Castle";
+
     public OrcCastle() {
-        name = "Neuschwanstein Castle";
+        name = NAME;
     }
 
     @Override

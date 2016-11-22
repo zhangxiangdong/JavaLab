@@ -7,8 +7,10 @@ import com.zhang.factory.abs2.AbsCastle;
  */
 public class ElfCastle extends AbsCastle {
 
+    public static final String NAME = "Mont Saint Michel";
+
     public ElfCastle() {
-        name = "Mont Saint Michel";
+        name = NAME;
     }
 
     @Override

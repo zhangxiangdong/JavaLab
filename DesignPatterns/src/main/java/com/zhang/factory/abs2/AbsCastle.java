@@ -5,4 +5,9 @@ package com.zhang.factory.abs2;
  */
 public abstract class AbsCastle implements Castle {
     protected String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }
