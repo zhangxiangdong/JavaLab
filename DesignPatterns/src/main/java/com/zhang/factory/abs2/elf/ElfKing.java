@@ -7,8 +7,10 @@ import com.zhang.factory.abs2.AbsKing;
  */
 public class ElfKing extends AbsKing {
 
+    public static final String NAME = "Jim";
+
     public ElfKing() {
-        name = "Jim";
+        name = NAME;
     }
 
     @Override
