@@ -1,8 +1,10 @@
 package com.zhang.factory.abs2;
 
+import com.zhang.factory.abs2.elf.ElfArmy;
 import com.zhang.factory.abs2.elf.ElfCastle;
 import com.zhang.factory.abs2.elf.ElfKing;
 import com.zhang.factory.abs2.elf.ElfKingdomFactory;
+import com.zhang.factory.abs2.orc.OrcArmy;
 import com.zhang.factory.abs2.orc.OrcCastle;
 import com.zhang.factory.abs2.orc.OrcKing;
 import com.zhang.factory.abs2.orc.OrcKingdomFactory;
@@ -45,6 +47,16 @@ public class AbstractFactoryTest {
         final Castle orcCastle = app.getCastle(orcFactory);
         assertTrue(orcCastle instanceof OrcCastle);
         assertEquals(OrcCastle.NAME, orcCastle.getName());
+    }
+
+    @Test
+    public void army() {
+        final Army elfArmy = app.getArmy(elfFactory);
+        assertTrue(elfArmy instanceof ElfArmy);
+        assertEquals(ElfArmy.NUMBER, elfArmy.getNumber());
+        final Army orcArmy = app.getArmy(orcFactory);
+        assertTrue(orcArmy instanceof OrcArmy);
+        assertEquals(OrcArmy.NUMBER, orcArmy.getNumber());
     }
 
 }
