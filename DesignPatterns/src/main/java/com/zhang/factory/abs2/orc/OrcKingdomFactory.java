@@ -8,9 +8,9 @@ import com.zhang.factory.abs2.KingdomFactory;
 /**
  * Created by zhangxiangdong on 2016/11/22.
  */
-public class OrcKindomFactory implements KingdomFactory {
+public class OrcKingdomFactory implements KingdomFactory {
 
-    public OrcKindomFactory() {
+    public OrcKingdomFactory() {
 
     }
 
