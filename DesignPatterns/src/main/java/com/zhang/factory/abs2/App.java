@@ -8,6 +8,10 @@ import com.zhang.factory.abs2.orc.OrcKingdomFactory;
  */
 public class App {
 
+    private King king;
+    private Castle castle;
+    private Army army;
+
     public static void main(String[] args) {
         App app = new App();
         app.createKingdom(new OrcKingdomFactory());
@@ -15,14 +19,17 @@ public class App {
         app.createKingdom(new ElfKingdomFactory());
     }
 
-    private void createKingdom(KingdomFactory factory) {
+    void createKingdom(KingdomFactory factory) {
         King king = getKing(factory);
+        setKing(king);
         System.out.println(king);
 
         Castle castle = getCastle(factory);
+        setCastle(castle);
         System.out.println(castle);
 
         Army army = getArmy(factory);
+        setArmy(army);
         System.out.println(army);
     }
 
@@ -36,5 +43,29 @@ public class App {
 
     Army getArmy(KingdomFactory factory) {
         return factory.createArmy();
+    }
+
+    public King getKing() {
+        return king;
+    }
+
+    public void setKing(King king) {
+        this.king = king;
+    }
+
+    public Castle getCastle() {
+        return castle;
+    }
+
+    public void setCastle(Castle castle) {
+        this.castle = castle;
+    }
+
+    public Army getArmy() {
+        return army;
+    }
+
+    public void setArmy(Army army) {
+        this.army = army;
     }
 }
