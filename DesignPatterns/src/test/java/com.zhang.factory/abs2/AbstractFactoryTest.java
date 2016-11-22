@@ -59,4 +59,18 @@ public class AbstractFactoryTest {
         assertEquals(OrcArmy.NUMBER, orcArmy.getNumber());
     }
 
+    @Test
+    public void createElfKingdom() {
+        app.createKingdom(elfFactory);
+        final King king = app.getKing();
+        final Castle castle = app.getCastle();
+        final Army army = app.getArmy();
+        assertTrue(king instanceof ElfKing);
+        assertEquals(ElfKing.NAME, king.getName());
+        assertTrue(castle instanceof ElfCastle);
+        assertEquals(ElfCastle.NAME, castle.getName());
+        assertTrue(army instanceof ElfArmy);
+        assertEquals(ElfArmy.NUMBER, army.getNumber());
+    }
+
 }
