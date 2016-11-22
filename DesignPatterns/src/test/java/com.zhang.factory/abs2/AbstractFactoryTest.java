@@ -1,7 +1,9 @@
 package com.zhang.factory.abs2;
 
+import com.zhang.factory.abs2.elf.ElfCastle;
 import com.zhang.factory.abs2.elf.ElfKing;
 import com.zhang.factory.abs2.elf.ElfKingdomFactory;
+import com.zhang.factory.abs2.orc.OrcCastle;
 import com.zhang.factory.abs2.orc.OrcKing;
 import com.zhang.factory.abs2.orc.OrcKingdomFactory;
 import org.junit.Before;
@@ -33,6 +35,16 @@ public class AbstractFactoryTest {
         final King orcKing = app.getKing(orcFactory);
         assertTrue(orcKing instanceof OrcKing);
         assertEquals(OrcKing.NAME, orcKing.getName());
+    }
+
+    @Test
+    public void castle() {
+        final Castle elfCastle = app.getCastle(elfFactory);
+        assertTrue(elfCastle instanceof ElfCastle);
+        assertEquals(ElfCastle.NAME, elfCastle.getName());
+        final Castle orcCastle = app.getCastle(orcFactory);
+        assertTrue(orcCastle instanceof OrcCastle);
+        assertEquals(OrcCastle.NAME, orcCastle.getName());
     }
 
 }
