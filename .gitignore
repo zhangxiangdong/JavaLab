@@ -1,3 +1,11 @@
 .idea
 out
 *.iml
+
+# Gradle generated files
+.gradle/
+/*/.gradle/
+
+# Built application files
+build/
+/*/build/
