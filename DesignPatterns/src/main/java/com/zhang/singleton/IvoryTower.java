@@ -2,6 +2,8 @@ package com.zhang.singleton;
 
 /**
  * Created by Zhang on 11/26/2016 6:04 PM.
+ * <p>
+ * Eagerly initialized static instance guarantees thread safety.
  */
 public class IvoryTower {
 
