@@ -18,6 +18,26 @@ public class EmployeeRecord implements Prototype {
         address = builder.address;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     public static final class Builder {
 
         private int id;
