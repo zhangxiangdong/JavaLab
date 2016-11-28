@@ -8,6 +8,7 @@ import java.util.List;
  */
 public abstract class ObjectPool<T> {
 
+    static final String poolPattern = "Pool: available = %d, inUse = %d.";
     private List<T> available = new ArrayList<>();
     private List<T> inUse = new ArrayList<>();
 
@@ -33,8 +34,9 @@ public abstract class ObjectPool<T> {
         System.out.println(toString());
     }
 
+    @Override
     public String toString() {
-        return String.format("Pool available = %d, inUse = %d", available.size(), inUse.size());
+        return String.format(poolPattern, available.size(), inUse.size());
     }
 
 }
