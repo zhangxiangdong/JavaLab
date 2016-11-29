@@ -7,8 +7,8 @@ public class App {
 
     public static void main(String[] args) {
         Leader leader = new Leader(new BattleCar());
-        leader.control();
-        leader.collide();
+        leader.move();
+        leader.attack();
     }
 
 }
