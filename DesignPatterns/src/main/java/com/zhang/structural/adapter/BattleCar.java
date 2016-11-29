@@ -13,6 +13,10 @@ public class BattleCar implements BattleVehicle {
         this.truck = new Truck();
     }
 
+    public BattleCar(Truck truck) {
+        this.truck = truck;
+    }
+
     public Truck getTruck() {
         return truck;
     }
