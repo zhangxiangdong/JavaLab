@@ -6,7 +6,7 @@ package com.zhang.structural.adapter;
 public class App {
 
     public static void main(String[] args) {
-        Leader leader = new Leader(new BattleCar(new Truck()));
+        Leader leader = new Leader(new BattleCar());
         leader.control();
         leader.collide();
     }

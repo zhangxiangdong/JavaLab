@@ -9,8 +9,8 @@ public class BattleCar implements BattleVehicle {
 
     private final Truck truck;
 
-    public BattleCar(Truck truck) {
-        this.truck = truck;
+    public BattleCar() {
+        this.truck = new Truck();
     }
 
     @Override
