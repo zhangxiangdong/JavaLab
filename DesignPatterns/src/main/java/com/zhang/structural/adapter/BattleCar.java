@@ -13,6 +13,10 @@ public class BattleCar implements BattleVehicle {
         this.truck = new Truck();
     }
 
+    public Truck getTruck() {
+        return truck;
+    }
+
     @Override
     public void move() {
         truck.run();
