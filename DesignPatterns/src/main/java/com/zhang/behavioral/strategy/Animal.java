@@ -29,6 +29,10 @@ abstract public class Animal {
         this.flyingType = newFlyType;
     }
 
+    public Flys getFlyingType() {
+        return flyingType;
+    }
+
     // Animal pushes off the responsibility for flying to flyingType
     public String tryToFly() {
         return flyingType.fly();
