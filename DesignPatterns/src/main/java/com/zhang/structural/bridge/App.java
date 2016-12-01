@@ -7,10 +7,10 @@ public class App {
 
     public static void main(String[] args) {
         Shape triangle = new Triangle(new GreenColor());
-        triangle.applyColor();
+        triangle.withColor();
 
         Shape pentagon = new Pentagon(new RedColor());
-        pentagon.applyColor();
+        pentagon.withColor();
     }
 
 }
