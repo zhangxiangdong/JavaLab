@@ -5,6 +5,9 @@ package com.zhang.structural.bridge;
  */
 abstract public class Shape {
 
+    /**
+     * Notice the bridge between Shape and Color interfaces and use of composition in implementing the bridge pattern.
+     */
     // Composition - implementor
     protected Color color;
 
