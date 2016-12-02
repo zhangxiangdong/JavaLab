@@ -20,6 +20,6 @@ public class Sentence extends LetterComposite {
 
     @Override
     protected void printThisAfter() {
-        // Not required
+        System.out.print(".");
     }
 }
