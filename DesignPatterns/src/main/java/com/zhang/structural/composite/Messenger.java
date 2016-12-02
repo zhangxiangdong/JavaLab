@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class Messenger {
 
+    public static final String MESSAGE_FROM_JIM = "Here you are.";
+    public static final String MESSAGE_FROM_LILY = "Do me a favor.";
+
     LetterComposite messageFromJim() {
         List<Word> words = new ArrayList<>();
 
