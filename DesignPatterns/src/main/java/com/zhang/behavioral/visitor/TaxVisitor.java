@@ -1,4 +1,4 @@
-package com.zhang.behavioral.vistor;
+package com.zhang.behavioral.visitor;
 
 import java.text.DecimalFormat;
 

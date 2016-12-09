@@ -1,11 +1,11 @@
-package com.zhang.behavioral.vistor;
+package com.zhang.behavioral.visitor;
 
 /**
  * Created by Zhang on 12/9/2016 11:10 PM.
  */
-public class Tobacco extends Product {
+public class Liquor extends Product {
 
-    public Tobacco(double price) {
+    public Liquor(double price) {
         super(price);
     }
 

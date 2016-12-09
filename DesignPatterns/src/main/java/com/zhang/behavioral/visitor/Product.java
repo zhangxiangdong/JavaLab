@@ -1,4 +1,4 @@
-package com.zhang.behavioral.vistor;
+package com.zhang.behavioral.visitor;
 
 /**
  * Created by Zhang on 12/9/2016 11:19 PM.
