@@ -3,9 +3,9 @@ package com.zhang.behavioral.visitor;
 /**
  * Created by Zhang on 12/9/2016 11:10 PM.
  */
-public class Neccesity extends Product {
+public class Necessity extends Product {
 
-    public Neccesity(double price) {
+    public Necessity(double price) {
         super(price);
     }
 

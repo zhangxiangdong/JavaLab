@@ -16,6 +16,6 @@ public interface Visitor {
 
     double visit(Tobacco tobacco);
 
-    double visit(Neccesity neccesity);
+    double visit(Necessity necessity);
 
 }
