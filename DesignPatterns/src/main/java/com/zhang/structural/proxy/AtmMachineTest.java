@@ -6,10 +6,21 @@ package com.zhang.structural.proxy;
 public class AtmMachineTest {
 
     public static void main(String[] args) {
+        AtmMachine atmMachine = new AtmMachine();
+        atmMachine.insertCard();
+        atmMachine.ejectCard();
+        atmMachine.insertCard();
+        atmMachine.insertPin(654321);
+        atmMachine.insertPin(123456);
+        atmMachine.requestCash(1000);
+        atmMachine.requestCash(1001);
+        atmMachine.insertCard();
+        atmMachine.ejectCard();
+
         // The interface limits access to just the methods you want
         // made accessible
 
-        GetAtmData atmProxy = new AtmProxy();
+        GetAtmData atmProxy = new AtmProxy(atmMachine);
 
         System.out.println("\nCurrent ATM State " + atmProxy.getAtmState());
 

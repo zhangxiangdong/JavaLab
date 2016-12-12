@@ -5,15 +5,19 @@ package com.zhang.structural.proxy;
  */
 public class AtmProxy implements GetAtmData {
 
+    AtmMachine atmMachine;
+
+    public AtmProxy(AtmMachine atmMachine) {
+        this.atmMachine = atmMachine;
+    }
+
     @Override
     public AtmState getAtmState() {
-        GetAtmData atmMachine = new AtmMachine();
         return atmMachine.getAtmState();
     }
 
     @Override
     public int getCashInMachine() {
-        GetAtmData atmMachine = new AtmMachine();
         return atmMachine.getCashInMachine();
     }
 }
