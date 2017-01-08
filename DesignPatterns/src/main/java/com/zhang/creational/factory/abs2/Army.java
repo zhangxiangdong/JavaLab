@@ -1,8 +1,0 @@
-package com.zhang.creational.factory.abs2;
-
-/**
- * Created by zhangxiangdong on 2016/11/22.
- */
-public interface Army {
-    int getNumber();
-}

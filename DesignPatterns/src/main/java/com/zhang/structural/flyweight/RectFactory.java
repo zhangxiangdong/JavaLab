@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class RectFactory {
 
-    // This factory only creates a new rectangle if it
+    // This factoryMethod only creates a new rectangle if it
     // uses a color not previously used
 
     // Intrinsic State: Color
