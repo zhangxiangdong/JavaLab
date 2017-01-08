@@ -7,7 +7,14 @@ public class Car {
 
     private double gasInTank;
     private double milesDriven;
-    private static final double MILES_PER_GALLON = 50;
+    private final double milesPerGallon;
+
+    public Car(double mpg) {
+        /* Initialize instance variables */
+        gasInTank = 0;
+        milesDriven = 0;
+        milesPerGallon = mpg;
+    }
 
     public void addGas(double amount) {
         gasInTank += amount;
@@ -16,7 +23,7 @@ public class Car {
     public void drive(double distance) {
         milesDriven += distance;
 
-        double gasConsumed = distance / MILES_PER_GALLON;
+        double gasConsumed = distance / milesPerGallon;
         gasInTank -= gasConsumed;
     }
 
