@@ -8,6 +8,7 @@ public class Mystery {
     public static void main(String[] args) {
         System.out.println(getIntegerMystery());
         System.out.println(getDoubleMystery());
+        System.out.println(getTotalPrice());
     }
 
     private static int getIntegerMystery() {
@@ -18,6 +19,11 @@ public class Mystery {
     private static double getDoubleMystery() {
         double oneMillion = 1000000;
         return oneMillion * oneMillion;
+    }
+
+    private static double getTotalPrice() {
+        double unitPrice = 4.35;
+        return 100 * unitPrice;
     }
 
 }
