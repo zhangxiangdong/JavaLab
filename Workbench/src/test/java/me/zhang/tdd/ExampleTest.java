@@ -1,7 +1,8 @@
 package me.zhang.tdd;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by zhangxiangdong on 2017/2/27.
@@ -10,21 +11,15 @@ public class ExampleTest {
 
     @Test
     public void testMultiplication() {
-        // Arrange
         Dollar five = new Dollar(5);
-        // Act
-        Dollar product = five.times(2);
-        // Assert
-        Assert.assertEquals(10, product.amount);
-
-        product = five.times(3);
-        Assert.assertEquals(15, product.amount);
+        assertEquals(new Dollar(10), five.times(2));
+        assertEquals(new Dollar(15), five.times(3));
     }
 
     @Test
     public void testEquality() {
-        Assert.assertTrue(new Dollar(5).equals(new Dollar(5)));
-        Assert.assertFalse(new Dollar(5).equals(new Dollar(6)));
+        assertTrue(new Dollar(5).equals(new Dollar(5)));
+        assertFalse(new Dollar(5).equals(new Dollar(6)));
     }
 
 }
