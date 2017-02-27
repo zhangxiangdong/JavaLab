@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by zhangxiangdong on 2017/2/27.
  */
-public class ExampleTest {
+public class DollarTest {
 
     @Test
     public void testMultiplication() {
