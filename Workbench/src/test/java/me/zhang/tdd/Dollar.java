@@ -4,7 +4,8 @@ package me.zhang.tdd;
  * Created by zhangxiangdong on 2017/2/27.
  */
 public class Dollar {
-    public int amount;
+
+    private int amount;
 
     public Dollar(int amount) {
         this.amount = amount;
@@ -19,4 +20,5 @@ public class Dollar {
         Dollar dollar = (Dollar) obj;
         return amount == dollar.amount;
     }
+
 }
