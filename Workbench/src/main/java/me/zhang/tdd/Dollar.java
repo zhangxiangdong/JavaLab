@@ -9,7 +9,8 @@ public class Dollar extends Money {
         super(amount);
     }
 
-    public Dollar times(int multiplier) {
+    @Override
+    public Money times(int multiplier) {
         return new Dollar(amount * multiplier);
     }
 
