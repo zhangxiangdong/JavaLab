@@ -19,6 +19,7 @@ public class Money implements Expression {
         return amount == money.amount && currency.equals(money.currency);
     }
 
+    @Override
     public Expression times(int multiplier) {
         return new Money(amount * multiplier, currency);
     }
