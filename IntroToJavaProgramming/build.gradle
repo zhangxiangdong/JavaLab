@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://github.com/junit-team/junit4
+    testCompile 'junit:junit:4.12'
+
+}
