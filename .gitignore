@@ -4,8 +4,6 @@ out
 
 # Gradle generated files
 .gradle/
-/*/.gradle/
 
 # Built application files
 build/
-/*/build/
