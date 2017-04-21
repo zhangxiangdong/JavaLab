@@ -32,15 +32,18 @@ public class RxDemo {
         source.subscribe(integer -> System.out.println("Number -> " + integer), Throwable::printStackTrace,
                 () -> System.out.println("Completed."));
 
-        Observable.create((Observable.OnSubscribe<String>) subscriber -> {
-            try {
-                String result = doSomeTimeTakingIoOperation();
-                subscriber.onNext(result);    // Pass on the data to subscriber
-                subscriber.onCompleted();     // Signal about the completion subscriber
-            } catch (Exception e) {
-                subscriber.onError(e);        // Signal about the error to subscriber
-            }
-        })
+        // ******************************************************************
+
+        Observable
+                .create((Observable.OnSubscribe<String>) subscriber -> {
+                    try {
+                        String result = doSomeTimeTakingIoOperation();
+                        subscriber.onNext(result);    // Pass on the data to subscriber
+                        subscriber.onCompleted();     // Signal about the completion subscriber
+                    } catch (Exception e) {
+                        subscriber.onError(e);        // Signal about the error to subscriber
+                    }
+                })
                 .observeOn(Schedulers.io())
                 .subscribe(new Subscriber<String>() {
 
@@ -58,6 +61,26 @@ public class RxDemo {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        System.out.println("\t" + s);
+                    }
+                });
+
+        Observable
+                .fromCallable(RxDemo::doSomeTimeTakingIoOperation)
+                .observeOn(Schedulers.io())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
                     }
 
                     @Override
