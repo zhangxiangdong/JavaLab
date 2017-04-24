@@ -21,6 +21,13 @@ public class Multithreading {
 //        bothOperatorAndSubscriberOnDifferntThread();
 
         subscribeOn();
+
+        try {
+            // Wait
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void defaultThreading() {
