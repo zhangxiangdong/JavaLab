@@ -9,6 +9,8 @@ import java.util.concurrent.Callable;
 
 /**
  * Created by zhangxiangdong on 2017/4/24.
+ * <p>
+ * https://praveer09.github.io/technology/2016/02/29/rxjava-part-3-multithreading/
  */
 public class Multithreading {
 
@@ -16,7 +18,9 @@ public class Multithreading {
 //        defaultThreading();
 //        operatorOnDifferentThread();
 //        subscriberOnDifferentThread();
-        bothOperatorAndSubscriberOnDifferntThread();
+//        bothOperatorAndSubscriberOnDifferntThread();
+
+        subscribeOn();
     }
 
     private static void defaultThreading() {
@@ -47,6 +51,16 @@ public class Multithreading {
                 .subscribe(printResult());
     }
 
+    private static void subscribeOn() {
+        Observable.fromCallable(thatReturnsNumberOne())
+                .subscribeOn(Schedulers.newThread()) // only the first declaration takes preference
+                .map(numberToString())
+                .subscribeOn(Schedulers.newThread())
+                .map(stringToNumber())
+                .toBlocking()
+                .subscribe(printNumberResult());
+    }
+
     private static Callable<Integer> thatReturnsNumberOne() {
         return () -> {
             System.out.println("Observable thread: " + Thread.currentThread().getName());
@@ -61,7 +75,21 @@ public class Multithreading {
         };
     }
 
+    private static Func1<String, Integer> stringToNumber() {
+        return string -> {
+            System.out.println("Operator thread: " + Thread.currentThread().getName());
+            return Integer.parseInt(string);
+        };
+    }
+
     private static Action1<String> printResult() {
+        return result -> {
+            System.out.println("Subscriber thread: " + Thread.currentThread().getName());
+            System.out.println("Result: " + result);
+        };
+    }
+
+    private static Action1<Integer> printNumberResult() {
         return result -> {
             System.out.println("Subscriber thread: " + Thread.currentThread().getName());
             System.out.println("Result: " + result);
