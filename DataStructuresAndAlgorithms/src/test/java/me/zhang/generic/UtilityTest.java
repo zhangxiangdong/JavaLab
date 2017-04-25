@@ -2,12 +2,25 @@ package me.zhang.generic;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by zhangxiangdong on 2017/4/25.
  */
 public class UtilityTest {
+
+    @Test
+    public void collectExample() {
+        List<String> list = Arrays.asList("Mukesh", "Vishal", "Amar");
+        String result = list.parallelStream().collect(StringBuilder::new,
+                (response, element) -> response.append(" ").append(element),
+                (response1, response2) -> response1.append(",").append(response2.toString()))
+                .toString();
+        System.out.println("Result: " + result);
+    }
 
     @Test
     public void reverseASequence() {
