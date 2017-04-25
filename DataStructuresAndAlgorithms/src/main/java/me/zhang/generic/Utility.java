@@ -18,4 +18,16 @@ public class Utility {
         }
     }
 
+    public static <T extends Number> T compare(T left, T right) {
+        T result;
+        if (left.intValue() > right.intValue()) {
+            result = (T) new Integer(1);
+        } else if (left.intValue() == right.intValue()) {
+            result = (T) new Integer(0);
+        } else {
+            result = (T) new Integer(-1);
+        }
+        return result;
+    }
+
 }

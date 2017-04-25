@@ -1,5 +1,6 @@
 package me.zhang.generic;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -33,6 +34,16 @@ public class UtilityTest {
         Utility.reverse(numberSequence);
         final String numberExpected = "5, 4, 3, 2, 1";
         assertEquals(numberExpected, toString(numberSequence));
+    }
+
+    @Test
+    public void compareTowNumbers() {
+        Integer low = 3;
+        Float middle = 3.1f;
+        Double high = 4.13;
+        Assert.assertEquals(-1, Utility.compare(low, high));
+        Assert.assertEquals(0, Utility.compare(low, middle));
+        Assert.assertEquals(1, Utility.compare(high, low));
     }
 
     private <T> String toString(T[] sequence) {
