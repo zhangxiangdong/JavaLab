@@ -23,10 +23,7 @@ public class GameEntry {
 
     @Override
     public String toString() {
-        return "GameEntry{" +
-                "name='" + name + '\'' +
-                ", score=" + score +
-                '}';
+        return "(" + name + "/" + score + ")";
     }
 
 }
