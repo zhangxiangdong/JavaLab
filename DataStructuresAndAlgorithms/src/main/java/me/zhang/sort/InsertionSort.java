@@ -27,11 +27,37 @@ public class InsertionSort {
         }
     }
 
+    public void sort1(int[] A) {
+        int len = A.length;
+        int out, in;
+        for (out = 1; out < len; out++) {
+            int temp = A[out];
+            in = out;
+            while (in > 0 && A[in - 1] > temp) {
+                A[in] = A[in - 1];
+                in--;
+            }
+            A[in] = temp;
+        }
+    }
+
+    public void sort2(int[] A) {
+        int len = A.length;
+        int out, in;
+        for (out = 1; out < len; out++) {
+            int temp = A[out];
+            for (in = out; in > 0 && A[in - 1] > temp; in--) {
+                A[in] = A[in - 1];
+            }
+            A[in] = temp;
+        }
+    }
+
     public static void main(String[] args) {
         InsertionSort sort = new InsertionSort();
         int[] A = {3, 2, 5, 4, 7, 6, 9, 0, 8, 1};
         printOutArray(A);
-        sort.sort(A);
+        sort.sort2(A);
         printOutArray(A);
     }
 
