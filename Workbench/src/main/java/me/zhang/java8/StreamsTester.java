@@ -12,7 +12,8 @@ public class StreamsTester {
     public static void main(String[] args) {
         List<String> input = Arrays.asList("A", "", "Good", "Example", "", "!");
         List<String> output = input.stream().filter(s -> !s.isEmpty()).collect(Collectors.toList());
-        System.out.println(output);
+
+        output.forEach(System.out::println);
     }
 
 }
