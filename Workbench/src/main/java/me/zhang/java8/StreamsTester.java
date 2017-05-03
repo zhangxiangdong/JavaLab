@@ -14,6 +14,10 @@ public class StreamsTester {
         List<String> output = input.stream().filter(s -> !s.isEmpty()).collect(Collectors.toList());
 
         output.forEach(System.out::println);
+
+        List<Integer> numbers = Arrays.asList(2, 1, 4, 6, 5, 2, 1);
+        List<Integer> squares = numbers.stream().map(i -> i * i).distinct().sorted().collect(Collectors.toList());
+        squares.forEach(System.out::println);
     }
 
 }
