@@ -3,7 +3,7 @@ package me.zhang.dataStructure;
 /**
  * Created by zhangxiangdong on 2017/5/2.
  */
-public class SinglyLinkedList<E> {
+public class SinglyLinkedList<E> implements Cloneable {
 
     private Node<E> head;
     private Node<E> tail;
@@ -86,6 +86,24 @@ public class SinglyLinkedList<E> {
             otherNode = otherNode.next;
         }
         return true;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        @SuppressWarnings("unchecked")
+        SinglyLinkedList<E> other = (SinglyLinkedList<E>) super.clone();
+        if (size > 0) {
+            other.head = new Node<>(head.element, null);
+            Node<E> walk = head.next;
+            Node<E> otherTail = other.head;
+            while (walk != null) {
+                Node<E> newNode = new Node<>(walk.element, null);
+                otherTail.next = newNode;
+                otherTail = newNode;
+                walk = walk.next;
+            }
+        }
+        return other;
     }
 
     public static class Node<E> {

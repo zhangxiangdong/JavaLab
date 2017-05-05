@@ -58,4 +58,16 @@ public class SinglyLinkedListTest {
         Assert.assertFalse(a.equals(f));
     }
 
+    @Test
+    public void testSinglyLinkedListCloning() throws CloneNotSupportedException {
+        SinglyLinkedList<Integer> linkedList = new SinglyLinkedList<>();
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
+
+        @SuppressWarnings("unchecked")
+        SinglyLinkedList<Integer> otherLinkedList = (SinglyLinkedList<Integer>) linkedList.clone();
+        Assert.assertTrue(linkedList.equals(otherLinkedList));
+    }
+
 }
