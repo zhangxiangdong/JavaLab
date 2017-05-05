@@ -63,6 +63,31 @@ public class SinglyLinkedList<E> {
         return element;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        @SuppressWarnings("unchecked")
+        SinglyLinkedList<E> other = (SinglyLinkedList<E>) obj;
+        if (this.size != other.size) {
+            return false;
+        }
+        Node<E> thisNode = head;
+        Node<E> otherNode = other.head;
+        while (thisNode != null) {
+            if (!thisNode.element.equals(otherNode.element)) { // Element mismatch.
+                return false;
+            }
+            thisNode = thisNode.next;
+            otherNode = otherNode.next;
+        }
+        return true;
+    }
+
     public static class Node<E> {
         E element;
         Node<E> next;
