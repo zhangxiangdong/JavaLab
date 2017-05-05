@@ -44,4 +44,24 @@ public class ArraysTestTest {
 
     }
 
+    @Test
+    public void testArrayStoresReferenceTypesDeepClone() throws CloneNotSupportedException {
+        Person[] contacts = new Person[2];
+        Person a = new Person(1, "Zack");
+        contacts[0] = a;
+        Person b = new Person(2, "Wade");
+        contacts[1] = b;
+
+        Person[] guests = new Person[contacts.length];
+        for (int i = 0; i < contacts.length; i++) {
+            guests[i] = (Person) contacts[i].clone();
+        }
+
+        Assert.assertTrue(guests[0].getName().equals(contacts[0].getName()));
+
+        guests[1].setName("Luca");
+        Assert.assertFalse(guests[1].getName().equals(contacts[1].getName()));
+
+    }
+
 }

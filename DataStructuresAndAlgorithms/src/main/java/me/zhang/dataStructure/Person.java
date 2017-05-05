@@ -3,7 +3,7 @@ package me.zhang.dataStructure;
 /**
  * Created by zhangxiangdong on 2017/5/5.
  */
-public class Person {
+public class Person implements Cloneable {
 
     private long id;
     private String name;
@@ -29,4 +29,8 @@ public class Person {
         this.name = name;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
