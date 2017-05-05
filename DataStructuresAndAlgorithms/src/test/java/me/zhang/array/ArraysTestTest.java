@@ -64,4 +64,21 @@ public class ArraysTestTest {
 
     }
 
+    @Test
+    public void testDeepCloneTwoDimensionalArray() {
+        int[][] a = {{0, 1}, {2, 3}};
+        int[][] b = new int[a.length][];
+        for (int i = 0; i < a.length; i++) {
+            b[i] = a[i].clone();
+        }
+        Assert.assertTrue(Arrays.deepEquals(a, b));
+        Assert.assertTrue(a[0] != b[0]);
+
+        a[0][0] = -1;
+        Assert.assertTrue(a[0][0] != b[0][0]);
+
+        System.out.println(Arrays.deepToString(a));
+        System.out.println(Arrays.deepToString(b));
+    }
+
 }
