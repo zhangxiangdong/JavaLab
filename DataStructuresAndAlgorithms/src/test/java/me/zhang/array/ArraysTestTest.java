@@ -1,5 +1,6 @@
 package me.zhang.array;
 
+import me.zhang.dataStructure.Person;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,6 +24,24 @@ public class ArraysTestTest {
         a[0] = -1; // a[0] == -1 while c[0] == 0
         Assert.assertFalse(a[0] == c[0]);
         Assert.assertTrue(0 == c[0]);
+    }
+
+    @Test
+    public void testArrayStoresReferenceTypesClone() {
+        Person[] contacts = new Person[3];
+        Person a = new Person(1, "Zack");
+        contacts[0] = a;
+        Person b = new Person(2, "Wade");
+        contacts[1] = b;
+        Person c = new Person(3, "Lucia");
+        contacts[2] = c;
+
+        Person[] guests = contacts.clone();
+        Assert.assertTrue(guests[0].getName().equals(contacts[0].getName()));
+
+        guests[2].setName("Lucy");
+        Assert.assertTrue(guests[2].getName().equals(contacts[2].getName()));
+
     }
 
 }
