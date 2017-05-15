@@ -12,10 +12,15 @@ public class FactorialFunctionTest {
     @Test
     public void testFactorialFunctionCorrectness() {
         FactorialFunction function = new FactorialFunction();
-        assertEquals(1, function.factorial(0));
-        assertEquals(1, function.factorial(1));
-        assertEquals(120, function.factorial(5));
-        assertEquals(function.factorial(8) * 9, function.factorial(9));
+        assertEquals(1, function.recursion(0));
+        assertEquals(1, function.recursion(1));
+        assertEquals(120, function.recursion(5));
+        assertEquals(function.recursion(8) * 9, function.recursion(9));
+
+        assertEquals(1, function.loop(0));
+        assertEquals(1, function.loop(1));
+        assertEquals(120, function.loop(5));
+        assertEquals(function.loop(8) * 9, function.loop(9));
     }
 
 }

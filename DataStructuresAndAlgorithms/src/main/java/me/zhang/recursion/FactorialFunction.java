@@ -9,11 +9,19 @@ package me.zhang.recursion;
  */
 public class FactorialFunction {
 
-    public long factorial(int n) {
+    public long recursion(int n) {
         if (n == 0) {
             return 1;
         }
-        return n * factorial(n - 1);
+        return n * recursion(n - 1);
+    }
+
+    public long loop(int n) {
+        long s = 1;
+        for (int i = 0; i < n; i++) {
+            s += s * i;
+        }
+        return s;
     }
 
 }
