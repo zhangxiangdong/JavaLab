@@ -9,14 +9,17 @@ import static org.junit.Assert.assertEquals;
  */
 public class FactorialFunctionTest {
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testFactorialFunctionCorrectness() {
         FactorialFunction function = new FactorialFunction();
+
+        function.recursion(-1);
         assertEquals(1, function.recursion(0));
         assertEquals(1, function.recursion(1));
         assertEquals(120, function.recursion(5));
         assertEquals(function.recursion(8) * 9, function.recursion(9));
 
+        function.loop(-1);
         assertEquals(1, function.loop(0));
         assertEquals(1, function.loop(1));
         assertEquals(120, function.loop(5));

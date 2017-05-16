@@ -10,6 +10,10 @@ package me.zhang.recursion;
 public class FactorialFunction {
 
     public long recursion(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        }
+
         if (n == 0) {
             return 1;
         }
@@ -17,6 +21,10 @@ public class FactorialFunction {
     }
 
     public long loop(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        }
+
         long s = 1;
         for (int i = 0; i < n; i++) {
             s += s * i;
