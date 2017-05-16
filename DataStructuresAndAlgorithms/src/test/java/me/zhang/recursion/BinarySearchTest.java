@@ -21,6 +21,12 @@ public class BinarySearchTest {
         final int targetNotExist = 12;
         index = search.recursion(a, targetNotExist, 0, a.length - 1);
         assertEquals(-1, index);
+
+        index = search.loop(a, targetExist, 0, a.length - 1);
+        assertEquals(5, index);
+
+        index = search.loop(a, targetNotExist, 0, a.length - 1);
+        assertEquals(-1, index);
     }
 
 }
