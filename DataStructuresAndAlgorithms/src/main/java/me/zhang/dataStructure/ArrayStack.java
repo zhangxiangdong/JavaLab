@@ -55,4 +55,41 @@ public class ArrayStack<E> implements Stack<E> {
     public int size() {
         return t + 1;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("(");
+        for (int i = 0; i < size(); i++) {
+            builder.append(i);
+            if (i < size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append(")");
+        return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        ArrayStack<Integer> arrayStack = new ArrayStack<>();
+        arrayStack.push(0);
+        System.out.println(arrayStack);
+        arrayStack.push(1);
+        System.out.println(arrayStack);
+        arrayStack.push(2);
+        System.out.println(arrayStack);
+
+        arrayStack.pop();
+        System.out.println(arrayStack);
+        arrayStack.pop();
+        System.out.println(arrayStack);
+
+        arrayStack.push(3);
+        System.out.println(arrayStack);
+        arrayStack.pop();
+        System.out.println(arrayStack);
+
+        arrayStack.pop();
+        System.out.println(arrayStack);
+    }
+
 }
