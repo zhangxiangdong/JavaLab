@@ -1,7 +1,7 @@
 package me.zhang.dataStructure.iterator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import me.zhang.dataStructure.list.ArrayList;
+
 import java.util.Iterator;
 
 /**
@@ -20,7 +20,10 @@ public class TestIterator {
 
     public static void main(String[] args) {
         TestIterator tester = new TestIterator();
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(-3, -2, -1, 0, 1, 2, 3));
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = -3; i < 3; i++) {
+            numbers.add(i + 3, i);
+        }
         System.out.println(numbers);
         tester.removeNegativeNumbers(numbers);
         System.out.println(numbers);

@@ -1,9 +1,12 @@
 package me.zhang.dataStructure.list;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Created by zhangxiangdong on 2017/6/9.
  */
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> implements List<E>, Iterable<E> {
 
     private static final int DEFAULT_CAPACITY = 16;
     private final E[] elements;
@@ -69,6 +72,55 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder to = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            to.append(elements[i]);
+            if (i < size - 1) {
+                to.append(", ");
+            }
+        }
+        to.append("]");
+        return to.toString();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<E> {
+
+        private int j;
+        private boolean removable;
+
+        @Override
+        public boolean hasNext() {
+            return j < size;
+        }
+
+        @Override
+        public E next() {
+            if (j == size) {
+                throw new NoSuchElementException("No next element");
+            }
+            removable = true;
+            return elements[j++];
+        }
+
+        @Override
+        public void remove() {
+            if (!removable) {
+                throw new IllegalStateException("Nothing to remove");
+            }
+
+            ArrayList.this.remove(j - 1);
+            j--;
+            removable = false;
+        }
     }
 
 }
