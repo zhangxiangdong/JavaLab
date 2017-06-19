@@ -16,6 +16,10 @@ public class TestIterator {
                 iterator.remove();
             }
         }
+
+        for (Integer i : numbers) {
+            System.out.println(i);
+        }
     }
 
     public static void main(String[] args) {
