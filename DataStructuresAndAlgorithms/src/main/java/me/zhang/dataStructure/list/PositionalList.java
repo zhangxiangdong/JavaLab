@@ -3,7 +3,7 @@ package me.zhang.dataStructure.list;
 /**
  * Created by zhangxiangdong on 2017/6/14.
  */
-public interface PositionalList<E> {
+public interface PositionalList<E> extends Iterable<E> {
 
     /**
      * Returns the number of elements in the list.
@@ -106,5 +106,12 @@ public interface PositionalList<E> {
      * @throws IllegalArgumentException if p is not a valid position for this list
      */
     E remove(Position<E> p) throws IllegalArgumentException;
+
+    /**
+     * Returns the positions of the list in iterable form from first to last.
+     *
+     * @return iterable collection of the list's positions
+     */
+    Iterable<Position<E>> positions();
 
 }

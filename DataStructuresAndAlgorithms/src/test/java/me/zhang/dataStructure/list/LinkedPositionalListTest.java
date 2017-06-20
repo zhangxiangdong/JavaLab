@@ -1,6 +1,5 @@
 package me.zhang.dataStructure.list;
 
-import me.zhang.dataStructure.list.LinkedPositionalList.Node;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import org.junit.Test;
  */
 public class LinkedPositionalListTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test//(expected = IllegalArgumentException.class)
     public void test() {
         PositionalList<Integer> list = new LinkedPositionalList<>();
         list.addFirst(0);
@@ -18,6 +17,9 @@ public class LinkedPositionalListTest {
         list.addBefore(list.last(), 2);
 
         // 0, 1, 2, 3
+        for (Integer i : list) {
+            System.out.print(i + " ");
+        }
 
         Assert.assertEquals(4, list.size());
         Assert.assertFalse(list.isEmpty());
@@ -26,12 +28,17 @@ public class LinkedPositionalListTest {
         Assert.assertEquals(null, list.before(list.first()));
         Assert.assertEquals(null, list.after(list.last()));
 
-        list.addAfter(new Stub<>(), 4); // IllegalArgumentException
-        list.addBefore(new Node<>(null, -1, null), 5); // IllegalArgumentException
+//        list.addAfter(new Stub<>(), 4); // IllegalArgumentException
+//        list.addBefore(new Node<>(null, -1, null), 5); // IllegalArgumentException
 
         list.set(list.first(), 100);
 
         // 100, 1, 2, 3
+        System.out.println();
+        Iterable<Position<Integer>> positions = list.positions();
+        for (Position<Integer> p : positions) {
+            System.out.print(p.getElement() + " ");
+        }
 
         Assert.assertEquals(100, list.first().getElement().intValue());
 
