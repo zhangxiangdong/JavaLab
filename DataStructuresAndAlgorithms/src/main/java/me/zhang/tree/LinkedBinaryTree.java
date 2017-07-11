@@ -2,8 +2,6 @@ package me.zhang.tree;
 
 import me.zhang.dataStructure.list.Position;
 
-import java.util.Iterator;
-
 /**
  * Created by zhangxiangdong on 2017/7/5.
  */
@@ -220,16 +218,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         node.right = null;
         node.parent = node; // convention for defunct node
         return element;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    @Override
-    public Iterable<Position<E>> positions() {
-        return null;
     }
 
 }
