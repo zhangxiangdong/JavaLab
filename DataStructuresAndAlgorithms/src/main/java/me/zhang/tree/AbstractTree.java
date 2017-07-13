@@ -128,6 +128,33 @@ public abstract class AbstractTree<E> implements Tree<E> {
         }
     }
 
+    /**
+     * Returns an iterable collection of positions of the tree, reported in postorder.
+     *
+     * @return iterable collection of the tree's positions in postorder
+     */
+    public Iterable<Position<E>> postorder() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty())
+            postorderSubtree(root(), snapshot); // fill the snapshot recursively
+        return snapshot;
+    }
+
+    /**
+     * Adds positions of the subtree rooted at Position p to the given
+     * snapshot using a postorder traversal
+     *
+     * @param p        Position serving as the root of a subtree
+     * @param snapshot a list to which results are appended
+     */
+    private void postorderSubtree(Position<E> p, List<Position<E>> snapshot) {
+        for (Position<E> c : children(p)) {
+            postorderSubtree(c, snapshot);
+        }
+        snapshot.add(p); // for postorder, we add position p after exploring subtrees
+    }
+
+
     private class ElementIterator implements Iterator<E> {
 
         Iterator<Position<E>> posIterator = positions().iterator();
