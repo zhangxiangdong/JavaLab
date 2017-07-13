@@ -1,5 +1,7 @@
 package me.zhang.tree;
 
+import me.zhang.dataStructure.LinkedQueue;
+import me.zhang.dataStructure.Queue;
 import me.zhang.dataStructure.list.Position;
 
 import java.util.ArrayList;
@@ -154,6 +156,26 @@ public abstract class AbstractTree<E> implements Tree<E> {
         snapshot.add(p); // for postorder, we add position p after exploring subtrees
     }
 
+    /**
+     * Returns an iterable collection of positions of the tree in breadth-first order.
+     *
+     * @return iterable collection of the tree's positions in breadth-first order
+     */
+    public Iterable<Position<E>> breadthfirst() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty()) {
+            Queue<Position<E>> fringe = new LinkedQueue<>();
+            fringe.enqueue(root()); // start with the root
+            while (!fringe.isEmpty()) {
+                Position<E> p = fringe.dequeue(); // remove from front of the queue
+                snapshot.add(p); // report this position
+                for (Position<E> child : children(p)) {
+                    fringe.enqueue(child); // add children to back of queue
+                }
+            }
+        }
+        return snapshot;
+    }
 
     private class ElementIterator implements Iterator<E> {
 
