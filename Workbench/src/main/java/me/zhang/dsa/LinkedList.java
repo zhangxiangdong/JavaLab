@@ -1,4 +1,4 @@
-package me.zhang.ds;
+package me.zhang.dsa;
 
 import java.util.Stack;
 
