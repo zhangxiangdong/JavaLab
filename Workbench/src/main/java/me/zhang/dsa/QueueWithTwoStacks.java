@@ -11,6 +11,10 @@ public class QueueWithTwoStacks<T> {
         return alpha.size() + beta.size();
     }
 
+    public boolean empty() {
+        return alpha.empty() && beta.empty();
+    }
+
     public void appendTail(T e) {
         alpha.push(e);
     }
