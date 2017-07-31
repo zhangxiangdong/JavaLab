@@ -18,6 +18,19 @@ public class Arrays {
         System.out.println("Bubble Sort: ");
         bubbleSort(test);
         System.out.println(java.util.Arrays.toString(test));
+
+        int[] a = {1, 2, 3, 4, 5};
+        int[] b = {6, 7, 8, 9};
+        int[] r = concatenate(a, b);
+        System.out.println("Merge Result: ");
+        System.out.println(java.util.Arrays.toString(r));
+    }
+
+    static int[] concatenate(int[] a, int[] b) {
+        int[] r = new int[a.length + b.length];
+        System.arraycopy(a, 0, r, 0, a.length);
+        System.arraycopy(b, 0, r, a.length, b.length);
+        return r;
     }
 
     static void reverse(int[] array) {
