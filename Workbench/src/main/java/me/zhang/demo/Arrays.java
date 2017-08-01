@@ -6,6 +6,7 @@ public class Arrays {
         int[] test = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         System.out.println(java.util.Arrays.toString(test));
 
+        System.out.println("After Reverse: ");
         reverse(test);
         System.out.println(java.util.Arrays.toString(test));
 
@@ -13,7 +14,9 @@ public class Arrays {
         selectionSort(test);
         System.out.println(java.util.Arrays.toString(test));
 
+        System.out.println("After Reverse: ");
         reverse(test);
+        System.out.println(java.util.Arrays.toString(test));
 
         System.out.println("Bubble Sort: ");
         bubbleSort(test);
@@ -23,6 +26,15 @@ public class Arrays {
         int[] b = {6, 7, 8, 9};
         int[] r = concatenate(a, b);
         System.out.println("Merge Result: ");
+        System.out.println(java.util.Arrays.toString(r));
+
+        System.out.println("After Reverse: ");
+        reverse(r);
+        System.out.println(java.util.Arrays.toString(r));
+
+
+        System.out.println("Quick Sort: ");
+        quickSort(r, 0, r.length - 1);
         System.out.println(java.util.Arrays.toString(r));
     }
 
@@ -70,6 +82,33 @@ public class Arrays {
                     a[j + 1] = temp;
                 }
             }
+        }
+    }
+
+    static void quickSort(int[] a, int lo, int hi) {
+        if (lo < hi) {
+            int p = partition(a, lo, hi);
+            quickSort(a, lo, p);
+            quickSort(a, p + 1, hi);
+        }
+    }
+
+    private static int partition(int[] a, int lo, int hi) {
+        int pivot = a[lo];
+        int i = lo, j = hi;
+        while (true) {
+            while (a[i] < pivot) {
+                i++;
+            }
+            while (a[j] > pivot) {
+                j--;
+            }
+            if (i >= j) {
+                return j;
+            }
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
         }
     }
 
