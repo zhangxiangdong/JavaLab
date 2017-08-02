@@ -36,6 +36,19 @@ public class Arrays {
         System.out.println("Quick Sort: ");
         quickSort(r, 0, r.length - 1);
         System.out.println(java.util.Arrays.toString(r));
+
+        int[] rotated = new int[]{1, 2, 3, 4, 5, 7};
+        System.out.println(java.util.Arrays.toString(rotated));
+        int minIndex = minNumberInRotatedArray(rotated, 0, rotated.length - 1);
+        System.out.printf("Min Number Index In Rotated Array: %d\n", minIndex);
+
+        rotated = new int[]{4, 5, 6, 7, 1, 2, 3};
+        minIndex = minNumberInRotatedArray(rotated, 0, rotated.length - 1);
+        System.out.printf("Min Number Index In Rotated Array: %d\n", minIndex);
+
+        rotated = new int[]{1, 0, 1, 1, 1};
+        minIndex = minNumberInRotatedArray(rotated, 0, rotated.length - 1);
+        System.out.printf("Min Number Index In Rotated Array: %d\n", minIndex);
     }
 
     static int[] concatenate(int[] a, int[] b) {
@@ -110,6 +123,47 @@ public class Arrays {
             a[i] = a[j];
             a[j] = temp;
         }
+    }
+
+    static int minNumberInRotatedArray(int[] a, int lo, int hi) {
+        if (lo >= hi) {
+            throw new IllegalArgumentException();
+        }
+        // If the first number is greater than the last one,
+        // it means that the array was sorted,
+        // just returns the first index immediately.
+        int target = lo;
+        while (a[lo] >= a[hi]) {
+            if (lo + 1 == hi) {
+                target = hi;
+                break;
+            }
+
+            int midIndex = (lo + hi) >>> 1;
+
+            // {0, 1, 1, 1, 1} 旋转 {1, 0, 1, 1, 1}
+            if (a[lo] == a[hi] && a[hi] == a[midIndex]) {
+                // 顺序查找最小值的位置
+                return minIndexInOrder(a);
+            }
+
+            if (a[lo] < a[midIndex]) {
+                lo = midIndex;
+            } else if (a[midIndex] < a[hi]) {
+                hi = midIndex;
+            }
+        }
+        return target;
+    }
+
+    private static int minIndexInOrder(int[] a) {
+        int target = 0;
+        for (int i = 1; i < a.length; i++) {
+            if (a[target] > a[i]) {
+                target = i;
+            }
+        }
+        return target;
     }
 
 }
