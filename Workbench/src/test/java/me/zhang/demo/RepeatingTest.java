@@ -19,4 +19,22 @@ public class RepeatingTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void fibonacci() {
+        // https://en.wikipedia.org/wiki/Fibonacci_number
+        int[] fibonacci = new int[]{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144};
+        int expected = fibonacci[6];
+        Assert.assertEquals(expected, repeating.fibonacciRecursively(6));
+        Assert.assertEquals(expected, repeating.fibonacciCyclically(6));
+
+        for (int i = 0; i < fibonacci.length; i++) {
+            expected = fibonacci[i];
+            Assert.assertEquals(expected, repeating.fibonacciRecursively(i));
+            Assert.assertEquals(expected, repeating.fibonacciCyclically(i));
+        }
+
+        // System.out.println(repeating.fibonacciRecursively(100));
+
+    }
+
 }

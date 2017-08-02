@@ -14,4 +14,34 @@ public class Repeating {
         return result;
     }
 
+    int fibonacciRecursively(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        } else if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else {
+            return fibonacciRecursively(n - 1) + fibonacciRecursively(n - 2);
+        }
+    }
+
+    int fibonacciCyclically(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        } else if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else {
+            int r = 0, a = 0, b = 1;
+            for (int i = 2; i <= n; i++) {
+                r = a + b;
+                a = b;
+                b = r;
+            }
+            return r;
+        }
+    }
+
 }
