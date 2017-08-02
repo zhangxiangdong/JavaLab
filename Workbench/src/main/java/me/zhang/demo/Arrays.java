@@ -49,6 +49,13 @@ public class Arrays {
         rotated = new int[]{1, 0, 1, 1, 1};
         minIndex = minNumberInRotatedArray(rotated, 0, rotated.length - 1);
         System.out.printf("Min Number Index In Rotated Array: %d\n", minIndex);
+
+        a = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
+        System.out.println("Before Insertion Sort: ");
+        System.out.println(java.util.Arrays.toString(a));
+        System.out.println("After Insertion Sort: ");
+        insertionSort(a);
+        System.out.println(java.util.Arrays.toString(a));
     }
 
     static int[] concatenate(int[] a, int[] b) {
@@ -164,6 +171,19 @@ public class Arrays {
             }
         }
         return target;
+    }
+
+    static void insertionSort(int[] a) {
+        int in, out;
+        for (out = 1; out < a.length; out++) {
+            int temp = a[out];
+            in = out;
+            while (in > 0 && temp <= a[in - 1]) {
+                a[in] = a[in - 1];
+                in--;
+            }
+            a[in] = temp;
+        }
     }
 
 }
