@@ -37,4 +37,17 @@ public class RepeatingTest {
 
     }
 
+    @Test
+    public void frogJump() {
+        // https://en.wikipedia.org/wiki/Geometric_progression
+        int[] steps = {1, 1, 2, 4, 8, 16, 32, 64, 128, 256};
+        int expected = steps[9];
+        Assert.assertEquals(expected, repeating.frogJump(9));
+
+        for (int i = 0; i < steps.length; i++) {
+            expected = steps[i];
+            Assert.assertEquals(expected, repeating.frogJump(i));
+        }
+    }
+
 }
