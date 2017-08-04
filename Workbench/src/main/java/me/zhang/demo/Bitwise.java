@@ -22,7 +22,7 @@ public class Bitwise {
         return count;
     }
 
-    int numberOfEfficiently(int num) {
+    int numberOf1Efficiently(int num) {
         int count = 0;
         while (num != 0) {
             count++;
