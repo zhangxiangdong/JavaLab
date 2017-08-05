@@ -1,4 +1,4 @@
-package me.zhang.demo;
+package me.zhang.dsa;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package me.zhang.demo;
+package me.zhang.dsa;
 
 public class Repeating {
 
