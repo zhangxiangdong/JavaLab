@@ -25,9 +25,9 @@ public class StringOperator {
         }
     }
 
-    // 创建一个随机字符串数组，使用长度是5的随机字符串初始化这个数组
-    public void randomStringArray(String[] array) {
-        char[] chars = new char[5];
+    // 创建一个随机字符串数组，使用长度是stringLength的随机字符串初始化这个数组
+    public void randomStringArray(String[] array, int stringLength) {
+        char[] chars = new char[stringLength];
         for (int i = 0; i < array.length; i++) {
             randomCharArray(chars);
             array[i] = new String(chars);
@@ -116,12 +116,20 @@ public class StringOperator {
 
     public static void main(String[] args) {
         StringOperator operator = new StringOperator();
+        testRandomCharArray(operator);
+        testRandomStringArray(operator);
+        testMapping(operator);
+    }
+
+    private static void testRandomCharArray(StringOperator operator) {
         char[] randChars = new char[5];
         operator.randomCharArray(randChars);
         System.out.println(Arrays.toString(randChars));
+    }
 
+    private static void testRandomStringArray(StringOperator operator) {
         String[] randStrings = new String[8];
-        operator.randomStringArray(randStrings);
+        operator.randomStringArray(randStrings, 5);
         System.out.println(Arrays.toString(randStrings));
 
         String[] tempRandStrings = new String[randStrings.length];
@@ -134,7 +142,9 @@ public class StringOperator {
         System.out.println("Sort by StringOperator: ");
         operator.sort(tempRandStrings);
         System.out.println(Arrays.toString(tempRandStrings));
+    }
 
+    private static void testMapping(StringOperator operator) {
         char[] passwordArray = new char[3];
         operator.randomCharArray(passwordArray);
         System.out.println("Password: " + new String(passwordArray));
