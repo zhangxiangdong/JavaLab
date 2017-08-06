@@ -32,6 +32,27 @@ public class StringOperator {
         }
     }
 
+    // 对数组进行排序，按照每个字符串的首字母排序（无视大小写）
+    public void sort(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length - i - 1; j++) {
+                char left = array[j].charAt(0);
+                char right = array[j + 1].charAt(0);
+                if (left >= 97) { // 忽视大小写
+                    left -= 32;
+                }
+                if (right >= 97) {
+                    right -= 32;
+                }
+                if (left > right) {
+                    String temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         StringOperator operator = new StringOperator();
         char[] randChars = new char[5];
@@ -41,6 +62,17 @@ public class StringOperator {
         String[] randStrings = new String[8];
         operator.randomStringArray(randStrings);
         System.out.println(Arrays.toString(randStrings));
+
+        String[] tempRandStrings = new String[randStrings.length];
+        System.arraycopy(randStrings, 0, tempRandStrings, 0, randStrings.length);
+
+        System.out.println("Sort by Arrays: ");
+        Arrays.sort(randStrings);
+        System.out.println(Arrays.toString(randStrings));
+
+        System.out.println("Sort by StringOperator: ");
+        operator.sort(tempRandStrings);
+        System.out.println(Arrays.toString(tempRandStrings));
     }
 
 }
