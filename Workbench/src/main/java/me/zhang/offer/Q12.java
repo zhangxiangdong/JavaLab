@@ -30,6 +30,25 @@ public class Q12 {
         }
     }
 
+    public void print1ToMaxOfNDigitsRecursively(int n) {
+        char[] digits = new char[n];
+        printRecursively(digits, 0);
+    }
+
+    /**
+     * @param index 当前递归方法调用所在字符数组的位置
+     */
+    private void printRecursively(char[] digits, int index) {
+        for (int i = '0'; i <= '9'; i++) {
+            digits[index] = (char) i;
+            if (index < digits.length - 1) {
+                printRecursively(digits, index + 1);
+            } else {
+                System.out.println(new String(digits));
+            }
+        }
+    }
+
     /**
      * 模拟累加字符数组表示的大数
      *
@@ -84,7 +103,8 @@ public class Q12 {
         Q12 q12 = new Q12();
         // q12.print1ToMaxOfNDigitsBad(3);
 
-        q12.print1ToMaxOfNDigitsSim(3);
+        // q12.print1ToMaxOfNDigitsSim(3);
+        q12.print1ToMaxOfNDigitsRecursively(3);
     }
 
 }
