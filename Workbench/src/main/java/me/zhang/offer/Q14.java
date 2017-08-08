@@ -23,7 +23,7 @@ public class Q14 {
      * @param a    要分组的数组
      * @param func 策略。比如：按照大小分为两部分，所有负数都在非负数前面；能被3整除的数都在不能被3整除的前面。
      */
-    public void reorderByOddAndEvenFast(int[] a, Func func) {
+    public void group(int[] a, Func func) {
         int left = 0, right = a.length - 1;
         while (left < right) {
             while (!func.calc(a[left])) {
@@ -53,7 +53,7 @@ public class Q14 {
 
         a = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         // 策略模式（Strategy Pattern）
-        q14.reorderByOddAndEvenFast(a, new IsEven());
+        q14.group(a, new IsEven());
         System.out.println(Arrays.toString(a));
     }
 
