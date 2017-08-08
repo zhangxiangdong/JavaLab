@@ -19,18 +19,21 @@ public class Q14 {
         }
     }
 
-    public void reorderByOddAndEvenFast(int[] a) {
+    /**
+     * @param a    要分组的数组
+     * @param func 策略。比如：按照大小分为两部分，所有负数都在非负数前面；能被3整除的数都在不能被3整除的前面。
+     */
+    public void reorderByOddAndEvenFast(int[] a, Func func) {
         int left = 0, right = a.length - 1;
         while (left < right) {
-            while ((a[left] & 1) != 0) {
+            while (!func.calc(a[left])) {
                 left++;
             }
-            while (left < right && (a[right] & 1) != 1) {
+            while (left < right && func.calc(a[right])) {
                 right--;
             }
 
             if (left < right) {
-                // a[left]是偶数，a[right]是奇数，执行交换
                 swap(a, left, right);
             }
         }
@@ -49,8 +52,24 @@ public class Q14 {
         System.out.println(Arrays.toString(a));
 
         a = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        q14.reorderByOddAndEvenFast(a);
+        // 策略模式（Strategy Pattern）
+        q14.reorderByOddAndEvenFast(a, new IsEven());
         System.out.println(Arrays.toString(a));
+    }
+
+    static class IsEven implements Func {
+        @Override
+        public boolean calc(int i) {
+            return isEven(i);
+        }
+
+        private boolean isEven(int i) {
+            return (i & 1) == 0;
+        }
+    }
+
+    interface Func {
+        boolean calc(int i);
     }
 
 }
