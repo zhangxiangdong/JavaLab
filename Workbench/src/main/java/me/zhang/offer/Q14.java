@@ -25,7 +25,7 @@ public class Q14 {
             while ((a[left] & 1) != 0) {
                 left++;
             }
-            while ((a[right] & 1) != 1) {
+            while (left < right && (a[right] & 1) != 1) {
                 right--;
             }
 
