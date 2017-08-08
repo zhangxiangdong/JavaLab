@@ -9,6 +9,10 @@ import java.util.Arrays;
 public class Q14 {
 
     public void reorderByOddAndEvenSlow(int[] a) {
+        if (a == null) {
+            throw new NullPointerException();
+        }
+
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a.length - i - 1; j++) {
                 if ((a[j] & 1) == 0 && (a[j + 1] & 1) == 1) {
@@ -24,6 +28,10 @@ public class Q14 {
      * @param func 策略。比如：按照大小分为两部分，所有负数都在非负数前面；能被3整除的数都在不能被3整除的前面。
      */
     public void group(int[] a, Func func) {
+        if (a == null) {
+            throw new NullPointerException();
+        }
+
         int left = 0, right = a.length - 1;
         while (left < right) {
             while (!func.calc(a[left])) {
@@ -53,6 +61,18 @@ public class Q14 {
 
         a = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         // 策略模式（Strategy Pattern）
+        q14.group(a, new IsEven());
+        System.out.println(Arrays.toString(a));
+
+        a = new int[]{1};
+        q14.group(a, new IsEven());
+        System.out.println(Arrays.toString(a));
+
+        a = new int[]{0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+        q14.group(a, new IsEven());
+        System.out.println(Arrays.toString(a));
+
+        a = new int[]{1, 3, 5, 7, 9, 0, 2, 4, 6, 8};
         q14.group(a, new IsEven());
         System.out.println(Arrays.toString(a));
     }
