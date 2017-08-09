@@ -1,5 +1,7 @@
 package me.zhang.offer;
 
+import me.zhang.dsa.Node;
+
 /**
  * 定义一个方法，输入一个链表的头节点，反转该链表并输出反转后的链表的头节点。
  */
@@ -188,23 +190,6 @@ public class Q16 {
                 n = n.next;
             } while (n != null);
             System.out.println();
-        }
-    }
-
-    static class Node {
-        int value;
-        Node next;
-
-        public Node(Node next, int value) {
-            this.value = value;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    "} -> ";
         }
     }
 

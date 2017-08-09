@@ -1,5 +1,7 @@
 package me.zhang.offer;
 
+import me.zhang.dsa.Node;
+
 /**
  * 给定单向链表的头节点和一个节点（位于该链表上），定义一个方法在O(1)时间删除该节点。
  * <p>
@@ -79,23 +81,6 @@ public class Q13 {
             n = n.next;
         }
         System.out.println();
-    }
-
-    static class Node {
-        Node next;
-        int value;
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    "} -> ";
-        }
-
-        Node(Node next, int value) {
-            this.next = next;
-            this.value = value;
-        }
     }
 
 }
