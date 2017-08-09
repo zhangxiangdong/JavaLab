@@ -2,6 +2,8 @@ package me.zhang.offer;
 
 import me.zhang.dsa.Node;
 
+import static me.zhang.dsa.NodeUtil.printOutLinkedList;
+
 /**
  * 给定单向链表的头节点和一个节点（位于该链表上），定义一个方法在O(1)时间删除该节点。
  * <p>
@@ -72,15 +74,6 @@ public class Q13 {
         System.out.println("\nAfter delete head: ");
         q13.deleteNode(head, head);
         printOutLinkedList(null);
-    }
-
-    private static void printOutLinkedList(Node head) {
-        Node n = head;
-        while (n != null) {
-            System.out.print(n);
-            n = n.next;
-        }
-        System.out.println();
     }
 
 }

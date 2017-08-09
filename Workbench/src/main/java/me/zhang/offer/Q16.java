@@ -2,6 +2,8 @@ package me.zhang.offer;
 
 import me.zhang.dsa.Node;
 
+import static me.zhang.dsa.NodeUtil.printOutLinkedList;
+
 /**
  * 定义一个方法，输入一个链表的头节点，反转该链表并输出反转后的链表的头节点。
  */
@@ -66,9 +68,9 @@ public class Q16 {
                         ), 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         Node tail = reverseLinkedListCyclically(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有三个节点。
         System.out.println("链表只有三个节点：");
@@ -79,9 +81,9 @@ public class Q16 {
                         ), 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListCyclically(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有两个节点。
         System.out.println("链表只有两个节点：");
@@ -90,26 +92,26 @@ public class Q16 {
                         null, 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListCyclically(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有一个节点。
         System.out.println("链表只有一个节点：");
         head = new Node(
                 null, 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListCyclically(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表为空。
         System.out.println("链表为空：");
         head = null;
-        printLinkedList(head);
+        printOutLinkedList(head);
         try {
             tail = reverseLinkedListCyclically(head);
-            printLinkedList(tail);
+            printOutLinkedList(tail);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -131,9 +133,9 @@ public class Q16 {
                         ), 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         Node tail = reverseLinkedListRecursively(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有三个节点。
         System.out.println("链表只有三个节点：");
@@ -144,9 +146,9 @@ public class Q16 {
                         ), 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListRecursively(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有两个节点。
         System.out.println("链表只有两个节点：");
@@ -155,41 +157,28 @@ public class Q16 {
                         null, 2
                 ), 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListRecursively(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表只有一个节点。
         System.out.println("链表只有一个节点：");
         head = new Node(
                 null, 1
         );
-        printLinkedList(head);
+        printOutLinkedList(head);
         tail = reverseLinkedListRecursively(head);
-        printLinkedList(tail);
+        printOutLinkedList(tail);
 
         // 链表为空。
         System.out.println("链表为空：");
         head = null;
-        printLinkedList(head);
+        printOutLinkedList(head);
         try {
             tail = reverseLinkedListRecursively(head);
-            printLinkedList(tail);
+            printOutLinkedList(tail);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        }
-    }
-
-    private static void printLinkedList(Node head) {
-        if (head == null) {
-            System.out.println("null");
-        } else {
-            Node n = head;
-            do {
-                System.out.print(n);
-                n = n.next;
-            } while (n != null);
-            System.out.println();
         }
     }
 
