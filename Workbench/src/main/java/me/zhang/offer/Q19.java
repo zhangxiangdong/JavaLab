@@ -2,6 +2,9 @@ package me.zhang.offer;
 
 import me.zhang.dsa.BinaryTreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 完成一个方法，输入一个二叉树，该方法输入它的镜像。
  */
@@ -18,6 +21,32 @@ public class Q19 {
         mirrorOf(rootNode.left);
         mirrorOf(rootNode.right);
 
+        return rootNode;
+    }
+
+    public static BinaryTreeNode mirrorIterative(BinaryTreeNode rootNode) {
+        Queue<BinaryTreeNode> nodeQueue = new LinkedList<>();
+        nodeQueue.add(rootNode);
+        while (!nodeQueue.isEmpty()) {
+            BinaryTreeNode root = nodeQueue.remove();
+            if (root.left == null && root.right == null) {
+                continue;
+            } else if (root.left != null && root.right != null) {
+                BinaryTreeNode temp = root.left;
+                root.left = root.right;
+                root.right = temp;
+                nodeQueue.add(root.left);
+                nodeQueue.add(root.right);
+            } else if (root.left == null) {
+                root.left = root.right;
+                root.right = null;
+                nodeQueue.add(root.left);
+            } else {
+                root.right = root.left;
+                root.left = null;
+                nodeQueue.add(root.right);
+            }
+        }
         return rootNode;
     }
 
@@ -75,6 +104,15 @@ public class Q19 {
                            4      1   2
          */
         BinaryTreeNode mirror = mirrorOf(root);
+        preorder(mirror);
+        System.out.println();
+        inorder(mirror);
+        System.out.println();
+        postorder(mirror);
+        System.out.println();
+
+        System.out.println("Mirror of mirror: ");
+        mirror = mirrorIterative(mirror);
         preorder(mirror);
         System.out.println();
         inorder(mirror);

@@ -14,6 +14,6 @@ public class BinaryTreeNode {
 
     @Override
     public String toString() {
-        return " " + value + " ";
+        return String.format("%4d", value);
     }
 }
