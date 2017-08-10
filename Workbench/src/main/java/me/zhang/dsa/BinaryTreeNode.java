@@ -11,4 +11,9 @@ public class BinaryTreeNode {
         this.left = left;
         this.right = right;
     }
+
+    @Override
+    public String toString() {
+        return " " + value + " ";
+    }
 }
