@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class Q24 {
 
-    public boolean verifySequenceOfBinarySearchTree(int[] sequence) {
+    public boolean verifyPostorderSequenceOfBinarySearchTree(int[] sequence) {
         if (sequence == null || sequence.length == 0) {
             return false;
         }
@@ -43,13 +43,48 @@ public class Q24 {
         boolean left = true;
         if (i > 0) {
             // 使用C/C++指针操作，效率更高
-            left = verifySequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, 0, i));
+            left = verifyPostorderSequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, 0, i));
         }
 
         // 判断右子树是不是二叉搜索树
         boolean right = true;
         if (i < len - 1) {
-            right = verifySequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, i, len - 1));
+            right = verifyPostorderSequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, i, len - 1));
+        }
+
+        return left && right;
+    }
+
+    public boolean verifyPreorderSequenceOfBinarySearchTree(int[] sequence) {
+        if (sequence == null || sequence.length == 0) {
+            return false;
+        }
+
+        int len = sequence.length;
+        int root = sequence[0];
+
+        int i = 1;
+        while (i < len) {
+            if (sequence[i] > root) {
+                break;
+            }
+            i++;
+        }
+
+        for (int j = i; j < len; j++) {
+            if (sequence[j] < root) {
+                return false;
+            }
+        }
+
+        boolean left = true;
+        if (i > 1) {
+            left = verifyPreorderSequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, 1, i));
+        }
+
+        boolean right = true;
+        if (i < len) {
+            right = verifyPreorderSequenceOfBinarySearchTree(Arrays.copyOfRange(sequence, i, len));
         }
 
         return left && right;
