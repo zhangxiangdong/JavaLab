@@ -57,6 +57,28 @@ public class Q29 {
         return occurrence > in.length / 2;
     }
 
+    /**
+     * 要找的数字出现的次数比其他所有数字出现的次数的总和还要多。
+     */
+    public int moreThanHalfNumberFast(int[] in) {
+        int target = in[0];
+        int occurrence = 1;
+        for (int i = 1; i < in.length; i++) {
+            if (occurrence == 0) {
+                target = in[i];
+                occurrence = 1;
+            } else if (target == in[i]) {
+                occurrence++;
+            } else {
+                occurrence--;
+            }
+        }
+        if (checkMoreThanHalf(in, target)) {
+            return target;
+        }
+        throw new ResultNotFoundException("数组中没有出现次数超过数组长度一半的");
+    }
+
     public static void main(String[] args) {
         int[] in = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         Q29 q29 = new Q29();
@@ -70,6 +92,14 @@ public class Q29 {
         in = new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2, 3};
         try {
             int result = q29.moreThanHalfNumberChooseMiddle(in);
+            System.out.println("数组中出现次数超过数组长度一半的数：" + result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        in = new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2, 2};
+        try {
+            int result = q29.moreThanHalfNumberFast(in);
             System.out.println("数组中出现次数超过数组长度一半的数：" + result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
