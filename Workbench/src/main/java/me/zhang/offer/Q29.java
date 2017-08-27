@@ -30,11 +30,46 @@ public class Q29 {
         throw new ResultNotFoundException("数组中没有出现次数超过数组长度一半的");
     }
 
+    public int moreThanHalfNumberChooseMiddle(int[] in) {
+        // 判断输入的数组重复的数字数量是否超过数组长度的一半
+        Arrays.sort(in);
+        int middle = in[in.length / 2];
+        if (checkMoreThanHalf(in, middle)) {
+            return middle;
+        }
+        throw new ResultNotFoundException("数组中没有出现次数超过数组长度一半的");
+    }
+
+    /**
+     * 检测目标数字是否在数组中出现的次数超过数组长度的一半
+     *
+     * @param in     数组
+     * @param target 要检测的数字
+     * @return boolean
+     */
+    private boolean checkMoreThanHalf(int[] in, int target) {
+        int occurrence = 0;
+        for (int i : in) {
+            if (i == target) {
+                occurrence++;
+            }
+        }
+        return occurrence > in.length / 2;
+    }
+
     public static void main(String[] args) {
         int[] in = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         Q29 q29 = new Q29();
         try {
             int result = q29.moreThanHalfNumber(in);
+            System.out.println("数组中出现次数超过数组长度一半的数：" + result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        in = new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2, 3};
+        try {
+            int result = q29.moreThanHalfNumberChooseMiddle(in);
             System.out.println("数组中出现次数超过数组长度一半的数：" + result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
