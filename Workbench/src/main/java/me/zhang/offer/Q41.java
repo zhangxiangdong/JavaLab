@@ -42,6 +42,39 @@ public class Q41 {
         return null;
     }
 
+    /**
+     * 找出所有的和为s的连续序列。
+     * 例如，输入9，输出[2, 3, 4]和[4, 5]
+     *
+     * @param s 和
+     */
+    public static void printOutAllContinuousSequences(int s) {
+        int small = 1, big = 2;
+        int middle = (1 + s) / 2;
+        while (small < middle) {
+            int sum = 0;
+            for (int i = small; i <= big; i++) {
+                sum += i;
+            }
+            if (sum == s) {
+                print(small, big);
+                big++;
+            } else if (sum < s) {
+                big++;
+            } else {
+                small++;
+            }
+        }
+    }
+
+    private static void print(int small, int big) {
+        System.out.print("[");
+        for (int i = small; i <= big; i++) {
+            System.out.print(i + (i < big ? ", " : ""));
+        }
+        System.out.print("]");
+    }
+
     private static void validate(int[] a) {
         if (a == null || a.length == 0) {
             throw new IllegalArgumentException();
@@ -51,11 +84,26 @@ public class Q41 {
     public static void main(String[] args) {
         int[] a = {1, 3, 6, 8, 9, 13};
         int s = 14;
-        System.out.println(Arrays.toString(findOutTwoNumbersEqualS(a, s)));
+        System.out.println(s + ": " + Arrays.toString(findOutTwoNumbersEqualS(a, s)));
         s = 11;
-        System.out.println(Arrays.toString(findOutTwoNumbersEqualS(a, s)));
+        System.out.println(s + ": " + Arrays.toString(findOutTwoNumbersEqualS(a, s)));
         s = 5;
-        System.out.println(Arrays.toString(findOutTwoNumbersEqualS(a, s)));
+        System.out.println(s + ": " + Arrays.toString(findOutTwoNumbersEqualS(a, s)));
+
+        s = 3;
+        System.out.print(s + ": ");
+        printOutAllContinuousSequences(s);
+        System.out.println();
+
+        s = 4;
+        System.out.print(s + ": ");
+        printOutAllContinuousSequences(s);
+        System.out.println();
+
+        s = 9;
+        System.out.print(s + ": ");
+        printOutAllContinuousSequences(s);
+        System.out.println();
     }
 
 }
