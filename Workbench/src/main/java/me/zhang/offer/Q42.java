@@ -59,4 +59,33 @@ public class Q42 {
         }
     }
 
+    /**
+     * 字符串的左旋操作是把字符串前面的若干个字符转移到字符串的尾部。
+     * 比如，输入字符串“abcdefg”和数字2，该方法将返回左旋2位得到的结果“cdefgab”。
+     *
+     * @param raw 原始字符串
+     * @param n   左旋位数
+     * @return 左旋后的字符串
+     */
+    public static String leftRotateString(String raw, int n) {
+        if (raw == null) {
+            throw new NullPointerException();
+        }
+        if (n < 0 || n > raw.length()) {
+            throw new IllegalArgumentException();
+        }
+
+        char[] string = raw.toCharArray();
+        // 反转要左旋的n位
+        reverse(string, 0, n - 1);
+        // 反转剩余的字符
+        int lastIndex = string.length - 1;
+        reverse(string, n, lastIndex);
+
+        // 反转整个字符串
+        reverse(string, 0, lastIndex);
+
+        return String.valueOf(string);
+    }
+
 }

@@ -32,4 +32,13 @@ public class Q42Test {
         Assert.assertEquals(reversed, Q42.reverseSentence(sentence));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void leftRotateString() {
+        String string = "abcdefg";
+        String leftRotated = "cdefgab";
+        Assert.assertEquals(leftRotated, Q42.leftRotateString(string, 2));
+
+        Q42.leftRotateString(string, -1);
+    }
+
 }
