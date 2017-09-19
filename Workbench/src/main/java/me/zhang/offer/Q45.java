@@ -78,11 +78,15 @@ public class Q45 {
         System.out.println("Last Remaining: " + remaining);
         remaining = lastRemaining(1, 1);
         System.out.println("Last Remaining: " + remaining);
+        remaining = lastRemaining(1000, 3);
+        System.out.println("Last Remaining: " + remaining);
 
         System.out.println("********************");
         remaining = lastRemaining1(5, 3);
         System.out.println("Last Remaining: " + remaining);
         remaining = lastRemaining1(1, 1);
+        System.out.println("Last Remaining: " + remaining);
+        remaining = lastRemaining1(1000, 3);
         System.out.println("Last Remaining: " + remaining);
     }
 
