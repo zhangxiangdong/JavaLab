@@ -27,6 +27,11 @@ public class Q49Test {
         Assert.assertEquals(expected, actual);
 
         try {
+            Q49.atoi("-");
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+        try {
             Q49.atoi(null);
         } catch (NullPointerException e) {
             Assert.assertTrue(true);

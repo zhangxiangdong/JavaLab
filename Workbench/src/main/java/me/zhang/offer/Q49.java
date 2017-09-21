@@ -28,6 +28,9 @@ public class Q49 {
             indexFrom++;
             isMinus = true;
         }
+        if (indexFrom >= numbers.length) {
+            throw new IllegalArgumentException();
+        }
         return atoiCore(Arrays.copyOfRange(numbers, indexFrom, numbers.length), isMinus);
     }
 
