@@ -13,6 +13,21 @@ public class CharTest {
                 System.out.println();
             }
         }
+
+        // *
+        System.out.println();
+        for (int i = 0; i < 20; i++) {
+            System.out.print('\u002A');
+        }
+        System.out.println();
+
+        // 张
+        char zhang = '\u5F20';
+        // 祥
+        char xiang = '\u7965';
+        // 东
+        char dong = '\u4E1C';
+        System.out.println(String.format("%c%c%c", zhang, xiang, dong));
     }
 
 }
