@@ -7,15 +7,26 @@ import java.util.GregorianCalendar;
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
 public class Employee {
+
+    private static int nextId = 1;
+
+    private int id;
     private String name;
     private double salary;
     private Date hireDay;
 
     public Employee(String name, double salary, int year, int month, int day) {
+        // each employee has a unique id
+        // start from 1
+        this.id = nextId++;
         this.name = name;
         this.salary = salary;
         GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
         this.hireDay = calendar.getTime();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -39,7 +50,8 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", salary=" + salary +
                 ", hireDay=" + hireDay +
                 '}';
