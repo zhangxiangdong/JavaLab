@@ -26,6 +26,7 @@ public class EmployeeTest {
         double tenYearsInMilliSeconds = 10 * 365.25 * 24 * 60 * 60 * 1000;
         hireDay.setTime((long) (hireDay.getTime() - tenYearsInMilliSeconds));
         // give Carl ten years of added seniority
+        // hireDay is a copy of the real one, it doesn't work!
         System.out.println(carl);
     }
 

@@ -27,7 +27,8 @@ public class Employee {
     }
 
     public Date getHireDay() {
-        return hireDay;
+        // avoid breaking the encapsulation
+        return (Date) hireDay.clone();
     }
 
     public void raiseSalary(int byPercent) {
