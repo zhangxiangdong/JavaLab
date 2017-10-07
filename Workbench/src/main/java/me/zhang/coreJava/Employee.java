@@ -20,7 +20,12 @@ public class Employee {
 
     private String name = "";
     private double salary = 0;
-    private Date hireDay = new Date();
+    private Date hireDay;
+
+    // object initialization block
+    {
+        hireDay = new Date();
+    }
 
     public Employee() {
     }
