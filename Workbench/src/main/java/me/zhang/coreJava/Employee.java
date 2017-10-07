@@ -15,6 +15,13 @@ public class Employee {
     private double salary;
     private Date hireDay;
 
+    public Employee() {
+        this.id = nextId++;
+        this.name = "";
+        this.salary = 0;
+        this.hireDay = new Date();
+    }
+
     public Employee(String name, double salary, int year, int month, int day) {
         // each employee has a unique id
         // start from 1
