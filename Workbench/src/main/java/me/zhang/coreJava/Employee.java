@@ -10,22 +10,22 @@ public class Employee {
 
     private static int nextId = 1;
 
-    private int id;
-    private String name;
-    private double salary;
-    private Date hireDay;
+    // each employee has a unique id
+    // start from 1
+    private int id = assignId();
+
+    private static int assignId() {
+        return nextId++;
+    }
+
+    private String name = "";
+    private double salary = 0;
+    private Date hireDay = new Date();
 
     public Employee() {
-        this.id = nextId++;
-        this.name = "";
-        this.salary = 0;
-        this.hireDay = new Date();
     }
 
     public Employee(String name, double salary, int year, int month, int day) {
-        // each employee has a unique id
-        // start from 1
-        this.id = nextId++;
         this.name = name;
         this.salary = salary;
         GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day);
@@ -47,6 +47,18 @@ public class Employee {
     public Date getHireDay() {
         // avoid breaking the encapsulation
         return (Date) hireDay.clone();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public void setHireDay(Date hireDay) {
+        this.hireDay = hireDay;
     }
 
     public void raiseSalary(int byPercent) {
