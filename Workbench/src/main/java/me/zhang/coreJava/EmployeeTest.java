@@ -38,6 +38,11 @@ public class EmployeeTest {
         // give Carl ten years of added seniority
         // hireDay is a copy of the real one, it doesn't work!
         System.out.println(carl);
+
+        Thread hook = new Thread(() -> System.out.println("Hook thread has been called."));
+        Runtime.getRuntime().addShutdownHook(hook);
+
+        System.runFinalizersOnExit(true);
     }
 
 }
