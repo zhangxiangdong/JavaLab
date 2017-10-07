@@ -10,8 +10,13 @@ public class Employee {
 
     private static int nextId = 1;
 
+    // static initialization block
+    static {
+        nextId = (int) (Math.random() * 10_000);
+    }
+
     // each employee has a unique id
-    // start from 1
+    // start from a random number(<10,000)
     private int id = assignId();
 
     private static int assignId() {
