@@ -13,7 +13,9 @@ public class EmployeeTest {
         Employee[] staff = new Employee[4];
         staff[0] = new Employee("Carl Cracker", 100_000, 2013, 5, 3);
         staff[1] = new Employee("Harry Hacker", 500_000, 2012, 2, 24);
-        staff[2] = new Employee("Tony Tester", 1_000_000, 2010, 8, 17);
+        Manager boss = new Manager("Tony Tester", 1_000_000, 2010, 8, 17);
+        boss.setBonus(5_000);
+        staff[2] = boss;
         staff[3] = new Employee();
         System.out.println(Arrays.deepToString(staff));
 
