@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
-public class Employee {
+public class Employee extends Person {
 
     private static int nextId = 1;
 
@@ -48,6 +48,11 @@ public class Employee {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return "An employee with a salary of $" + salary;
     }
 
     public double getSalary() {
