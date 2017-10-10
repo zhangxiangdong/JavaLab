@@ -2,6 +2,7 @@ package me.zhang.coreJava;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
@@ -95,5 +96,29 @@ public class Employee extends Person {
     protected void finalize() throws Throwable {
         System.out.println("finalize()");
         super.finalize();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // a quick test to see if the objects are identical
+        if (this == obj) {
+            return true;
+        }
+
+        // must return false if the explicit parameter is null
+        if (obj == null) {
+            return false;
+        }
+
+        // if the classes don't match, they can't be equal
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // now we know obj is a non-null Employee
+        Employee other = (Employee) obj;
+
+        // test whether the fields have identical values
+        return Objects.equals(name, other.name) && salary == other.salary && Objects.equals(hireDay, other.hireDay);
     }
 }

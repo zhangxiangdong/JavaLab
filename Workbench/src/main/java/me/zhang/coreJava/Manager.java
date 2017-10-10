@@ -33,4 +33,15 @@ public class Manager extends Employee {
                 ", bonus=" + bonus +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        // super.equals checked that this and obj belong to the same class
+        Manager other = (Manager) obj;
+        return bonus == other.bonus;
+    }
 }

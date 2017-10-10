@@ -27,6 +27,8 @@ public class EmployeeTest {
         zhang.setHireDay(calendar.getTime());
         System.out.println(zhang);
 
+        System.out.println(staff[0].equals(staff[1]));
+
         // raise salary
         for (Employee employee : staff) {
             employee.raiseSalary(5);
