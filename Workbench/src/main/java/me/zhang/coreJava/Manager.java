@@ -29,7 +29,7 @@ public class Manager extends Employee {
                 "id=" + getId() +
                 ", name='" + getName() + '\'' +
                 ", salary=" + getSalary() +
-                ", hireDay=" + getHireDay() +
+                ", hireDay=" + hireDay +
                 ", bonus=" + bonus +
                 '}';
     }

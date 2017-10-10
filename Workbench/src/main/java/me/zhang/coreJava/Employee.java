@@ -25,7 +25,7 @@ public class Employee extends Person {
 
     private String name = "";
     private double salary = 0;
-    private Date hireDay;
+    protected Date hireDay;
 
     // object initialization block
     {
