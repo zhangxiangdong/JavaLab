@@ -27,7 +27,10 @@ public class EmployeeTest {
         zhang.setHireDay(calendar.getTime());
         System.out.println(zhang);
 
-        System.out.println(staff[0].equals(staff[1]));
+        Employee e = new Employee("Lily", 1_000_000, 2013, 4, 8);
+        Manager m = new Manager("Lily", 1_000_000, 2013, 4, 8);
+        System.out.println(e.equals(m)); // false
+        System.out.println(m.equals(e)); // false
 
         // raise salary
         for (Employee employee : staff) {

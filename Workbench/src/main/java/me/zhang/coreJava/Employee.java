@@ -114,6 +114,9 @@ public class Employee extends Person {
         if (getClass() != obj.getClass()) {
             return false;
         }
+//        if (!(obj instanceof Employee)) {
+//            return false;
+//        }
 
         // now we know obj is a non-null Employee
         Employee other = (Employee) obj;
