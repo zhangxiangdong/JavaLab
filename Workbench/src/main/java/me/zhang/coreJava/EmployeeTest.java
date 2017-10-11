@@ -1,7 +1,5 @@
 package me.zhang.coreJava;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -58,13 +56,8 @@ public class EmployeeTest {
 
     private static void printEmployees(Employee[] employees) {
         for (Employee e : employees) {
-            System.out.print(e + "\t" + atHashCode(e));
-            System.out.println();
+            System.out.println(e);
         }
-    }
-
-    private static String atHashCode(@NotNull Object obj) {
-        return "@" + obj.hashCode();
     }
 
 }

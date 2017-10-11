@@ -84,12 +84,13 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return getClass().getName() + "@" + Integer.toHexString(hashCode()) +
+                "[" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", salary=" + salary +
                 ", hireDay=" + hireDay +
-                '}';
+                ']';
     }
 
     @Override
