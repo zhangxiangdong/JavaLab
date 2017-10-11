@@ -1,6 +1,7 @@
 package me.zhang.coreJava;
 
-import java.util.Arrays;
+import com.sun.istack.internal.NotNull;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,8 +18,21 @@ public class EmployeeTest {
         boss.setBonus(5_000);
         staff[2] = boss;
         staff[3] = new Employee();
-        System.out.println(Arrays.deepToString(staff));
+        printEmployees(staff);
 
+//        Employee e = new Employee("Lily", 1_000_000, 2013, 4, 8);
+//        Manager m = new Manager("Lily", 1_000_000, 2013, 4, 8);
+//        System.out.println(e.equals(m)); // false
+//        System.out.println(m.equals(e)); // false
+
+        System.out.println("****************************");
+        // raise salary
+        for (Employee employee : staff) {
+            employee.raiseSalary(5);
+        }
+        printEmployees(staff);
+
+        System.out.println("****************************");
         Employee zhang = staff[3];
         zhang.setName("Zhang");
         zhang.setSalary(300_000);
@@ -27,17 +41,7 @@ public class EmployeeTest {
         zhang.setHireDay(calendar.getTime());
         System.out.println(zhang);
 
-        Employee e = new Employee("Lily", 1_000_000, 2013, 4, 8);
-        Manager m = new Manager("Lily", 1_000_000, 2013, 4, 8);
-        System.out.println(e.equals(m)); // false
-        System.out.println(m.equals(e)); // false
-
-        // raise salary
-        for (Employee employee : staff) {
-            employee.raiseSalary(5);
-        }
-        System.out.println(Arrays.deepToString(staff));
-
+        System.out.println("****************************");
         Employee carl = staff[0];
         Date hireDay = carl.getHireDay();
         double tenYearsInMilliSeconds = 10 * 365.25 * 24 * 60 * 60 * 1000;
@@ -50,6 +54,17 @@ public class EmployeeTest {
         Runtime.getRuntime().addShutdownHook(hook);
 
         System.runFinalizersOnExit(true);
+    }
+
+    private static void printEmployees(Employee[] employees) {
+        for (Employee e : employees) {
+            System.out.print(e + "\t" + atHashCode(e));
+            System.out.println();
+        }
+    }
+
+    private static String atHashCode(@NotNull Object obj) {
+        return "@" + obj.hashCode();
     }
 
 }

@@ -1,5 +1,7 @@
 package me.zhang.coreJava;
 
+import java.util.Objects;
+
 /**
  * Created by Zhang on 10/8/2017 9:59 PM.
  */
@@ -43,5 +45,10 @@ public class Manager extends Employee {
         // super.equals checked that this and obj belong to the same class
         Manager other = (Manager) obj;
         return bonus == other.bonus;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + Objects.hash(bonus);
     }
 }

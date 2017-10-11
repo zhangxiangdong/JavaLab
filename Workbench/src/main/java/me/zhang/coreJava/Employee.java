@@ -124,4 +124,10 @@ public class Employee extends Person {
         // test whether the fields have identical values
         return Objects.equals(name, other.name) && salary == other.salary && Objects.equals(hireDay, other.hireDay);
     }
+
+    @Override
+    public int hashCode() {
+        // return 7 * Objects.hashCode(name) + 11 * Objects.hashCode(salary) + 13 * Objects.hashCode(hireDay);
+        return Objects.hash(name, salary, hireDay);
+    }
 }
