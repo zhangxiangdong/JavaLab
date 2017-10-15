@@ -1,13 +1,14 @@
 package me.zhang.coreJava;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
+import java.util.Arrays;
 
 /**
  * Created by Zhang on 2017/10/13 20:04.
  */
 public class ReflectionTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException {
         Employee employee = new Employee();
         Manager manager = new Manager();
 
@@ -71,12 +72,43 @@ public class ReflectionTest {
             Manager reflectiveManager = (Manager) Class
                     .forName(managerClassName)
                     .getConstructor(String.class, double.class, int.class, int.class, int.class)
-                    .newInstance("Jim", 1_000_000, 2009, 11, 25);
+                    .newInstance("Hanks", 1_000_000, 2009, 11, 25);
             reflectiveManager.setBonus(5_000);
 
             System.out.println("******************");
             System.out.println(reflectiveEmployee);
             System.out.println(reflectiveManager);
+
+            // Employee.class.getField("name"); method only find the field if it's public
+            Field nameField = Employee.class.getDeclaredField("name");
+            nameField.setAccessible(true);
+            Class nameType = nameField.getType();
+            int nameModifiers = nameField.getModifiers();
+
+            System.out.println("******************");
+            System.out.println(nameField.get(reflectiveEmployee));
+            System.out.println(nameType.getName());
+            System.out.println(Modifier.toString(nameModifiers));
+
+            Method getHireDayMethod = Employee.class.getMethod("getHireDay");
+            Class getHireDayReturnType = getHireDayMethod.getReturnType();
+            int getNameModifiers = getHireDayMethod.getModifiers();
+
+            System.out.println("******************");
+            System.out.println(getHireDayMethod.invoke(reflectiveEmployee));
+            System.out.println(getHireDayReturnType.getName());
+            System.out.println(Modifier.toString(getNameModifiers));
+
+            Constructor<Employee> employeeConstructor = Employee
+                    .class
+                    .getConstructor(String.class, double.class, int.class, int.class, int.class);
+            int employeeConstructorParameterCount = employeeConstructor.getParameterCount();
+            Class[] employeeConstructorParameterTypes = employeeConstructor.getParameterTypes();
+
+            System.out.println("******************");
+            System.out.println(employeeConstructor.getName());
+            System.out.println(employeeConstructorParameterCount);
+            System.out.println(Arrays.toString(employeeConstructorParameterTypes));
         } catch (InstantiationException
                 | IllegalAccessException
                 | InvocationTargetException
