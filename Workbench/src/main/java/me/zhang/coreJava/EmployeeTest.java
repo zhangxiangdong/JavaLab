@@ -1,5 +1,6 @@
 package me.zhang.coreJava;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,6 +32,11 @@ public class EmployeeTest {
         printEmployees(staff);
 
         System.out.println("****************************");
+        staff[2] = new Employee();
+        Arrays.sort(staff);
+        printEmployees(staff);
+
+        System.out.println("****************************");
         Employee zhang = staff[3];
         zhang.setName("Zhang");
         zhang.setSalary(300_000);
@@ -52,6 +58,14 @@ public class EmployeeTest {
         Runtime.getRuntime().addShutdownHook(hook);
 
         System.runFinalizersOnExit(true);
+
+        System.out.println("****************************");
+        Manager tim = new Manager("Tim", 2_000_000, 2002, 4, 12);
+        Manager bill = new Manager("Bill", 2_200_000, 2002, 3, 12);
+        tim.setBonus(25_000);
+        bill.setBonus(18_000);
+        int res = tim.compareTo(bill);
+        System.out.println("Bonus: tim " + (res >= 0 ? (res == 0 ? "=" : ">") : "<") + " bill");
     }
 
     private static void printEmployees(Employee[] employees) {

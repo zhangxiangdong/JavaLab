@@ -48,4 +48,14 @@ public class Manager extends Employee {
     public int hashCode() {
         return super.hashCode() + Objects.hash(bonus);
     }
+
+    @Override
+    public int compareTo(Employee o) {
+        // can't compare manager with a normal employee
+        if (getClass() != o.getClass()) throw new ClassCastException();
+
+        Manager other = (Manager) o;
+        // compare manager by bonus
+        return Double.compare(bonus, other.bonus);
+    }
 }

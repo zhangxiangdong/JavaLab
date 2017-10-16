@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
-public class Employee extends Person {
+public class Employee extends Person implements Comparable<Employee> {
 
     private static int nextId = 1;
 
@@ -130,5 +130,11 @@ public class Employee extends Person {
     public int hashCode() {
         // return 7 * Objects.hashCode(name) + 11 * Objects.hashCode(salary) + 13 * Objects.hashCode(hireDay);
         return Objects.hash(name, salary, hireDay);
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        // compare by salary
+        return Double.compare(salary, o.salary);
     }
 }
