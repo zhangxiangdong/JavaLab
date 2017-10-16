@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
-public class Employee extends Person implements Comparable<Employee> {
+public class Employee extends Person implements Comparable<Employee>, Cloneable {
 
     private static int nextId = 1;
 
@@ -65,6 +65,10 @@ public class Employee extends Person implements Comparable<Employee> {
         return (Date) hireDay.clone();
     }
 
+    public Date getHireDay1() {
+        return hireDay;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -84,7 +88,7 @@ public class Employee extends Person implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return getClass().getName() + "@" + Integer.toHexString(hashCode()) +
+        return getClass().getName() + "@" + hashCode() +
                 "[" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -136,5 +140,14 @@ public class Employee extends Person implements Comparable<Employee> {
     public int compareTo(Employee o) {
         // compare by salary
         return Double.compare(salary, o.salary);
+    }
+
+    /* raise visibility level to public, change return type to specific type */
+    @Override
+    public Employee clone() throws CloneNotSupportedException {
+        Employee cloned = (Employee) super.clone();
+        // clone mutable fields
+        cloned.hireDay = (Date) hireDay.clone();
+        return cloned;
     }
 }

@@ -54,18 +54,46 @@ public class EmployeeTest {
         // hireDay is a copy of the real one, it doesn't work!
         System.out.println(carl);
 
-        Thread hook = new Thread(() -> System.out.println("Hook thread has been called."));
-        Runtime.getRuntime().addShutdownHook(hook);
-
-        System.runFinalizersOnExit(true);
-
         System.out.println("****************************");
         Manager tim = new Manager("Tim", 2_000_000, 2002, 4, 12);
         Manager bill = new Manager("Bill", 2_200_000, 2002, 3, 12);
         tim.setBonus(25_000);
         bill.setBonus(18_000);
         int res = tim.compareTo(bill);
+        System.out.println(bill);
         System.out.println("Bonus: tim " + (res >= 0 ? (res == 0 ? "=" : ">") : "<") + " bill");
+
+        System.out.println("****************************");
+        try {
+            carl = new Employee("Carl Cracker", 100_000, 2003, 5, 13);
+            Employee clonedCarl = carl.clone();
+            System.out.println(System.identityHashCode(carl));
+            System.out.println(System.identityHashCode(clonedCarl));
+            System.out.println(carl);
+            System.out.println(clonedCarl);
+
+            clonedCarl.setSalary(200_000);
+            /* deep clone. hireDay is a brand new object */
+            clonedCarl.getHireDay1().setTime(calendar.getTime().getTime());
+
+            System.out.println(carl);
+            System.out.println(clonedCarl);
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("****************************");
+        int[] luckyNumbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] clonedNumbers = luckyNumbers.clone();
+        clonedNumbers[5] = -1;
+        System.out.println(Arrays.toString(luckyNumbers));
+        System.out.println(Arrays.toString(clonedNumbers));
+
+        System.out.println("****************************");
+        Thread hook = new Thread(() -> System.out.println("Hook thread has been called."));
+        Runtime.getRuntime().addShutdownHook(hook);
+
+        System.runFinalizersOnExit(true);
     }
 
     private static void printEmployees(Employee[] employees) {
