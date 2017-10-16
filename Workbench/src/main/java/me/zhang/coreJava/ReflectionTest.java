@@ -116,6 +116,31 @@ public class ReflectionTest {
                 | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        try {
+            System.out.println("******************");
+
+            Method sqrtMethod = Math.class.getMethod("sqrt", double.class);
+            System.out.println(sqrtMethod);
+            print(3, sqrtMethod);
+
+            Method sinMethod = Math.class.getMethod("sin", double.class);
+            System.out.println(sinMethod);
+            print(Math.PI / 2, sinMethod);
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void print(double n, Method m) {
+        try {
+            // invoke static method
+            Double result = (Double) m.invoke(null, n);
+            System.out.printf("%9.4f | %9.4f\n", n, result);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 }
