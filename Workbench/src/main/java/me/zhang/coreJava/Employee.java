@@ -21,7 +21,10 @@ public class Employee extends Person implements Comparable<Employee>, Cloneable 
     private int id = assignId();
 
     private static int assignId() {
-        return nextId++;
+        nextId = nextId + 1;
+        // here the immediately enclosing class is Employee.class
+        System.out.println(new Object(){}.getClass().getEnclosingClass() + ", next id: " + nextId);
+        return nextId;
     }
 
     private String name = "";
