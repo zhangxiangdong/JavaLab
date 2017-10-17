@@ -10,8 +10,9 @@ public class TimerTest {
     public static void main(String[] args) {
         TalkingClock clock = new TalkingClock(10 * 1000, false);
         // clock.start();
-        TalkingClock.TimePrinter printer = clock.new TimePrinter();
+        clock.start1();
 
+        TalkingClock.TimePrinter printer = clock.new TimePrinter();
         Timer timer = new Timer(10 * 1000, printer);
         timer.start();
 

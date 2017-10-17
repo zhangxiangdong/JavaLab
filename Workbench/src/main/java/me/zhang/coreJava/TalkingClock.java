@@ -26,6 +26,24 @@ public class TalkingClock {
         timer.start();
     }
 
+    public void start1() {
+        // local class has no access modifier
+        class TimePrinter implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("(Local class)At the tone, the time is " + new Date());
+                if (beep) {
+                    Toolkit.getDefaultToolkit().beep();
+                }
+            }
+        }
+
+        ActionListener listener = new TimePrinter();
+        Timer timer = new Timer(interval, listener);
+        timer.start();
+    }
+
     public class TimePrinter implements ActionListener {
 
         // private TalkingClock outer;
@@ -36,7 +54,7 @@ public class TalkingClock {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("At the tone, the time is " + new Date());
+            System.out.println("(Inner class)At the tone, the time is " + new Date());
             if (TalkingClock.this.beep) { // outer.beep
                 Toolkit.getDefaultToolkit().beep();
             }
