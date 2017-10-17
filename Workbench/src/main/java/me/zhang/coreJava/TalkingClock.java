@@ -26,7 +26,8 @@ public class TalkingClock {
         timer.start();
     }
 
-    public void start1() {
+    public void start1(int interval, boolean beep) { /* implicit final on Java 8,
+                                                        Only an effectively final variable can be used */
         // local class has no access modifier
         class TimePrinter implements ActionListener {
 
