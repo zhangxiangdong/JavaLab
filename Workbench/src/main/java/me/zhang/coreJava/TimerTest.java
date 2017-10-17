@@ -11,6 +11,7 @@ public class TimerTest {
         TalkingClock clock = new TalkingClock(10 * 1000, false);
         // clock.start();
         clock.start1(10 * 1000, false);
+        clock.start2();
 
         TalkingClock.TimePrinter printer = clock.new TimePrinter();
         Timer timer = new Timer(10 * 1000, printer);

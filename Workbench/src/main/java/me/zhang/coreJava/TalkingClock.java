@@ -45,6 +45,16 @@ public class TalkingClock {
         timer.start();
     }
 
+    public void start2() {
+        Timer timer = new Timer(interval, e -> { // lambda expression
+            System.out.println("(Anonymous inner class)At the tone, the time is " + new Date());
+            if (beep) {
+                Toolkit.getDefaultToolkit().beep();
+            }
+        });
+        timer.start();
+    }
+
     public class TimePrinter implements ActionListener {
 
         // private TalkingClock outer;
