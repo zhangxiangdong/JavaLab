@@ -9,7 +9,11 @@ public class TimerTest {
 
     public static void main(String[] args) {
         TalkingClock clock = new TalkingClock(10 * 1000, false);
-        clock.start();
+        // clock.start();
+        TalkingClock.TimePrinter printer = clock.new TimePrinter();
+
+        Timer timer = new Timer(10 * 1000, printer);
+        timer.start();
 
         JOptionPane.showMessageDialog(null, "Quit program?");
         System.exit(0);

@@ -21,7 +21,7 @@ public class TalkingClock {
 
     public void start() {
         // ActionListener listener = new TimePrinter(this); // parameter automatically added
-        ActionListener listener = new TimePrinter();
+        ActionListener listener = this.new TimePrinter();
         Timer timer = new Timer(interval, listener);
         timer.start();
     }
@@ -37,7 +37,7 @@ public class TalkingClock {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("At the tone, the time is " + new Date());
-            if (beep) { // outer.beep
+            if (TalkingClock.this.beep) { // outer.beep
                 Toolkit.getDefaultToolkit().beep();
             }
         }
