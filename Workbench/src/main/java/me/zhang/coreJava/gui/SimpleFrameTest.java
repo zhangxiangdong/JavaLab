@@ -2,8 +2,6 @@ package me.zhang.coreJava.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Zhang on 2017/10/19 20:37.
@@ -17,25 +15,6 @@ public class SimpleFrameTest {
             // System.out.println(Thread.currentThread().getName());
 
             SimpleFrame frame = new SimpleFrame();
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            // frame.setUndecorated(true);
-
-            // frame.setLocation(100, 100);
-            // frame.setBounds(100, 100, 300, 200);
-            frame.setLocationByPlatform(true);
-
-            try {
-                URL iconLocation = new URL("https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/focus-128.png");
-                ImageIcon icon = new ImageIcon(iconLocation);
-                frame.setIconImage(icon.getImage());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
-            frame.setTitle("Simple Frame");
-
-            frame.setResizable(true);
-
             // frame.show();
             frame.setVisible(true);
         });
@@ -45,10 +24,25 @@ public class SimpleFrameTest {
 
 class SimpleFrame extends JFrame {
 
-    public static final int DEFAULT_HEIGHT = 200;
-    public static final int DEFAULT_WIDTH = 300;
-
     public SimpleFrame() throws HeadlessException {
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        /* get screen dimension */
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int width = screenSize.width;
+        int height = screenSize.height;
+
+        // frame.setUndecorated(true);
+        // frame.setLocation(100, 100);
+        // frame.setBounds(100, 100, 300, 200);
+        setSize(width / 2, height / 2);
+        setLocationByPlatform(true);
+
+        String filePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/frame.png";
+        ImageIcon icon = new ImageIcon(filePath);
+        setIconImage(icon.getImage());
+        setTitle("Simple Frame");
+        setResizable(true);
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
