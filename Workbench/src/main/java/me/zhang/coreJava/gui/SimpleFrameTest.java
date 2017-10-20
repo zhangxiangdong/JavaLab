@@ -26,8 +26,7 @@ class SimpleFrame extends JFrame {
 
     public SimpleFrame() throws HeadlessException {
         /* get screen dimension */
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
         int height = screenSize.height;
 
@@ -38,8 +37,10 @@ class SimpleFrame extends JFrame {
         setLocationByPlatform(true);
 
         String filePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/frame.png";
-        ImageIcon icon = new ImageIcon(filePath);
-        setIconImage(icon.getImage());
+        Image image = Toolkit.getDefaultToolkit().getImage(filePath);
+        ImageIcon imageIcon = new ImageIcon(image);
+        // setIconImage(image);
+        setIconImage(imageIcon.getImage());
         setTitle("Simple Frame");
         setResizable(true);
 
