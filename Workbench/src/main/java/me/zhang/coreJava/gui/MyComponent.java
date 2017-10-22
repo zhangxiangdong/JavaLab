@@ -2,9 +2,13 @@ package me.zhang.coreJava.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
+import java.text.AttributedString;
 
 import static me.zhang.coreJava.gui.SimpleFrameTest.DEFAULT_HEIGHT;
 import static me.zhang.coreJava.gui.SimpleFrameTest.DEFAULT_WIDTH;
@@ -22,8 +26,22 @@ public class MyComponent extends JComponent {
         super.paintComponent(g);
         System.out.println("paintComponent");
 
-        g.setColor(new Color(0, 255, 0));
-        g.drawString("Hello, World!", TEXT_X, TEXT_Y);
+        Font font = new Font("SansSerif", Font.ITALIC, 14);
+        AttributedString styledString = new AttributedString("你好，World!");
+        styledString.addAttribute(TextAttribute.FONT, font);
+        g.setColor(new Color(255, 0, 0));
+        g.drawString(styledString.getIterator(), TEXT_X, TEXT_Y / 2);
+
+        String filePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/simkai.ttf";
+        try {
+            // load font from local
+            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File(filePath)).deriveFont(15.0f));
+            g.setColor(new Color(0, 255, 0));
+            g.drawString("Hello, 世界！", TEXT_X, TEXT_Y);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+
         Graphics2D g2D = (Graphics2D) g;
 
         double x = 100;
