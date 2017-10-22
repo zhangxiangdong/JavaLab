@@ -32,10 +32,10 @@ public class MyComponent extends JComponent {
         g.setColor(new Color(255, 0, 0));
         g.drawString(styledString.getIterator(), TEXT_X, TEXT_Y / 2);
 
-        String filePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/simkai.ttf";
+        String fontFilePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/simkai.ttf";
         try {
             // load font from local
-            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File(filePath)).deriveFont(15.0f));
+            g.setFont(Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath)).deriveFont(15.0f));
             g.setColor(new Color(0, 255, 0));
             g.drawString("Hello, 世界！", TEXT_X, TEXT_Y);
         } catch (FontFormatException | IOException e) {
@@ -77,6 +77,28 @@ public class MyComponent extends JComponent {
 
         g2D.setPaint(Color.MAGENTA);
         g2D.fill(smallRect);
+
+        String imageFilePath = System.getProperty("user.dir") + "/Workbench/src/main/java/me/zhang/coreJava/gui/frame.png";
+        final int imageWidth = 64;
+        final int imageHeight = 64;
+        final int imageX = getWidth() - 256;
+        int imageY = getHeight() - 256;
+        g2D.drawImage(
+                new ImageIcon(imageFilePath).getImage(),
+                imageX, imageY,
+                imageWidth, imageHeight,
+                null
+        );
+
+        for (int i = 1; i <= 2; i++) {
+            for (int j = 1; j <= 2; j++) {
+                g2D.copyArea(
+                        imageX, imageY,
+                        imageWidth, imageHeight,
+                        i * (imageWidth + 10), j * (imageHeight + 10)
+                );
+            }
+        }
     }
 
     @Override
