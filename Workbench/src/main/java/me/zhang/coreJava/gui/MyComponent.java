@@ -14,15 +14,16 @@ import static me.zhang.coreJava.gui.SimpleFrameTest.DEFAULT_WIDTH;
  */
 public class MyComponent extends JComponent {
 
-    public static final int TEXT_Y = 100;
-    public static final int TEXT_X = 75;
+    public static final int TEXT_Y = 50;
+    public static final int TEXT_X = 50;
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         System.out.println("paintComponent");
 
-        // g.drawString("Hello, World!", TEXT_X, TEXT_Y);
+        g.setColor(new Color(0, 255, 0));
+        g.drawString("Hello, World!", TEXT_X, TEXT_Y);
         Graphics2D g2D = (Graphics2D) g;
 
         double x = 100;
@@ -39,13 +40,25 @@ public class MyComponent extends JComponent {
         double centerX = doubleRect.getCenterX();
         double centerY = doubleRect.getCenterY();
         double radius = Math.sqrt(Math.pow(w, 2) + Math.pow(h, 2)) / 2;
-        Ellipse2D circle = new Ellipse2D.Double();
-        circle.setFrameFromCenter(centerX, centerY, centerX + radius, centerY + radius);
+        Ellipse2D bigCircle = new Ellipse2D.Double();
+        bigCircle.setFrameFromCenter(centerX, centerY, centerX + radius, centerY + radius);
+        Rectangle2D smallRect = new Rectangle2D.Double();
+        smallRect.setFrameFromCenter(centerX, centerY, centerX + radius / 4, centerY + radius / 4);
 
+        g2D.setPaint(Color.RED);
         g2D.draw(doubleRect);
+
+        g2D.setPaint(Color.GREEN);
         g2D.draw(doubleLine);
+
+        g2D.setPaint(Color.ORANGE);
         g2D.draw(floatEllipse);
-        g2D.draw(circle);
+
+        g2D.setPaint(Color.BLUE);
+        g2D.draw(bigCircle);
+
+        g2D.setPaint(Color.MAGENTA);
+        g2D.fill(smallRect);
     }
 
     @Override

@@ -19,6 +19,7 @@ public class SimpleFrameTest {
             SimpleFrame frame = new SimpleFrame();
 
             Container container = frame.getContentPane();
+            container.setBackground(SystemColor.desktop);
             Component component = new MyComponent();
             container.add(component);
             /* could use JFrame.add() directly on Java SE 5.0 and above */
