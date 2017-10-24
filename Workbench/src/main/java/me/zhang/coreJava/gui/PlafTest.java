@@ -2,6 +2,8 @@ package me.zhang.coreJava.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by zhangxiangdong on 2017/10/24.
@@ -21,6 +23,24 @@ class PlafFrame extends JFrame {
     public PlafFrame() throws HeadlessException {
 
         setPreferredSize(new Dimension(300, 200));
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                int result = JOptionPane.showConfirmDialog(PlafFrame.this,
+                        "Exit and save your data?", "Warning", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    // save data
+                    System.out.println("Save data and exit.");
+                    // close app
+                    System.exit(0);
+                } else {
+                    System.out.println("Canceld.");
+                }
+            }
+        });
+
         panel = new JPanel();
 
         UIManager.LookAndFeelInfo[] feels = UIManager.getInstalledLookAndFeels();
@@ -32,7 +52,8 @@ class PlafFrame extends JFrame {
         add(panel);
         pack();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setLocationByPlatform(true);
         setVisible(true);
 
     }
