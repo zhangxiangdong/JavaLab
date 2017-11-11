@@ -54,10 +54,18 @@ public class TestException {
                 conn.disconnect();
             }
             if (in != null) {
-                in.close();
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    System.out.println("Close InputStream Failed: " + e.getMessage());
+                }
             }
             if (reader != null) {
-                reader.close();
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Close InputStream Failed: " + e.getMessage());
+                }
             }
         }
     }
