@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 /**
  * Created by Zhang on 2017/11/11 9:38.
@@ -21,6 +22,28 @@ public class TestException {
             System.out.println(response);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        printStackTrace();
+        printAllStackTrace();
+    }
+
+    private static void printStackTrace() {
+        System.out.println("\n************Print Out Stack Trace Of Current Thread************");
+        Throwable throwable = new Throwable();
+        StackTraceElement[] stackTrace = throwable.getStackTrace();
+        for (StackTraceElement e : stackTrace) {
+            System.out.println(e);
+        }
+    }
+
+    private static void printAllStackTrace() {
+        System.out.println("\n************Print Out All Stack Trace************");
+        Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+        for (Thread t : allStackTraces.keySet()) {
+            StackTraceElement[] stackTraceElements = allStackTraces.get(t);
+            for (StackTraceElement e : stackTraceElements) {
+                System.out.println(e);
+            }
         }
     }
 
