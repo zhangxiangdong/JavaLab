@@ -26,22 +26,23 @@ public class TestException {
 
     private static String requestUrl(String targetUrl) throws IOException {
         HttpURLConnection conn = null;
-        InputStream in = null;
-        BufferedReader reader = null;
         try {
             URL url = new URL(targetUrl);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
-            in = conn.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(in));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+            // try auto closeable resources
+            try (InputStream in = conn.getInputStream()) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    return response.toString();
+                }
             }
-            return response.toString();
         } catch (MalformedURLException e) {
             // rethrow wrapped exception
             throw new IOException("URL Error", e);
@@ -52,20 +53,6 @@ public class TestException {
         } finally {
             if (conn != null) {
                 conn.disconnect();
-            }
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    System.out.println("Close InputStream Failed: " + e.getMessage());
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    System.out.println("Close InputStream Failed: " + e.getMessage());
-                }
             }
         }
     }
