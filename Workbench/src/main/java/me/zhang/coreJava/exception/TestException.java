@@ -26,14 +26,16 @@ public class TestException {
 
     private static String requestUrl(String targetUrl) throws IOException {
         HttpURLConnection conn = null;
+        InputStream in = null;
+        BufferedReader reader = null;
         try {
             URL url = new URL(targetUrl);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
-            InputStream in = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            in = conn.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -50,6 +52,12 @@ public class TestException {
         } finally {
             if (conn != null) {
                 conn.disconnect();
+            }
+            if (in != null) {
+                in.close();
+            }
+            if (reader != null) {
+                reader.close();
             }
         }
     }
