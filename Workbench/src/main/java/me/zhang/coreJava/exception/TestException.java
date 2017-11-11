@@ -16,11 +16,15 @@ public class TestException {
     private static final String URL_BINGO = "http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=7&video=1";
 
     public static void main(String[] args) {
-        String response = requestUrl(URL_BINGO);
-        System.out.println(response);
+        try {
+            String response = requestUrl(URL_BINGO);
+            System.out.println(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static String requestUrl(String targetUrl) {
+    private static String requestUrl(String targetUrl) throws IOException {
         HttpURLConnection conn = null;
         try {
             URL url = new URL(targetUrl);
@@ -37,15 +41,17 @@ public class TestException {
             }
             return response.toString();
         } catch (MalformedURLException e) {
-            System.err.println(e.getClass().getSimpleName());
+            // rethrow wrapped exception
+            throw new IOException("URL Error", e);
         } catch (IOException e) {
+            // log then rethrow exception
             System.err.println(e.getClass().getName());
+            throw e;
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
         }
-        return null;
     }
 
 }
