@@ -26,6 +26,7 @@ public class TestLogger {
     public static void main(String[] args) {
         Logger.getGlobal().info("TestLogger.main");
         LOGGER.info("Log from custom logger");
+        Thread.dumpStack();
     }
 
 }
