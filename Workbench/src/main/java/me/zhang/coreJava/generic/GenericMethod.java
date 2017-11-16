@@ -11,6 +11,7 @@ import java.util.List;
 public class GenericMethod {
 
     private static void printList(List<?> list) {
+        duplicateList(list);
         System.out.println("Sum: " + list.size());
         for (Object o : list) {
             System.out.print(o);
@@ -22,11 +23,35 @@ public class GenericMethod {
         System.out.println();
     }
 
+    private static void duplicateList(List<?> list) {
+        duplicateListHelper(list);
+    }
+
+    private static <E> void duplicateListHelper(List<E> list) {
+        /* duplicate list */
+        int preSize = list.size();
+        for (int i = 0; i < preSize; i++) {
+            list.add(list.get(i));
+        }
+    }
+
     private static void addNumbers(List<? super Integer> list) {
         for (int i = 10; i < 100; i += 10) {
             list.add(i);
         }
     }
+
+    private static void swapFirst(List<? extends Number> firstList, List<? extends Number> secondList) {
+        // https://docs.oracle.com/javase/tutorial/java/generics/capture.html
+        // There is no helper method to work around the problem, because the code is fundamentally wrong.
+        // swapFirstHelper(firstList, secondList);
+    }
+
+//    private static <E extends Number> void swapFirstHelper(List<E> firstList, List<E> secondList) {
+//        E temp = firstList.get(0);
+//        firstList.set(0, secondList.get(0));
+//        secondList.set(0, temp);
+//    }
 
     public static void main(String[] args) {
         System.out.println(GenericMethod.<Integer>getMiddle(1, 2, 3));
@@ -54,20 +79,21 @@ public class GenericMethod {
         processStringList(emptyList);
         processStringList(Collections.emptyList()); // error on java 7: List<Object> cannot be converted to List<String>
 
-        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5); // fixed-size
         System.out.println(sumOfNumber(integers));
 
         List<Double> doubles = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
         System.out.println(sumOfNumber(doubles));
 
+        System.out.println("**************************");
+        integers = new ArrayList<>(integers);
         printList(integers);
-        printList(doubles);
+        printList(new ArrayList<>(doubles));
 
-        addNumbers(integers = new ArrayList<>(integers));
+        addNumbers(integers);
         printList(integers);
 
         System.out.println("**************************");
-
         List<? extends Integer> iList = new ArrayList<>();
         iList.add(null);
         List<? extends Number> nList = iList; // OK. List<? extends Integer> is a subtype of List<? extends Number>
