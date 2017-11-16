@@ -1,5 +1,6 @@
 package me.zhang.coreJava.generic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +20,12 @@ public class GenericMethod {
         // list.add("a string"); // ERROR
         // list.add(null); // it works
         System.out.println();
+    }
+
+    private static void addNumbers(List<? super Integer> list) {
+        for (int i = 10; i < 100; i += 10) {
+            list.add(i);
+        }
     }
 
     public static void main(String[] args) {
@@ -55,6 +62,9 @@ public class GenericMethod {
 
         printList(integers);
         printList(doubles);
+
+        addNumbers(integers = new ArrayList<>(integers));
+        printList(integers);
     }
 
     private static void processStringList(List<String> target) {
