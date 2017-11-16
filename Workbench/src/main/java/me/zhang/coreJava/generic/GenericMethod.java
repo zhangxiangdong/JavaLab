@@ -1,5 +1,6 @@
 package me.zhang.coreJava.generic;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +34,12 @@ public class GenericMethod {
         List<String> emptyList = Collections.<String>emptyList();
         processStringList(emptyList);
         processStringList(Collections.emptyList()); // error on java 7: List<Object> cannot be converted to List<String>
+
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
+        System.out.println(sumOfNumber(integers));
+
+        List<Double> doubles = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
+        System.out.println(sumOfNumber(doubles));
     }
 
     private static void processStringList(List<String> target) {
@@ -78,6 +85,14 @@ public class GenericMethod {
 
     private static Number getNumber(Box<Number> nBox) {
         return nBox.getT();
+    }
+
+    private static double sumOfNumber(List<? extends Number> numbers) {
+        double sum = 0;
+        for (Number n : numbers) {
+            sum += n.doubleValue();
+        }
+        return sum;
     }
 
 }
