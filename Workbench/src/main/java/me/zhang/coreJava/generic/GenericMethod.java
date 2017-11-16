@@ -65,6 +65,14 @@ public class GenericMethod {
 
         addNumbers(integers = new ArrayList<>(integers));
         printList(integers);
+
+        System.out.println("**************************");
+
+        List<? extends Integer> iList = new ArrayList<>();
+        iList.add(null);
+        List<? extends Number> nList = iList; // OK. List<? extends Integer> is a subtype of List<? extends Number>
+        nList.add(null);
+        System.out.println(iList.size());
     }
 
     private static void processStringList(List<String> target) {
