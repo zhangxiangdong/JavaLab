@@ -1,5 +1,8 @@
 package me.zhang.coreJava.generic;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by zhangxiangdong on 2017/11/13.
  */
@@ -14,6 +17,26 @@ public class GenericMethod {
 
         System.out.println(min(2, 1, 4, 3, 7, 6, 5, 8, 9));
         System.out.println(min(3.1, 2.0, 4.3));
+
+        // inspect("Hi"); // ERROR!!!
+        inspect(2_000);
+
+        Character[] characters = new Character[]{'a', 'b', 'c', 'd', 'e'};
+        int count = countGreaterThan(characters, 'b');
+        System.out.println(count); // 3
+
+        // The common parent of Box<Integer> and Box<Number> is Object.
+        // Box<Integer> iBox = new Box<>(123);
+        // System.out.println(getNumber(iBox); // ERROR!!!
+        System.out.println(getNumber(new Box<>(12.0)));
+
+        List<String> emptyList = Collections.<String>emptyList();
+        processStringList(emptyList);
+        processStringList(Collections.emptyList()); // error on java 7: List<Object> cannot be converted to List<String>
+    }
+
+    private static void processStringList(List<String> target) {
+
     }
 
     @SafeVarargs
@@ -34,6 +57,27 @@ public class GenericMethod {
             }
         }
         return smallest;
+    }
+
+    private static <T extends Number> void inspect(T input) {
+        System.out.println(input);
+    }
+
+    private static <T extends Comparable> int countGreaterThan(T[] ts, T t) {
+        if (ts == null) {
+            throw new NullPointerException();
+        }
+        int count = 0;
+        for (T t1 : ts) {
+            if (t1.compareTo(t) > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static Number getNumber(Box<Number> nBox) {
+        return nBox.getT();
     }
 
 }
