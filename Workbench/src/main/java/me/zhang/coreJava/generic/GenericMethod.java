@@ -9,6 +9,18 @@ import java.util.List;
  */
 public class GenericMethod {
 
+    private static void printList(List<?> list) {
+        System.out.println("Sum: " + list.size());
+        for (Object o : list) {
+            System.out.print(o);
+            System.out.print(" ");
+        }
+        /* only null can be inserted */
+        // list.add("a string"); // ERROR
+        // list.add(null); // it works
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         System.out.println(GenericMethod.<Integer>getMiddle(1, 2, 3));
         System.out.println(GenericMethod.getMiddle("A", "B", "C"));
@@ -40,6 +52,9 @@ public class GenericMethod {
 
         List<Double> doubles = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
         System.out.println(sumOfNumber(doubles));
+
+        printList(integers);
+        printList(doubles);
     }
 
     private static void processStringList(List<String> target) {
