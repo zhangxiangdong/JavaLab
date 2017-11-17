@@ -111,7 +111,7 @@ public class GenericMethod {
     }
 
     @SafeVarargs
-    private static <T extends Number & Comparable> T min(T... a) {
+    private static <T extends Number & Comparable<T>> T min(T... a) {
         if (a == null || a.length == 0) {
             return null;
         }
@@ -129,7 +129,7 @@ public class GenericMethod {
         System.out.println(input);
     }
 
-    private static <T extends Comparable> int countGreaterThan(T[] ts, T t) {
+    private static <T extends Comparable<T>> int countGreaterThan(T[] ts, T t) {
         if (ts == null) {
             throw new NullPointerException();
         }
