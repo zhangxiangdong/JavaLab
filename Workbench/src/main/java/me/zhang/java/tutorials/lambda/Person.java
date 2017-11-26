@@ -1,6 +1,7 @@
 package me.zhang.java.tutorials.lambda;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by Zhang on 11/26/2017 8:35 PM.
@@ -63,16 +64,12 @@ public class Person {
         System.out.println(toString());
     }
 
-    public static void printPerson(List<Person> roster, CheckPerson tester) {
+    public static void printPerson(List<Person> roster, Predicate<Person> tester) {
         for (Person p : roster) {
             if (tester.test(p)) {
                 p.print();
             }
         }
-    }
-
-    public interface CheckPerson {
-        boolean test(Person p);
     }
 
 }
