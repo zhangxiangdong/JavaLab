@@ -34,6 +34,13 @@ public class PersonTest {
                 person -> person.getName() + ": " + person.getPhone(),
                 System.out::println
         );
+
+        // Aggregate Operations
+        roster
+                .stream()
+                .filter(person -> person.getName().contains("K"))
+                .map(person -> person.getName() + ": " + person.getPhone())
+                .forEach(System.out::println);
     }
 
     /**
