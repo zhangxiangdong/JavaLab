@@ -12,12 +12,18 @@ public class PersonTest {
 
     public static void main(String[] args) {
         List<Person> roster = new ArrayList<>();
-        roster.add(new Person("Lucy", 23, Gender.FEMALE));
-        roster.add(new Person("Jimmy", 22, Gender.MALE));
-        roster.add(new Person("Kevin", 25, Gender.MALE));
+        roster.add(new Person("Lucy", 23, Gender.FEMALE, "18510728644"));
+        roster.add(new Person("Jimmy", 22, Gender.MALE, "18510728643"));
+        roster.add(new Person("Kevin", 20, Gender.MALE, "18510728642"));
+        roster.add(new Person("Zhang", 25, Gender.MALE, "18510728641"));
 
         // Specify Search Criteria Code with a Lambda Expression
-        Person.printPerson(roster, p -> p.getGender() == Gender.MALE && p.getAge() > 23);
+        Person.printPerson(
+                roster,
+                person -> person.getGender() == Gender.MALE && person.getAge() > 23,
+                person -> person.getName() + ": " + person.getPhone(),
+                System.out::println
+        );
     }
 
 }
