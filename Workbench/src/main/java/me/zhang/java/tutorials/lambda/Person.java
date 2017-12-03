@@ -1,6 +1,7 @@
 package me.zhang.java.tutorials.lambda;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -40,6 +41,29 @@ public class Person {
 
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                Objects.equals(name, person.name) &&
+                gender == person.gender &&
+                Objects.equals(phone, person.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, gender, phone);
     }
 
     public static void printPerson(List<Person> roster,
