@@ -5,16 +5,18 @@ package me.zhang.coreJava.threads;
  */
 public class InterruptionTest {
 
+    private static final int ONE_SECOND_IN_MILLIS = 1000; // 1s
+
     public static void main(String[] args) {
         final Thread a = new Thread(new R());
 
         Thread b = new Thread(() -> {
             try {
                 /* Interrupt thread a after 10s */
-                Thread.sleep(10 * 1000);
+                Thread.sleep(10 * ONE_SECOND_IN_MILLIS);
                 a.interrupt();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ignored) {
+
             }
         });
 
@@ -28,13 +30,13 @@ public class InterruptionTest {
 
         @Override
         public void run() {
-            try {
-                while (!Thread.currentThread().isInterrupted()) {
-                    System.out.println("R" + counter++);
-                    Thread.sleep(1000);
+            while (!Thread.currentThread().isInterrupted()) {
+                System.out.println("R" + counter++);
+                try {
+                    Thread.sleep(ONE_SECOND_IN_MILLIS);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
             }
         }
     }
