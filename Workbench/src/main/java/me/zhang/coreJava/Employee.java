@@ -9,6 +9,9 @@ import java.util.Objects;
  */
 public class Employee extends Person implements Comparable<Employee>, Cloneable {
 
+    public static final int NAME_SIZE = 40;
+    public static final int RECORD_SIZE = 2 * NAME_SIZE + 8 + 4 + 4 + 4;
+
     private static int nextId = 1;
 
     // static initialization block
