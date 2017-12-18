@@ -1,5 +1,6 @@
 package me.zhang.effective;
 
+import me.zhang.effective.item1.CollectionsFactory;
 import org.junit.Assert;
 import org.junit.Test;
 

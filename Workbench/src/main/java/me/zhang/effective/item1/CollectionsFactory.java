@@ -1,4 +1,4 @@
-package me.zhang.effective;
+package me.zhang.effective.item1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
