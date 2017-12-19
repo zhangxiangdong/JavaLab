@@ -1,5 +1,6 @@
 package me.zhang.coreJava;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
@@ -7,8 +8,9 @@ import java.util.Objects;
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
-public class Employee extends Person implements Comparable<Employee>, Cloneable {
+public class Employee extends Person implements Comparable<Employee>, Cloneable, Serializable {
 
+    private static final long serialVersionUID = -1085594495285026870L;
     public static final int NAME_SIZE = 40;
     public static final int RECORD_SIZE = 2 * NAME_SIZE + 8 + 4 + 4 + 4;
 
