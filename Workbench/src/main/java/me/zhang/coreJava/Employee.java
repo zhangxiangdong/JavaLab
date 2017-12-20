@@ -1,6 +1,8 @@
 package me.zhang.coreJava;
 
-import java.io.Serializable;
+import me.zhang.coreJava.io.SerialCloneable;
+
+import java.io.*;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
@@ -8,7 +10,12 @@ import java.util.Objects;
 /**
  * Created by Zhang on 10/6/2017 4:01 PM.
  */
-public class Employee extends Person implements Comparable<Employee>, Cloneable, Serializable {
+public class Employee extends Person
+        implements
+        Comparable<Employee>,
+        Cloneable,
+        Serializable,
+        SerialCloneable<Employee> {
 
     private static final long serialVersionUID = -1085594495285026870L;
     public static final int NAME_SIZE = 40;
@@ -158,4 +165,22 @@ public class Employee extends Person implements Comparable<Employee>, Cloneable,
         cloned.hireDay = (Date) hireDay.clone();
         return cloned;
     }
+
+    @Override
+    public Employee serialClone() {
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        try (ObjectOutputStream out = new ObjectOutputStream(bao)) {
+            out.writeObject(this);
+            /* write from byte array */
+            try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bao.toByteArray()))) {
+                return (Employee) in.readObject();
+            } catch (IOException | ClassNotFoundException ignored) {
+
+            }
+        } catch (IOException ignored) {
+
+        }
+        return null;
+    }
+
 }
