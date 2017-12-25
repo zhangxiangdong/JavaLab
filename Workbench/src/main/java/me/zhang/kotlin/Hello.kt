@@ -1,5 +1,7 @@
 package me.zhang.kotlin
 
+import java.util.*
+
 /**
  * Created by Zhang on 12/24/2017 2:28 PM.
  */
@@ -120,5 +122,48 @@ fun obj() {
     list.add("O")
     for (it in list) {
         println(it)
+    }
+}
+
+fun notNullShorthand() {
+    val fruit = Arrays.asList("Apple", null, "Banana", "Orange", null)
+    println("********If not null shorthand********")
+    for (f in fruit) {
+        println(f?.length)
+    }
+
+    println("********If not null and else shorthand********")
+    for (f in fruit) {
+        println(f?.length ?: "item is null")
+    }
+
+    println("********Executing a statement if null********")
+    for (f in fruit) {
+        println(f?.length ?: continue)
+    }
+
+    println("********Execute if not null********")
+    for (f in fruit) {
+        f?.let { println(f) }
+    }
+
+    println("********Map nullable value if not null\n********")
+    for (f in fruit) {
+        println(f?.let { f.toLowerCase() } ?: "*** no fruit ***")
+    }
+}
+
+fun transform(color: String): Int = when (color.toUpperCase()) {
+    "RED" -> 0
+    "GREEN" -> 1
+    "BLUE" -> 2
+    else -> throw IllegalArgumentException("Invalid color string")
+}
+
+fun divide(x: Int, y: Int): Int {
+    return try {
+        x / y
+    } catch (e: ArithmeticException) {
+        throw ArithmeticException("$x / $y : " + e.message)
     }
 }

@@ -1,6 +1,7 @@
 package me.zhang.kotlin
 
 import org.junit.Test
+import kotlin.test.assertFailsWith
 
 /**
  * Created by Zhang on 12/24/2017 4:54 PM.
@@ -106,6 +107,35 @@ class HelloKtTest {
     @Test
     fun obj() {
         me.zhang.kotlin.obj()
+    }
+
+    @Test
+    fun notNullShorthand() {
+        me.zhang.kotlin.notNullShorthand()
+    }
+
+    @Test
+    fun transform() {
+        var color = "red"
+        assert(transform(color) == 0)
+
+        color = "Blue"
+        assert(transform(color) == 2)
+
+        color = "gReeN"
+        assert(transform(color) == 1)
+
+        color = "ORANGE"
+        assertFailsWith(IllegalArgumentException::class) { transform(color) }
+    }
+
+    @Test
+    fun divide() {
+        assert(divide(4, 2) == 2)
+
+        assertFailsWith(ArithmeticException::class) {
+            divide(1, 0)
+        }
     }
 
 }

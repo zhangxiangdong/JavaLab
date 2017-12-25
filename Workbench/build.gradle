@@ -26,7 +26,11 @@ dependencies {
     // https://github.com/ReactiveX/RxJava
     compile 'io.reactivex:rxjava:1.2.9'
 
+    // kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
 
 }
 
