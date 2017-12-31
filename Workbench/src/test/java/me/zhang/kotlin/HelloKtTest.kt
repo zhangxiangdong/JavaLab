@@ -23,19 +23,9 @@ class HelloKtTest {
     }
 
     @Test
-    fun printSum() {
-        me.zhang.kotlin.printSum(1, 2)
-    }
-
-    @Test
     fun incrementX() {
         me.zhang.kotlin.incrementX()
         assert(me.zhang.kotlin.x == 1)
-    }
-
-    @Test
-    fun stringTemplate() {
-        me.zhang.kotlin.stringTemplate()
     }
 
     @Test
@@ -75,12 +65,6 @@ class HelloKtTest {
     }
 
     @Test
-    fun printAll() {
-        val list = listOf("A", "B", "C")
-        me.zhang.kotlin.loopAll(list)
-    }
-
-    @Test
     fun describe() {
         val one = 1
         val greeting = "Hello"
@@ -92,26 +76,6 @@ class HelloKtTest {
         assert(me.zhang.kotlin.describe(long) == "Long")
         assert(me.zhang.kotlin.describe(notAString) == "Not a string")
         assert(me.zhang.kotlin.describe(unknown) == "Unknown")
-    }
-
-    @Test
-    fun range() {
-        me.zhang.kotlin.range()
-    }
-
-    @Test
-    fun lambda() {
-        me.zhang.kotlin.lambda()
-    }
-
-    @Test
-    fun obj() {
-        me.zhang.kotlin.obj()
-    }
-
-    @Test
-    fun notNullShorthand() {
-        me.zhang.kotlin.notNullShorthand()
     }
 
     @Test
