@@ -6,7 +6,26 @@ import java.util.*
  * Created by Zhang on 12/24/2017 2:28 PM.
  */
 fun main(args: Array<String>) {
-    println("Hello World!")
+    arrays()
+}
+
+fun arrays() {
+    val arrayOfInts = arrayOf(1, 2, 3)
+    arrayOfInts.forEach { print("$it ") }
+    println("\n***********")
+
+    val arrayOfStrings = arrayOfNulls<String>(5)
+    for ((index, i) in (1..4).withIndex()) {
+        arrayOfStrings[index] = "${i + 10}"
+    }
+    arrayOfStrings.filter { it != null }
+            .map { it?.replace("1", "x") }
+            .forEach { print("$it ") }
+    println("\n***********")
+
+    val asc = Array(5, { i -> (i * i).toString() })
+    asc.forEach { print(it + " ") }
+    println("\n***********")
 }
 
 fun sum(a: Int, b: Int): Int {
