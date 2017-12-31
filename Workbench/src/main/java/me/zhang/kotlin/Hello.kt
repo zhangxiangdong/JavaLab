@@ -6,7 +6,48 @@ import java.util.*
  * Created by Zhang on 12/24/2017 2:28 PM.
  */
 fun main(args: Array<String>) {
-    arrays()
+    strings()
+}
+
+fun strings() {
+    // escaped string
+    val string = "In computer programming, a string is traditionally a sequence of characters."
+    for (s in string) { // iterate a string
+        print(s)
+    }
+    println("\n***********")
+
+    // raw string
+    val code = """
+        for (s in string)
+            print(s)
+        """
+    print(code)
+    println("\n***********")
+
+    val command = """
+        >
+        >javac Hello.java
+        >java Hello
+        >
+        """
+    print(command.trimMargin(">"))
+    println("\n***********")
+
+    val intArrayOf = intArrayOf(1, 2, 3, 4, 5)
+    intArrayOf.forEach { print("i=$it ") }
+    println("\n***********")
+
+    val s = "Hello Kotlin!"
+    print("\"$s\".length is ${s.length}")
+    println("\n***********")
+
+    val mount = 1200
+    val price = """
+        ${'$'}$mount
+        """
+    print(price)
+    println("\n***********")
 }
 
 fun arrays() {
