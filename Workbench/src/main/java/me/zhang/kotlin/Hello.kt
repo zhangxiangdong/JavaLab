@@ -6,7 +6,162 @@ import java.util.*
  * Created by Zhang on 12/24/2017 2:28 PM.
  */
 fun main(args: Array<String>) {
-    strings()
+    controlFlow()
+}
+
+fun controlFlow() {
+    println("******* if statement *******")
+    ifStatement()
+
+    println("******* when statement *******")
+    whenStatement()
+
+    println("******* loop statement *******")
+    loopStatement()
+}
+
+fun ifStatement() {
+    println(traditional(1, 2))
+    println(withElse(3, 4))
+    println(asExpression(6, 5))
+}
+
+private fun traditional(a: Int, b: Int): Int {
+    var max = a
+    if (a < b) max = b
+    return max
+}
+
+private fun withElse(a: Int, b: Int): Int {
+    var max: Int
+    if (a < b) {
+        max = b
+    } else {
+        max = a
+    }
+    return max
+}
+
+private fun asExpression(a: Int, b: Int): Int {
+    var max = if (a < b) {
+        print("Choose b: ")
+        b // the last expression is the value of a block
+    } else {
+        print("Choose a: ")
+        a
+    }
+    return max
+}
+
+fun whenStatement() {
+    println("** when as statement")
+    whenAsStatement(1)
+    whenAsStatement(2)
+    val case3 = 3
+    try {
+        whenAsStatement(case3)
+    } catch (exp: IllegalArgumentException) {
+        println("${exp.message}: $case3")
+    }
+    whenAsStatement(4, "4") // parseInt("4") == 4
+
+    println("** when as expression")
+    println(whenAsExpression(1))
+    println(whenAsExpression(2))
+    println(whenAsExpression(4))
+    try {
+        println(whenAsExpression(10))
+    } catch (e: IllegalArgumentException) {
+        println("Exception occurs, case: ${10}")
+    }
+    println(whenAsExpression(9))
+    println(whenAsExpression(21))
+
+    var s = "prefixM"
+    println("$s has prefix: ${hasPrefix(s)}")
+    s = "mSuffix"
+    println("$s has prefix: ${hasPrefix(s)}")
+
+    whenAsIf(2)
+    whenAsIf(11)
+    whenAsIf(1.5f)
+}
+
+private fun whenAsStatement(case: Int, str: String = "") {
+    when (case) {
+        1 -> println("case is 1")
+        2 -> println("case is 2")
+        parseInt(str) -> println("str encodes case")
+        else ->
+            throw IllegalArgumentException("unknown case")
+    }
+}
+
+private fun whenAsExpression(case: Int): String {
+    return when (case) {
+        1 -> "case is 1"
+        2 -> "case is 2"
+        3, 4, 5 -> "case is one of 3, 4, 5"
+        in 7..9 -> "case is in 7, 8, 9"
+        !in 10..20 -> "case is not in 10..20"
+        else ->
+            throw IllegalArgumentException("unknown case")
+    }
+}
+
+private fun hasPrefix(s: Any) = when (s) {
+    is String -> s.startsWith("prefix")
+    else -> false
+}
+
+private fun whenAsIf(x: Number) {
+    when {
+        x.isEven() -> println("x is even")
+        x.isOdd() -> println("x is odd")
+        else -> println("x is funny")
+    }
+}
+
+private fun Number.isOdd() = if (this is Int) Math.abs(this % 2) == 1 else false
+
+private fun Number.isEven() = when {
+    this is Int -> this % 2 == 0
+    else -> false
+}
+
+fun loopStatement() {
+    val courses = arrayOf("Chinese", "English", "Math", "Geometry", "Physics")
+    for (course in courses) {
+        if (course.startsWith("C")) {
+            continue
+        }
+        print("$course ")
+    }
+    println()
+    for (i in courses.indices) {
+        print("${courses[i]} ")
+    }
+    println()
+
+    for ((i, value) in courses.withIndex()) {
+        print("$i->$value ")
+    }
+    println()
+
+    var index = 0
+    while (index < courses.size) {
+        print("${courses[index]} ")
+        index++
+    }
+    println()
+
+    index = 0
+    do {
+        print("${courses[index]} ")
+        if (index == 2) break
+        index++
+    } while (index < courses.size)
+    println()
 }
 
 fun strings() {
