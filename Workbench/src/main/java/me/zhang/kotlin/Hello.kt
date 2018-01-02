@@ -6,7 +6,76 @@ import java.util.*
  * Created by Zhang on 12/24/2017 2:28 PM.
  */
 fun main(args: Array<String>) {
-    controlFlow()
+    labels()
+}
+
+fun labels() {
+    labelsInForLoop()
+    println()
+
+    returnAtLabels()
+}
+
+private fun labelsInForLoop() {
+    loop@ for (i in 1..100) {
+        if (i == 100) return@loop
+        if (i == 99) break@loop
+        if (i % 2 == 0) continue@loop
+        print("$i ")
+    }
+}
+
+private fun returnAtLabels() {
+    val arrayOfAlphabet = arrayOf("A", "B", "C", "D")
+
+    arrayOfAlphabet.forEach c@ {
+        if (it == "C") return@c // it returns only from the lambda expression
+        print("$it ")
+    }
+    println()
+
+    arrayOfAlphabet.forEach {
+        // implicits labels: such a label has the same name as the function to which the lambda is passed
+        if (it == "D") return@forEach
+        print("$it ")
+    }
+    println()
+
+    arrayOfAlphabet.forEach(fun(value: String) {
+        if (value == "B") return // local return to the caller of the anonymous fun, i.e. the forEach loop
+        print("$value ")
+    })
+    println()
+
+    arrayOfAlphabet.forEach {
+        // The return-expression returns from the nearest enclosing function
+        if (it == "C") return // nonlocal return from inside lambda directly to the caller of returnAtLabels()
+        print("$it ")
+    }
+    println()
+}
+
+fun returnsAndJumps() {
+    val supplies = arrayOf("Book", "Pen", null, "Eraser", null)
+    for (supply in supplies) {
+        print("${supply ?: continue} ") // only print none null supplies
+    }
+    println()
+
+    println(getSupplyByFirstAlphabet("E", supplies))
+    println(getSupplyByFirstAlphabet("K", supplies))
+
+    println(supplies.firstOrNull { it?.startsWith("P") == true })
+    println(supplies.firstOrNull { it?.startsWith("M") == true })
+}
+
+private fun getSupplyByFirstAlphabet(firstAlphabet: String, supplies: Array<String?>): String? {
+    loop@ for (supply in supplies) {
+        if (supply?.startsWith(firstAlphabet) == true) {
+            return@loop supply // gives preference to the qualified return
+        }
+    }
+    return null
 }
 
 fun controlFlow() {
