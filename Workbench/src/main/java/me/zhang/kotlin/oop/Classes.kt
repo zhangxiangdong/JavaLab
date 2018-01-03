@@ -7,7 +7,17 @@ import javax.swing.JButton
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testSuperKeyword()
+    testFields()
+}
+
+private fun testFields() {
+    val fields = Fields()
+    fields.counter = 2
+    println(fields.counter)
+
+    fields.table.put("A", 65)
+    fields.table.put("a", 97)
+    println(fields.table)
 }
 
 private fun testSuperKeyword() {
@@ -27,6 +37,71 @@ private fun testConstructors() {
     val dontCreateMe = DontCreateMe.getInstance()
 
     MyButton("My Button")
+}
+
+
+// ************************* CLASSES ****************************
+
+const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
+
+object Const {
+    const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
+}
+
+class Fields {
+
+    @Deprecated(SUBSYSTEM_DEPRECATED)
+    fun foo() {
+        println("Deprecated")
+    }
+
+    private var _table: HashMap<String, Int>? = null
+    public val table: HashMap<String, Int>
+        get() {
+            if (_table == null) {
+                _table = HashMap()
+            }
+            return _table ?: throw AssertionError("Set to null by another thread")
+        }
+
+    var size = 0
+
+    val isEmpty: Boolean
+        get() = this.size == 0 //  there will be no backing field
+
+    val hasData = this.size != 0 // has type Boolean
+
+    var stringRepresentation: String
+        get() = toString()
+        set(aString) = setDataFromString(aString)
+
+    var setterVisibility: String = "default"
+        private set // the setter is private and has the default implementation
+
+    var counter = 0 // the initializer value is written directly to the backing field
+        set(value) {
+            if (value > 0) {
+                field = value
+            } else {
+                throw IllegalArgumentException("value must > 0, value: $value")
+            }
+        }
+
+    var selectedColor: Int = -1
+        get() {
+            if (field > 0)
+                return field
+            return 0
+        }
+        set(color) {
+            if (color > 0)
+                field = color
+        }
+
+    private fun setDataFromString(aString: String) {
+
+    }
+
 }
 
 open class A {
