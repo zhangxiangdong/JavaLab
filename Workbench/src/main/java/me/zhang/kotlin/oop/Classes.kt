@@ -7,7 +7,18 @@ import javax.swing.JButton
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testFields()
+    testSealed()
+}
+
+private fun testSealed() {
+    val c = Const(3.0)
+    println(eval(c))
+
+    val s = Sum(Const(1.0), Const(2.0))
+    println(eval(s))
+
+    val n = NotANumber
+    println(eval(n))
 }
 
 private fun testFields() {
@@ -39,8 +50,22 @@ private fun testConstructors() {
     MyButton("My Button")
 }
 
+fun eval(e: Expression): Double = when (e) {
+    is Const -> e.number
+    is Sum -> eval(e.e1) + eval(e.e2)
+    is NotANumber -> Double.NaN
+}
 
 // ************************* CLASSES ****************************
+
+sealed class Expression
+data class Const(val number: Double) : Expression()
+data class Sum(val e1: Expression, val e2: Expression) : Expression()
+object NotANumber : Expression() {
+    override fun toString(): String {
+        return "not a number"
+    }
+}
 
 open class Outer {
     private val a = 1
@@ -72,7 +97,7 @@ class Unrelated(o: Outer) {
 
 const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 
-object Const {
+object Consts {
     const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 }
 
