@@ -7,7 +7,24 @@ import javax.swing.JButton
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testSealed()
+    testNestedAndInnerClasses()
+}
+
+fun testNestedAndInnerClasses() {
+    println(Outer.Nested().foo()) // 5
+    println(Outer().Inner().foo()) // 4
+
+    // anonymous inner classes
+    val count = 3
+    val fool = object : Foo {
+        override val count: Int
+            get() = count
+
+        override fun f() {
+            println(this.count) // 3
+        }
+    }
+    fool(fool)
 }
 
 private fun testSealed() {
@@ -56,6 +73,10 @@ fun eval(e: Expression): Double = when (e) {
     is NotANumber -> Double.NaN
 }
 
+fun fool(expr: Foo) {
+    expr.f()
+}
+
 // ************************* CLASSES ****************************
 
 sealed class Expression
@@ -73,8 +94,17 @@ open class Outer {
     internal val c = 3
     val d = 4  // public by default
 
-    protected class Nested {
+    // marked as inner to be able to access members of outer class
+    inner class Inner {
         public val e: Int = 5
+
+        fun foo() = d
+    }
+
+    class Nested {
+        public val e: Int = 5
+
+        fun foo() = e
     }
 }
 
