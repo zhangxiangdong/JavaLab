@@ -7,7 +7,15 @@ import javax.swing.JButton
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testEnumClasses()
+    testDelegation()
+}
+
+fun testDelegation() {
+    val p = PrinterImpl()
+    DerivedPrinter0(p).print().also { println() }
+    DerivedPrinter0(p).println()
+    DerivedPrinter(p).print().also { println() }
+    DerivedPrinter(p).println()
 }
 
 fun testEnumClasses() {
@@ -91,6 +99,35 @@ fun fool(expr: Foo) {
 }
 
 // ************************* CLASSES ****************************
+
+interface Printer {
+    fun print()
+    fun println()
+}
+
+class PrinterImpl : Printer {
+    override fun println() {
+        println("PrinterImpl")
+    }
+
+    override fun print() {
+        print("PrinterImpl")
+    }
+}
+
+class DerivedPrinter0(p: Printer) : Printer by p {
+    // The compiler will use your override implementations instead of those in the delegate object.
+    override fun println() {
+        println("DerivedPrinter0")
+    }
+}
+
+class DerivedPrinter(p: Printer) : Printer by p {
+    // The compiler will use your override implementations instead of those in the delegate object.
+    override fun print() {
+        print("DerivedPrinter")
+    }
+}
 
 enum class ProtocolState {
 
