@@ -7,7 +7,20 @@ import javax.swing.JButton
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testNestedAndInnerClasses()
+    testEnumClasses()
+}
+
+fun testEnumClasses() {
+    println(Integer.toHexString(Color.RED.getColorInt()))
+
+    println(Integer.toHexString(Color.valueOf("GREEN").getColorInt()))
+
+    val colors = Color.values()
+    colors.forEach { println(it.name) }
+
+    println(enumValues<Color>().joinToString { it.name })
+
+    println(enumValueOf<Color>(Color.BLUE.name).name)
 }
 
 fun testNestedAndInnerClasses() {
@@ -78,6 +91,42 @@ fun fool(expr: Foo) {
 }
 
 // ************************* CLASSES ****************************
+
+enum class ProtocolState {
+
+    // Anonymous Classes
+    WAITING {
+        override fun signal() = TAKING
+
+        // deprecated
+        class Nested {}
+
+        inner class Inner {}
+    },
+
+    TAKING {
+        override fun signal() = WAITING
+    };
+
+    abstract fun signal(): ProtocolState
+
+}
+
+enum class Color(private val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF);
+
+    fun getColorInt() = rgb
+}
+
+enum class Direction {
+    // each enum constant is an object
+    EAST,
+    WEST,
+    SOUTH,
+    NORTH
+}
 
 sealed class Expression
 data class Const(val number: Double) : Expression()
