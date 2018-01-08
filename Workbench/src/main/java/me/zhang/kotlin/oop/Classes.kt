@@ -2,6 +2,8 @@ package me.zhang.kotlin.oop
 
 import javax.swing.Icon
 import javax.swing.JButton
+import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 /**
  * Created by zhangxiangdong on 2018/1/2.
@@ -16,6 +18,46 @@ fun testDelegation() {
     DerivedPrinter0(p).println()
     DerivedPrinter(p).print().also { println() }
     DerivedPrinter(p).println()
+
+    println(Example().p)
+    Example().p = "Example"
+
+    println(Example().r)
+
+    /* Standard Delegates */
+    val lazyObject = LazyObject()
+    println(lazyObject.lazyString) // executes the lambda passed to lazy() and remembers the result
+    println(lazyObject.lazyString) // simply return the remembered result
+
+    val book = Book()
+    book.bookName = "A brief history of time"
+
+    book.bookName = "Holy shit"
+    book.isLegal = true // vetoed
+    println("Is Legal: ${book.isLegal}") // false
+
+    book.bookName = "Clean code"
+    book.isLegal = true // allowed
+    println("Is Legal: ${book.isLegal}") // true
+
+    val infoMap = mapOf<String, Any?>( // immutable map
+            "name" to "Kathy",
+            "age" to 23,
+            "gender" to 0 // 0: girl, 1: boy
+    )
+    val kathy = Student(infoMap)
+    println(kathy)
+
+    val mutableMap = mutableMapOf<String, Any?>(
+            "name" to "Kane",
+            "age" to 25,
+            "gender" to 1
+    )
+    val kane = MutableStudent(mutableMap) // Student also works here -- change its fields via map
+    println(kane)
+    mutableMap.put("age", 27)
+    println(kane)
+
 }
 
 fun testEnumClasses() {
@@ -99,6 +141,84 @@ fun fool(expr: Foo) {
 }
 
 // ************************* CLASSES ****************************
+
+class MutableStudent(infoMap: MutableMap<String, Any?>) {
+
+    var name: String by infoMap
+    var age: Int by infoMap
+    var gender: Int by infoMap
+
+    override fun toString(): String {
+        return "A Student($name, $age years old, ${if (gender == 0) "girl" else "boy"})"
+    }
+}
+
+class Student(infoMap: Map<String, Any?>) {
+
+    val name: String by infoMap
+    val age: Int by infoMap
+    val gender: Int by infoMap
+
+    override fun toString(): String {
+        return "A Student($name, $age years old, ${if (gender == 0) "girl" else "boy"})"
+    }
+
+}
+
+class Book {
+
+    var bookName: String by Delegates.observable("<no name>") { property, oldValue, newValue ->
+        println("${property.name}: $oldValue -> $newValue")
+    }
+
+    var isLegal: Boolean by Delegates.vetoable(false) { _, _, _ ->
+        !bookName.contains("shit") // book name without 'shit' will be set as legal
+    }
+
+}
+
+class LazyObject {
+
+    // By default, the evaluation of lazy properties is synchronized
+    val lazyString: String by lazy {
+        println("Working on it...")
+        "Lazy String"
+    }
+
+    val lazyString0: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        ""
+    }
+
+}
+
+class Example {
+    // The expression after 'by' is the delegate
+    var p: String by DelegateForMutableProperty()
+    val q: String by DelegateForImmutableProperty()
+    val r: String by Stub()
+}
+
+operator fun Stub.getValue(thisRef: Any?, property: KProperty<*>): String {
+    return "$thisRef, thank you for delegating '${property.name}' to me!"
+}
+
+class Stub
+
+class DelegateForMutableProperty {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name}' in $thisRef.")
+    }
+}
+
+class DelegateForImmutableProperty {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    }
+}
 
 interface Printer {
     fun print()
