@@ -3,6 +3,7 @@ package me.zhang.kotlin.oop
 import java.util.*
 import javax.swing.Icon
 import javax.swing.JButton
+import kotlin.math.cos
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -49,7 +50,44 @@ fun testFunctions() {
     val arrayOf = arrayOf("Apple", "Google", "Microsoft", "Amazone")
     testVararg(*arrayOf)
     testVararg("Baidu", "Alibaba", "Tencent", "Netease")
+
+    println("************************")
+
+    val arrayOfAnys = arrayOf("m", 1, 'c')
+    // if we already have an array and want to pass its contents to the function,
+    // we use the spread operator (prefix the array with *)
+    val list = asList("N", 3, "Q", 'h', *arrayOfAnys, null, 1.2f)
+    list.forEach { print("$it ") }
+
+    println("************************")
+    val s0 = "Hello"
+    val s1 = " "
+    val s2 = "World"
+    val s3 = "!"
+    // call extension function using infix notation
+    println(s0 plus s1 plus s2 plus s3)
+
+    println("************************")
+    println(findFixPoint()) // 0.7390851332151607
+    println(findFixPoint0())
 }
+
+tailrec fun findFixPoint(x: Double = 1.0): Double = if (x == cos(x)) x else findFixPoint(cos(x))
+
+private fun findFixPoint0(): Double {
+    var x = 1.0
+    while (true) {
+        val y = cos(x)
+        if (x == y) return x
+        x = y
+    }
+}
+
+infix fun String.plus(s: String): String {
+    return "$this$s" // concatenation
+}
+
+fun <T> asList(vararg ts: T) = ts.toList()
 
 fun testVararg(vararg strings: String) {
     println(Arrays.toString(strings))
