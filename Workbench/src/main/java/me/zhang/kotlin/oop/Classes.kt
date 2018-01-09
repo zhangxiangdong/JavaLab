@@ -1,5 +1,6 @@
 package me.zhang.kotlin.oop
 
+import java.util.*
 import javax.swing.Icon
 import javax.swing.JButton
 import kotlin.properties.Delegates
@@ -9,8 +10,68 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testDelegation()
+    testFunctions()
 }
+
+fun testFunctions() {
+    foo(baz = 4) // The default value bar = 3 is used
+    foo(6, 7)
+
+    bar { println("Hello, everybody!") }
+    bar(1) { println("Hi, there!") }
+    bar(1, 2) { println("Hello, everyone!") }
+
+    println("************************")
+
+    val str = "Complicated String"
+    reformat(str)
+    reformat(str,
+            true,
+            true,
+            false,
+            '_'
+    )
+    reformat(str,
+            normalizeCase = true,
+            upperCaseFirstLetter = true,
+            divideByCamelHumps = false,
+            wordSeparator = '_'
+    )
+    reformat(str, wordSeparator = '_')
+
+    println("************************")
+
+    // min(x = 1, 2) // all the positional arguments should be placed before the ```first``` named one
+    println(min(1, y = 2))
+
+    println("************************")
+
+    val arrayOf = arrayOf("Apple", "Google", "Microsoft", "Amazone")
+    testVararg(*arrayOf)
+    testVararg("Baidu", "Alibaba", "Tencent", "Netease")
+}
+
+fun testVararg(vararg strings: String) {
+    println(Arrays.toString(strings))
+}
+
+fun foo(bar: Int = 3, baz: Int) {
+    println("bar: $bar, baz: $baz")
+}
+
+fun bar(foo: Int = 0, bar: Int = 1, func: () -> Unit) {
+    println("foo: $foo, bar: $bar")
+    func.invoke()
+}
+
+fun reformat(str: String,
+             normalizeCase: Boolean = true,
+             upperCaseFirstLetter: Boolean = true,
+             divideByCamelHumps: Boolean = false,
+             wordSeparator: Char = ' ') {
+}
+
+fun min(x: Int = 0, y: Int = 0) = if (x > y) y else x
 
 fun testDelegation() {
     val p = PrinterImpl()
@@ -141,6 +202,22 @@ fun fool(expr: Foo) {
 }
 
 // ************************* CLASSES ****************************
+
+open class Super {
+
+    open fun foo(i: Int = 10) {}
+
+}
+
+class Sub : Super() {
+
+    // When overriding a method with default parameters values,
+    // the default parameter values must be omitted from the signature
+    override fun foo(i: Int) { // no default value allowed
+
+    }
+
+}
 
 class MutableStudent(infoMap: MutableMap<String, Any?>) {
 
