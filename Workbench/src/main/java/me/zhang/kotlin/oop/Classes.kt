@@ -42,9 +42,32 @@ fun testLambdas() {
         shouldFilter // return@filter shouldFilter
         // return // return from the enclosing function -- ``` testLambdas() ```
     })
-    println(ints.filter(fun(i): Boolean {
+
+    val filtered = ints.filter(fun(i): Boolean {
         return i > 0 // return inside an anonymous function will return from the anonymous function itself
-    }))
+    })
+    println(filtered)
+
+    println("******************")
+    var summary = 0
+    filtered.forEach {
+        summary += it // access its closure
+    }
+    println(summary)
+
+    val jia: Int.(other: Int) -> Int = { this + it } // Function Literals with Receiver
+    println(3.jia(7)) // 10
+    val jian = fun Int.(other: Int) = this - other // a function type with receiver
+    println(7.jian(3)) // 4
+
+    val represents: String.(other: Int) -> Boolean = { toIntOrNull() == it }
+    println("211".represents(211)) // true
+    println("985".represents(911)) // false
+
+    fun testOperation(op: (String, Int) -> Boolean, str: String, int: Int, expected: Boolean) {
+        assert(op.invoke(str, int) == expected)
+    }
+    testOperation(represents, "123", 123, true) // test OK
 
     println("******************")
     /* Anonymous Functions */
@@ -54,6 +77,19 @@ fun testLambdas() {
     val sum1 = fun(x: Int, y: Int): Int = x + y
     println(sum(1, 2, sum0))
     println(sum(1, 2, sum1))
+
+    println("******************")
+    fun html(initProcedure: Html.() -> Unit): Html { // get an Html instance (already initialized)
+        val html = Html()
+        html.initProcedure()
+        return html
+    }
+
+    println(Html().body()) // print ```null```
+    val html = html {
+        init() // calling a method on the receiver object
+    }
+    println(html.body()) // print out body
 }
 
 private fun sum(x: Int, y: Int, sum: ((x: Int, y: Int) -> Int)?): Int {
@@ -329,6 +365,19 @@ fun fool(expr: Foo) {
 }
 
 // ************************* CLASSES ****************************
+
+class Html {
+
+    private var body: String? = null
+
+    fun init() {
+        println("Html initialized!")
+        body = "This is html body."
+    }
+
+    fun body() = body
+
+}
 
 open class Super {
 
