@@ -1,6 +1,8 @@
 package me.zhang.kotlin.oop
 
 import java.util.*
+import java.util.concurrent.locks.Lock
+import java.util.concurrent.locks.ReentrantLock
 import javax.swing.Icon
 import javax.swing.JButton
 import kotlin.math.cos
@@ -11,7 +13,47 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testFunctions()
+    testLambdas()
+}
+
+fun testLambdas() {
+    val input = arrayListOf("M", "n", "O", "p", "Q")
+    println(input.map { it -> it.toLowerCase() })
+    println(input.map({ it.toUpperCase() }))
+    println(input.map { it })
+}
+
+private fun timeConsumingFunc() {
+    fun toBeSynchronized() = complicatedCalc()
+    println(compute(ReentrantLock(), ::toBeSynchronized)) // function references
+
+    println(compute(ReentrantLock(), { complicatedCalc() })) // lambda expression
+    println(compute(ReentrantLock()) {
+        complicatedCalc()
+    })
+}
+
+fun <I, O> List<I>.map(transform: (I) -> O): List<O> {
+    val result = arrayListOf<O>()
+    @Suppress("LoopToCallChain")
+    for (item in this) {
+        result.add(transform(item))
+    }
+    return result
+}
+
+fun <T> compute(lock: Lock, expr: () -> T): T {
+    lock.lock()
+    try {
+        return expr.invoke()
+    } finally {
+        lock.unlock()
+    }
+}
+
+fun complicatedCalc(): String {
+    Thread.sleep(1000)
+    return "Complicated Results!"
 }
 
 fun testFunctions() {
