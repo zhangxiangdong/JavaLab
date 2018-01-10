@@ -21,6 +21,53 @@ fun testLambdas() {
     println(input.map { it -> it.toLowerCase() })
     println(input.map({ it.toUpperCase() }))
     println(input.map { it })
+
+    println("******************")
+    val keywords = arrayListOf("String", "Int", "Boolean", "Double")
+    val max = keywords.unique { l, r -> l < r }
+    println(max)
+    val min = keywords.unique { l, r -> l > r }
+    println(min)
+
+    println("******************")
+    val sumFunc: ((x: Int, y: Int) -> Int)? = { x, y -> x + y }
+    println(sum(1, 2, sumFunc))
+    println(sum(1, 2, null))
+    println(sum(1, 2, { x, y -> x + y }))
+
+    println("******************")
+    val ints = arrayListOf(-3, -2, -1, 0, 1, 2, 3)
+    println(ints.filter {
+        val shouldFilter = it > 0 && it % 2 != 0
+        shouldFilter // return@filter shouldFilter
+        // return // return from the enclosing function -- ``` testLambdas() ```
+    })
+    println(ints.filter(fun(i): Boolean {
+        return i > 0 // return inside an anonymous function will return from the anonymous function itself
+    }))
+
+    println("******************")
+    /* Anonymous Functions */
+    val sum0 = fun(x: Int, y: Int): Int {
+        return x + y
+    }
+    val sum1 = fun(x: Int, y: Int): Int = x + y
+    println(sum(1, 2, sum0))
+    println(sum(1, 2, sum1))
+}
+
+private fun sum(x: Int, y: Int, sum: ((x: Int, y: Int) -> Int)?): Int {
+    return sum?.invoke(x, y) ?: 0
+}
+
+fun <T> Collection<T>.unique(calc: (T, T) -> Boolean): T? {
+    var target: T? = null
+    for (item in this) {
+        if (target == null || calc(target, item)) {
+            target = item
+        }
+    }
+    return target
 }
 
 private fun timeConsumingFunc() {
