@@ -5,6 +5,8 @@ import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 import javax.swing.Icon
 import javax.swing.JButton
+import javax.swing.tree.DefaultMutableTreeNode
+import javax.swing.tree.TreeNode
 import kotlin.math.cos
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
@@ -13,7 +15,47 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testLambdas()
+    testInline()
+}
+
+fun testInline() {
+    val arrayListOfLetters = arrayListOf("Moon", "nIGHT", "Nope", "Xforce")
+    val nString = lowercaseStringStartsWithN(arrayListOfLetters)
+    println(nString)
+
+    println("********************")
+    println(hasZeros(arrayListOf(1, 2, 3, 0, 2, 5)))
+
+    println("********************")
+    DefaultMutableTreeNode().findParentOfType<DefaultMutableTreeNode>()
+}
+
+inline fun <reified T> TreeNode.findParentOfType(): T? {
+    var p = parent
+    while (p != null && p !is T) {
+        p = p.parent
+    }
+    return p as T?
+}
+
+fun lowercaseStringStartsWithN(strs: List<String>): String? {
+    var str: String? = null
+    run stop@ {
+        strs.forEach {
+            if (it.startsWith("N", true)) {
+                str = it
+                return@stop
+            }
+        }
+    }
+    return str?.toLowerCase()
+}
+
+fun hasZeros(ints: List<Int>): Boolean {
+    ints.forEach {
+        if (it == 0) return true // returns from hasZeros
+    }
+    return false
 }
 
 fun testLambdas() {
@@ -125,7 +167,7 @@ fun <I, O> List<I>.map(transform: (I) -> O): List<O> {
     return result
 }
 
-fun <T> compute(lock: Lock, expr: () -> T): T {
+inline fun <T> compute(lock: Lock, expr: () -> T): T {
     lock.lock()
     try {
         return expr.invoke()
@@ -608,13 +650,13 @@ class Fields {
 
     var size = 0
 
-    val isEmpty: Boolean
+    inline val isEmpty: Boolean
         get() = this.size == 0 //  there will be no backing field
 
     val hasData = this.size != 0 // has type Boolean
 
     var stringRepresentation: String
-        get() = toString()
+        inline get() = toString()
         set(aString) = setDataFromString(aString)
 
     var setterVisibility: String = "default"
