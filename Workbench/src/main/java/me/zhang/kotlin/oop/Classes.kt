@@ -7,6 +7,9 @@ import javax.swing.Icon
 import javax.swing.JButton
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.TreeNode
+import kotlin.coroutines.experimental.SequenceBuilder
+import kotlin.coroutines.experimental.buildIterator
+import kotlin.coroutines.experimental.buildSequence
 import kotlin.math.cos
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
@@ -15,7 +18,96 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testInline()
+    testCoroutines()
+}
+
+fun testCoroutines() {
+    async {
+        Thread.sleep(3000)
+    }
+
+    fibonacciSeq()
+    lazySeq0()
+    lazySeq1()
+    lazyIterator()
+
+    extensions()
+}
+
+fun extensions() {
+    val lazySeq = buildSequence {
+        yieldIfOdd(20..30)
+    }
+
+    lazySeq.forEach { print("$it ") }
+}
+
+suspend fun SequenceBuilder<Int>.yieldIfOdd(elements: Iterable<Int>) {
+    val iterator = elements.iterator()
+    while (iterator.hasNext()) {
+        val x = iterator.next()
+        if (x % 2 != 0) yield(x)
+    }
+}
+
+fun lazyIterator() {
+    val lazyIterator = buildIterator {
+        yieldAll(10..19)
+    }
+
+    lazyIterator.forEach { print("$it ") }
+    println()
+}
+
+fun lazySeq1() {
+    val lazySeq = buildSequence {
+        yield(0)
+        yieldAll(1..9)
+    }
+
+    lazySeq.forEach { print("$it ") }
+    println()
+}
+
+fun lazySeq0() {
+    // sampleStart
+    val lazySeq = buildSequence {
+        print("START ")
+        for (i in 1..5) {
+            yield(i)
+            print("STEP ")
+        }
+        print("END")
+    }
+
+    // Print the first three elements of the sequence
+    lazySeq.take(3).forEach { print("$it ") }
+    println()
+    // sampleEnd
+}
+
+fun fibonacciSeq() {
+    // sampleStart
+    val fibonacciSeq = buildSequence {
+        var a = 0
+        var b = 1
+
+        yield(1)
+
+        while (true) {
+            yield(a + b)
+
+            val tmp = a + b
+            a = b
+            b = tmp
+        }
+    } // sampleEnd
+
+    println(fibonacciSeq.take(8).toList())
+}
+
+fun <T> async(block: suspend () -> T) {
+
 }
 
 fun testInline() {
