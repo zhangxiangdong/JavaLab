@@ -18,7 +18,27 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testCoroutines()
+    testDestructuring()
+}
+
+fun testDestructuring() {
+    val map = mapOf(Pair("A", 1), Pair("B", 2), Pair("C", 3))
+    for ((key, value) in map) {
+        print("($key, $value) ")
+    }
+    println()
+
+    map.mapKeys { (key: String, _: Int) // a destructured pair
+        ->
+        "$key!"
+    }.forEach { key, value // two parameters
+        ->
+        print("($key, $value) ")
+    }
+    println()
+
+    map.mapValues { (_, value) -> "$value!" }.forEach { (key: String, value: String) -> print("($key, $value) ") }
+    println()
 }
 
 fun testCoroutines() {
