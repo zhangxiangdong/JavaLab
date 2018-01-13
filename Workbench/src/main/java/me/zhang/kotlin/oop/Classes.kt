@@ -18,7 +18,11 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testCasts()
+    testThis()
+}
+
+fun testThis() {
+    AA().BB().callFromB()
 }
 
 fun testCasts() {
@@ -58,7 +62,7 @@ fun testTypeChecks() {
 }
 
 fun testDestructuring() {
-    val map = mapOf(Pair("A", 1), Pair("B", 2), Pair("C", 3))
+    val map = mapOf(Pair("A", 1), Pair("BB", 2), Pair("C", 3))
     for ((key, value) in map) {
         print("($key, $value) ")
     }
@@ -556,6 +560,51 @@ fun fool(expr: Foo) {
 
 // ************************* CLASSES ****************************
 
+/* Test This Expression */
+class AA { // implicit label @AA
+
+    val a0 = 1
+
+    inner class BB { // implicit label @BB
+
+        val b = 2
+
+        fun callFromB() {
+            3.foo()
+        }
+
+        private fun Int.foo() { // implicit label @foo
+            val a = this@AA // AA's this
+            println(a.a0) // 1
+
+            val b = this@BB // BB's this
+            println(b.b) // 2
+
+            val c = this // foo()'s receiver, an Int
+            println(c) // 3
+
+            val c1 = this@foo // foo()'s receiver, an Int
+            println(c1) // 3
+
+            val funLit = lambda@ fun String.() {
+                val d = this // funLit's receiver
+                println(d) // funLit
+            }
+            funLit.invoke("funLit")
+
+            val funLit2 = {
+                // foo()'s receiver, since enclosing lambda expression
+                // doesn't have any receiver
+                val d1 = this
+                println(d1) // 3
+            }
+            funLit2()
+        }
+
+    }
+
+}
+
 class Html {
 
     private var body: String? = null
@@ -848,7 +897,7 @@ open class A {
 
 interface B {
     fun f() {
-        print("B")
+        print("BB")
     } // interface members are 'open' by default
 
     fun b() {
@@ -860,7 +909,7 @@ class C() : A(), B {
     // The compiler requires f() to be overridden:
     override fun f() {
         super<A>.f() // call to A.f()
-        super<B>.f() // call to B.f()
+        super<B>.f() // call to BB.f()
     }
 }
 
