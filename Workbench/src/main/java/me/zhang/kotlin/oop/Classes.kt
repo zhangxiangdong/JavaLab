@@ -18,7 +18,43 @@ import kotlin.reflect.KProperty
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testDestructuring()
+    testCasts()
+}
+
+fun testCasts() {
+    val y: Any? = 1
+    // val x: String? = y as String? // ClassCastException
+    val x: String? = y as? String // safe cast, returns null on failure
+    println(x) // null
+}
+
+fun testTypeChecks() {
+    val any: Any? = intArrayOf(1, 2, 3)
+
+    if (any !is String) { // !(any is String)
+        println("any is not a string")
+    } else {
+        println("any is a string")
+    }
+
+    if (any is String && any.length > 0) {
+        println("length of any: ${any.length}") // smart casts
+    }
+
+    if (any !is String || any.length == 0) {
+        println("any is not a string or its' length is 0")
+    }
+
+    when (any) {
+        is Int -> println(any + 1)
+        is IntArray -> println(any.sum())
+    }
+
+    //region The cast to be safe if a negative check leads to a return
+    if (any !is String) return
+    println("length of any: ${any.length}") // Any is automatically cast to String
+    //endregion
+
 }
 
 fun testDestructuring() {
