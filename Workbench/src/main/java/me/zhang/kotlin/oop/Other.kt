@@ -4,8 +4,57 @@ package me.zhang.kotlin.oop
  * Created by zhangxiangdong on 2018/1/13.
  */
 fun main(args: Array<String>) {
-    testOperatorOverloading()
+    testNullSafety()
 }
+
+fun testNullSafety() {
+    val listOf = listOf("M", null, "N")
+    for (item in listOf) {
+        item?.let { print("$it ") }
+    }
+    println()
+
+    println("************")
+    var s: String? = null
+    val len = if (s != null) s.length else -1
+    println(len)
+    s = "Int"
+    val length = s?.length ?: -1
+    println(length)
+
+    println("************")
+    s = null
+    // println(s!!.length) // NPE
+
+    println("************")
+    val a: Any? = 1
+    val i = a as? Int
+    println(i)
+
+    println("************")
+    val nullableList = listOf(1, 2, null, "4", 5.0f)
+    println(nullableList)
+    val notNullList = nullableList.filterNotNull()
+    println(notNullList)
+
+    println("************")
+    println(convertToString(MM("Alex", 22)))
+    println(convertToString(MM("Alex", null)))
+    println(convertToString(MM("", 24)))
+    try {
+        println(convertToString(MM(null, 23)))
+        println(convertToString(MM(null, null)))
+    } catch (e: Exception) {
+    }
+}
+
+fun convertToString(mm: MM): String? {
+    val age = mm.age ?: return null
+    val name = mm.name ?: throw IllegalArgumentException("name must not be null")
+    return "$name, $age"
+}
+
+fun String.hasA() = this.contains("A")
 
 fun testOperatorOverloading() {
     val a = 3
@@ -119,4 +168,4 @@ fun testEquality() {
 
 }
 
-data class MM(val name: String, val age: Int)
+data class MM(val name: String?, val age: Int?)
