@@ -8,6 +8,7 @@ import me.zhang.kotlin.oop.Util.foo
 import me.zhang.kotlin.oop.Util.getNextItem
 import me.zhang.kotlin.oop.Util.sort
 import java.util.*
+import kotlin.Number
 
 /**
  * Created by zhangxiangdong on 2018/1/4.

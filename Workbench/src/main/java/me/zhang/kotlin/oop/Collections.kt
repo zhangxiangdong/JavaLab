@@ -1,5 +1,7 @@
 package me.zhang.kotlin.oop
 
+import kotlin.Number
+
 /**
  * Created by zhangxiangdong on 2018/1/12.
  */
