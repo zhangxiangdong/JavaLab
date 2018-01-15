@@ -4,7 +4,43 @@ package me.zhang.kotlin.oop
  * Created by zhangxiangdong on 2018/1/13.
  */
 fun main(args: Array<String>) {
-    testNullSafety()
+    testExceptions()
+}
+
+fun testExceptions() {
+    println(parseToInt("123")) // 123
+    println(parseToInt("12c")) // null
+    println(parseToInt("a12")) // null
+    println(parseToInt("-123")) // -123
+    println(parseToInt("0")) // 0
+    println(parseToInt("-0")) // 0
+
+    println("*******************")
+    try {
+        MM(null, 23).name ?: fail("Name required")
+    } catch (e: Exception) {
+        println(e.message)
+    }
+
+    println("*******************")
+    val n = null // Nothing?
+    if (n is Nothing?) {
+        println("n is type of `Nothing?`")
+    }
+}
+
+fun parseToInt(s: String): Int? {
+    return try {
+        Integer.parseInt(s)
+    } catch (e: NumberFormatException) {
+        null
+    } finally {
+        println("\tdone")
+    }
+}
+
+fun fail(message: String): Nothing {
+    throw IllegalArgumentException(message)
 }
 
 fun testNullSafety() {
