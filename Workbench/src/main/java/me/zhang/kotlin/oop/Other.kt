@@ -7,6 +7,37 @@ fun main(args: Array<String>) {
     testExceptions()
 }
 
+@Fancy
+class Foolish @Fancy constructor(@Fancy private val any: Any?) {
+
+    @Fancy
+    var foolish: Any? = any
+
+    @Fancy
+    fun foolish(@Fancy any: Any?): Any? {
+        foolish = any
+        return (@Fancy any)
+    }
+
+    @SerializedName("coolName")
+    var name: String? = null
+
+}
+
+@Target(AnnotationTarget.CLASS,
+        AnnotationTarget.CONSTRUCTOR,
+        AnnotationTarget.EXPRESSION,
+        AnnotationTarget.FIELD,
+        AnnotationTarget.VALUE_PARAMETER,
+        AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.SOURCE)
+@MustBeDocumented
+annotation class Fancy
+
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class SerializedName(val name: String)
+
 fun testExceptions() {
     println(parseToInt("123")) // 123
     println(parseToInt("12c")) // null
