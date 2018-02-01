@@ -2,7 +2,10 @@ package me.zhang.coreJava.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -11,7 +14,18 @@ import java.util.Scanner;
 public class SocketTest {
 
     public static void main(String[] args) {
-        try (Socket socket = new Socket("time-A.timefreq.bldrdoc.gov", 13)) {
+        final String host = "time-A.timefreq.bldrdoc.gov";
+        final int port = 13;
+
+        try {
+            System.out.println(InetAddress.getByName(host));
+            System.out.println(Arrays.toString(InetAddress.getAllByName("baidu.com")));
+            System.out.println(InetAddress.getLocalHost());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+        try (Socket socket = new Socket(host, port)) {
             InputStream in = socket.getInputStream();
             Scanner scanner = new Scanner(in);
             while (scanner.hasNextLine()) {
