@@ -7,6 +7,8 @@ repositories {
 
 dependencies {
 
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
     // Retrofit & OkHttp
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -35,7 +37,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.2.20'
+    ext.kotlin_version = '1.2.21'
     repositories {
         mavenCentral()
     }
