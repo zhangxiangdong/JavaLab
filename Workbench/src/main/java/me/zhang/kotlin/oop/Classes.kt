@@ -12,14 +12,109 @@ import kotlin.coroutines.experimental.buildIterator
 import kotlin.coroutines.experimental.buildSequence
 import kotlin.math.cos
 import kotlin.properties.Delegates
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
+import kotlin.reflect.jvm.javaField
+import kotlin.reflect.jvm.javaGetter
 
 /**
  * Created by zhangxiangdong on 2018/1/2.
  */
 fun main(args: Array<String>) {
-    testThis()
+    testRelection()
 }
+
+val x = 1
+var y = 0
+
+val String.lastChar get() = this[length - 1]
+
+fun testRelection() {
+    val kClass = Person::class
+    val jClass = Person::class.java
+    println(kClass.qualifiedName)
+    println(jClass.name)
+
+
+    println("*************************")
+
+
+    val numbers = listOf(1, 2, 3)
+    // ::isOdd is a value of function type (Int) -> Boolean
+    println(numbers.filter(::isOdd)) // prints [1, 3]
+
+    val strings = listOf("strange", "even", "odd", "normal", "queer")
+    // refers to isOdd(s: String)
+    println(strings.filter(::isOdd)) // prints [strange, odd]
+
+    val predicate: (String) -> Boolean = ::isOdd // refers to isOdd(s: String)
+    println(strings.filter(predicate))
+
+    println(strings.filter(compose(::isOdd, String::length))) // prints [strange, odd, queer]
+
+    println(strings.map(String::length)) // prints [7, 4, 3, 6, 5]
+
+    println("*************************")
+
+
+    println(::x.get()) // prints 1
+    println(::x.name) // prints x
+
+    println(y) // prints 0
+    ::y.set(2)
+    println(y) // prints 2
+
+    val p = DD::p
+    println(p.get(DD(100))) // prints 100
+    println(String::lastChar.get("abc")) // prints c
+
+    println(DD::p.javaGetter) // prints "public final int me.zhang.kotlin.oop.DD.getP()"
+    println(p.javaField) // prints "private final int me.zhang.kotlin.oop.DD.p"
+
+    val kClass1 = getKClass(DD(0))
+    println(kClass1.simpleName) // prints DD
+
+    printInstance(::EE)
+
+    println("*************************")
+
+    val numberRegex = "\\d+".toRegex()
+    println(numberRegex.matches("200")) // prints true
+
+    // refer to an instance method of a particular object
+    val isNumber = numberRegex::matches // such reference is bound to its receiver
+    println(isNumber("300")) // prints true
+
+    val ns = listOf("string", "数字", "500", "砨1", "A777")
+    println(ns.filter(isNumber)) // prints [500]
+
+    val matches: (Regex, CharSequence) -> Boolean = Regex::matches
+    val isN = matches("\\d+".toRegex(), "404")
+    println(isN) // prints true
+
+    val prop = "303"::length
+    println(prop.get()) // prints 3
+}
+
+fun printInstance(factory: () -> EE) {
+    val instance: EE = factory()
+    println(instance)
+}
+
+fun getKClass(o: Any): KClass<Any> = o.javaClass.kotlin
+
+class EE
+
+data class DD(val p: Int = 0)
+
+// compose(f, g) = f(g(*))
+fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C {
+    return { x -> f(g(x)) }
+}
+
+fun isOdd(x: Int) = x % 2 != 0
+
+fun isOdd(s: String) = s == "strange" || s == "odd"
 
 fun testThis() {
     AA().BB().callFromB()
@@ -72,9 +167,9 @@ fun testDestructuring() {
         ->
         "$key!"
     }.forEach { key, value // two parameters
-        ->
-        print("($key, $value) ")
-    }
+                ->
+                print("($key, $value) ")
+            }
     println()
 
     map.mapValues { (_, value) -> "$value!" }.forEach { (key: String, value: String) -> print("($key, $value) ") }
