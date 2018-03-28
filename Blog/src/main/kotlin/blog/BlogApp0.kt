@@ -15,6 +15,14 @@ import io.ktor.server.netty.Netty
 fun main(args: Array<String>) {
     embeddedServer(
             Netty,
+            configure = {
+                requestQueueLimit = 16
+                shareWorkGroup = false
+                configureBootstrap = {
+
+                }
+                responseWriteTimeoutSeconds = 10
+            },
             port = 8080,
             watchPaths = listOf("java-lab/Blog"),
             module = Application::module
