@@ -13,13 +13,20 @@ public class MyClass {
     void myMethod(Object aString) {
     }
 
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Author(name = "Thompson")
-    void mySuperMethod() {
+    @Deprecated
+    public void mySuperMethod() {
     }
 
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void main(String[] args) {
+        new MyClass().mySuperMethod();
     }
 
 }
