@@ -23,3 +23,14 @@ public class MyClass {
     }
 
 }
+
+@ClassPreamble(
+        author = "Xiangdong",
+        date = "2018/5/13",
+        lastModified = "2018/5/13",
+        lastModifiedBy = "Zhang",
+        reviewers = {"Zhang", ""}
+)
+class Example {
+
+}
