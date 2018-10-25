@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class GenericTester<T> {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 //        GenericTester<Integer> genericTester = new GenericTester<>();
 //        Optional<Integer> optional = genericTester.findById("Hi");
 //        optional.ifPresent(System.out::println);
@@ -47,6 +47,11 @@ public class GenericTester<T> {
         integers.add(2);
         integers.add(3);
         System.out.println(integers);
+
+        System.out.println("***********************************************************************");
+        List<Stub> il = new ArrayList<>();
+        append(il, Stub.class);
+        System.out.println(il.get(0).getS());
     }
 
     // https://docs.oracle.com/javase/tutorial/java/generics/capture.html
@@ -123,6 +128,28 @@ public class GenericTester<T> {
 
     private Optional<T> findById(Object key) {
         return Optional.ofNullable((T) key);
+    }
+
+    private static <E> void append(List<E> list, Class<E> cls) throws IllegalAccessException, InstantiationException {
+//        E e = new E(); // error!
+//        list.add(e);
+        list.add(cls.newInstance());
+    }
+
+    private static class Stub {
+        private int s;
+
+        public Stub() {
+            s = -1; // default
+        }
+
+        public int getS() {
+            return s;
+        }
+
+        public void setS(int s) {
+            this.s = s;
+        }
     }
 
 }
