@@ -1,3 +1,5 @@
+@file:Suppress("ObsoleteExperimentalCoroutines")
+
 package me.zhang.kotlin.oop
 
 import java.util.*
@@ -167,9 +169,9 @@ fun testDestructuring() {
         ->
         "$key!"
     }.forEach { key, value // two parameters
-                ->
-                print("($key, $value) ")
-            }
+        ->
+        print("($key, $value) ")
+    }
     println()
 
     map.mapValues { (_, value) -> "$value!" }.forEach { (key: String, value: String) -> print("($key, $value) ") }
@@ -190,7 +192,7 @@ fun testCoroutines() {
 }
 
 fun extensions() {
-    val lazySeq = buildSequence {
+    @Suppress("ObsoleteExperimentalCoroutines") val lazySeq = buildSequence<Int> {
         yieldIfOdd(20..30)
     }
 
@@ -206,7 +208,7 @@ suspend fun SequenceBuilder<Int>.yieldIfOdd(elements: Iterable<Int>) {
 }
 
 fun lazyIterator() {
-    val lazyIterator = buildIterator {
+    @Suppress("ObsoleteExperimentalCoroutines") val lazyIterator = buildIterator {
         yieldAll(10..19)
     }
 
@@ -215,7 +217,7 @@ fun lazyIterator() {
 }
 
 fun lazySeq1() {
-    val lazySeq = buildSequence {
+    @Suppress("ObsoleteExperimentalCoroutines") val lazySeq = buildSequence {
         yield(0)
         yieldAll(1..9)
     }
@@ -226,7 +228,7 @@ fun lazySeq1() {
 
 fun lazySeq0() {
     // sampleStart
-    val lazySeq = buildSequence {
+    @Suppress("ObsoleteExperimentalCoroutines") val lazySeq = buildSequence {
         print("START ")
         for (i in 1..5) {
             yield(i)
@@ -243,7 +245,7 @@ fun lazySeq0() {
 
 fun fibonacciSeq() {
     // sampleStart
-    val fibonacciSeq = buildSequence {
+    @Suppress("ObsoleteExperimentalCoroutines") val fibonacciSeq = buildSequence {
         var a = 0
         var b = 1
 
@@ -287,7 +289,7 @@ inline fun <reified T> TreeNode.findParentOfType(): T? {
 
 fun lowercaseStringStartsWithN(strs: List<String>): String? {
     var str: String? = null
-    run stop@ {
+    run stop@{
         strs.forEach {
             if (it.startsWith("N", true)) {
                 str = it
@@ -843,7 +845,7 @@ enum class ProtocolState {
         override fun signal() = TAKING
 
         // deprecated
-        class Nested {}
+        inner class Nested {}
 
         inner class Inner {}
     },
