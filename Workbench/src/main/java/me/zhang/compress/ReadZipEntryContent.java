@@ -9,6 +9,7 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Properties;
 
@@ -20,26 +21,29 @@ public class ReadZipEntryContent {
     private static final String YAPATCH_MF = "YAPATCH.MF";
 
     public static void main(String[] args) throws IOException, ArchiveException {
-        File file = new File("D:\\patch_signed.apk");
-        String format = detectFormat(file);
-        System.out.println("File format: " + format);
-        System.out.println("**********************");
+        URL resource = ReadZipEntryContent.class.getClassLoader().getResource("apks/patch_signed.apk");
+        if (resource != null) {
+            File file = new File(resource.getPath());
+            String format = detectFormat(file);
+            System.out.println("File format: " + format);
+            System.out.println("**********************");
 
-        Properties properties = new Properties();
+            Properties properties = new Properties();
 
-        switch (format) {
-            case ArchiveStreamFactory.ZIP:
-                parseZipFile(file, properties);
-                break;
-            case ArchiveStreamFactory.SEVEN_Z:
-                parseSevenZipFile(file, properties);
-                break;
+            switch (format) {
+                case ArchiveStreamFactory.ZIP:
+                    parseZipFile(file, properties);
+                    break;
+                case ArchiveStreamFactory.SEVEN_Z:
+                    parseSevenZipFile(file, properties);
+                    break;
+            }
+
+            System.out.println("VersionName: " + properties.getProperty("VersionName"));
+            System.out.println("VersionCode: " + properties.getProperty("VersionCode"));
+            System.out.println("From: " + properties.getProperty("From"));
+            System.out.println("To: " + properties.getProperty("To"));
         }
-
-        System.out.println("VersionName: " + properties.getProperty("VersionName"));
-        System.out.println("VersionCode: " + properties.getProperty("VersionCode"));
-        System.out.println("From: " + properties.getProperty("From"));
-        System.out.println("To: " + properties.getProperty("To"));
     }
 
     private static void parseZipFile(File file, Properties properties) throws IOException {
