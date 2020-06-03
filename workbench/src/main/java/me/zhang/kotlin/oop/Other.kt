@@ -154,9 +154,9 @@ fun testOperatorOverloading() {
     println(-point) // (-12.0, -23.0)
 
     println("*****************")
-    println(Number(3).plus(5)) // 8
-    println(Number(3) + 5) // 8
-    val number = Number(3)
+    println(Num(3).plus(5)) // 8
+    println(Num(3) + 5) // 8
+    val number = Num(3)
     number += 5
     println(number) // 8
 
@@ -191,10 +191,10 @@ class MapProcessor(val map: MutableMap<String, Int>) {
 
 }
 
-data class Number(var value: Int) {
+data class Num(var value: Int) {
 
-    operator fun plus(inc: Int): Number {
-        return Number(inc + value)
+    operator fun plus(inc: Int): Num {
+        return Num(inc + value)
     }
 
     operator fun plusAssign(inc: Int) {
