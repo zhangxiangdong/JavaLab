@@ -9,14 +9,10 @@ public class WeekTest {
     public static void main(String[] args) {
         Calendar calendar = Calendar.getInstance();
 
-        int currentMonth = calendar.get(Calendar.MONTH);
-
         long currentTime = calendar.getTimeInMillis();
         calendar.add(Calendar.MONTH, -3);
         long threeMonthAgoTime = calendar.getTimeInMillis();
         int interval = (int) ((currentTime - threeMonthAgoTime) / (24 * 3600 * 1000));
-
-        calendar.set(Calendar.MONTH, currentMonth);
 
         System.out.println("3个月天数：" + interval);
 
@@ -43,9 +39,8 @@ public class WeekTest {
         weeks.add(new Week());
         int weekIndex = 0;
 
-        final int future = 13;
-        calendar.add(Calendar.DAY_OF_MONTH, future);
-        for (int i = -future; i < interval; i++) {
+        final int future = 14;
+        for (int i = -interval; i < future; i++) {
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
             int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             int month = calendar.get(Calendar.MONTH) + 1;
@@ -82,14 +77,14 @@ public class WeekTest {
                 w.days.add(new Week.Day(week + "|" + month + "月" + dayOfMonth + "日" + (i == 0 ? "（今天）" : "")));
             }
 
-            if (dayOfWeek == Calendar.SUNDAY) {
+            if (dayOfWeek == Calendar.SATURDAY) {
                 // System.out.println("---");
                 Week next = new Week();
                 weekIndex++;
                 weeks.add(next);
             }
 
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         System.out.println(weeks);
@@ -102,11 +97,8 @@ public class WeekTest {
 
         @Override
         public String toString() {
-            ArrayList<Day> reverse = new ArrayList<>(days);
-            Collections.reverse(reverse);
-
             return "Week{" +
-                    "days=" + reverse +
+                    "days=" + days +
                     '}';
         }
 
