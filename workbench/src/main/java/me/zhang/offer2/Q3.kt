@@ -24,7 +24,9 @@ object Q3 {
 
         println(Q3(twoD).hasThisValue0(8))
         println()
-        println(Q3(twoD).hasThisValue1(8))
+        println(Q3(twoD).hasThisValue1(6))
+        println()
+        println(Q3(twoD).hasThisValue2(12))
     }
 
     internal class Q3(@field:NotNull private val twoD: Array<IntArray>) {
@@ -67,6 +69,33 @@ object Q3 {
                     else -> {
                         col--
                     }
+                }
+            }
+
+            return hasThisValue
+        }
+
+        fun hasThisValue2(targetValue: Int): Boolean {
+            var hasThisValue = false
+
+            val rows = twoD.size
+            val cols = if (rows > 0) twoD[0].size else 0
+
+            var row = rows - 1
+            var col = 0
+
+            loop@ while (row >= 0 && col < cols) {
+                val startBottomValue = twoD[row][col]
+                when {
+                    startBottomValue == targetValue -> {
+                        hasThisValue = true
+                        println("[$row, $col]")
+                        break@loop
+                    }
+                    startBottomValue < targetValue -> {
+                        col++
+                    }
+                    else -> row--
                 }
             }
 
