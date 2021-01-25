@@ -48,7 +48,7 @@ object Q3 {
             var hasThisValue = false
 
             val rows = twoD.size
-            val cols = twoD[0].size
+            val cols = if (rows > 0) twoD[0].size else 0
 
             var row = 0
             var col = cols - 1
