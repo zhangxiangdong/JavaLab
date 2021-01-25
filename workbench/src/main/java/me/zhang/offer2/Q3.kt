@@ -22,21 +22,54 @@ object Q3 {
         val row3: IntArray = intArrayOf(6, 8, 11, 15)
         val twoD: Array<IntArray> = arrayOf(row0, row1, row2, row3)
 
-        val hasThisValue = Q3(twoD).hasThisValue0(8)
-        println(hasThisValue)
+        println(Q3(twoD).hasThisValue0(8))
+        println()
+        println(Q3(twoD).hasThisValue1(8))
     }
 
     internal class Q3(@field:NotNull private val twoD: Array<IntArray>) {
         fun hasThisValue0(targetValue: Int): Boolean {
             var hasThisValue = false
-            twoD.forEachIndexed outer@{ row, arr ->
-                arr.forEachIndexed inner@{ col, value ->
+
+            loop@ for ((row, item) in twoD.withIndex()) {
+                for ((col, value) in item.withIndex()) {
                     if (value == targetValue) {
                         hasThisValue = true
-                        println("row: $row, col: $col")
+                        println("[$row, $col]")
+                        break@loop
                     }
                 }
             }
+
+            return hasThisValue
+        }
+
+        fun hasThisValue1(targetValue: Int): Boolean {
+            var hasThisValue = false
+
+            val rows = twoD.size
+            val cols = twoD[0].size
+
+            var row = 0
+            var col = cols - 1
+
+            loop@ while (row < rows && col >= 0) {
+                val topEndValue = twoD[row][col]
+                when {
+                    topEndValue == targetValue -> {
+                        hasThisValue = true
+                        println("[$row, $col]")
+                        break@loop
+                    }
+                    topEndValue < targetValue -> {
+                        row++
+                    }
+                    else -> {
+                        col--
+                    }
+                }
+            }
+
             return hasThisValue
         }
     }
