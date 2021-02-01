@@ -88,12 +88,17 @@ object Q7 {
                 for (i in 0 until queueB.size - 1) {
                     queueA.add(queueB.poll())
                 }
-                top = queueB.poll()
+                top = queueB.poll() // 最后一个元素
             } else if (queueB.isEmpty()) {
-                for (i in 0 until queueA.size - 1) {
-                    queueB.add(queueA.poll())
+                while (!queueA.isEmpty()) {
+                    val result = queueA.poll()
+                    if (queueA.isEmpty()) {
+                        top = result // 最后一个元素
+                        break
+                    } else {
+                        queueB.add(result)
+                    }
                 }
-                top = queueA.poll()
             }
             return top
         }
