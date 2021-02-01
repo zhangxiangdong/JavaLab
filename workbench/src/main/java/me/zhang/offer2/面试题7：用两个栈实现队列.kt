@@ -14,14 +14,27 @@ object Q7 {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        //region Custom Queue
         val customQueue = CustomQueue()
         for (i in 0..9) {
             customQueue.appendTail(i)
         }
-
         while (!customQueue.empty()) {
             println(customQueue.deleteHead())
         }
+        //endregion
+
+        println()
+
+        //region Custom Stack
+        val customStack = CustomStack()
+        for (i in 0..9) {
+            customStack.push(i)
+        }
+        while (!customStack.empty()) {
+            println(customStack.pop())
+        }
+        //endregion
     }
 
     internal class CustomQueue {
@@ -52,6 +65,37 @@ object Q7 {
             }
 
             return head
+        }
+
+    }
+
+    internal class CustomStack {
+
+        private val queueA = LinkedList<Int>()
+        private val queueB = LinkedList<Int>()
+
+        fun empty(): Boolean {
+            return queueA.isEmpty() && queueB.isEmpty()
+        }
+
+        fun push(value: Int) {
+            queueA.add(value)
+        }
+
+        fun pop(): Int? {
+            var top: Int? = null
+            if (queueA.isEmpty()) {
+                for (i in 0 until queueB.size - 1) {
+                    queueA.add(queueB.poll())
+                }
+                top = queueB.poll()
+            } else if (queueB.isEmpty()) {
+                for (i in 0 until queueA.size - 1) {
+                    queueB.add(queueA.poll())
+                }
+                top = queueA.poll()
+            }
+            return top
         }
 
     }
